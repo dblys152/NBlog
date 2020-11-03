@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const users = require('./users.js');
+const homeRouter = require('./main/home.js')
+const userMngRouter = require('./user/userMng.js');
+const postMngRouter = require('./blog/postMng.js');
 
-router.use('/users', users);
-
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.use('/', homeRouter);
+router.use('/user', userMngRouter);
+router.use('/blog', postMngRouter);
 
 module.exports = router;
