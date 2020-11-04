@@ -1,14 +1,14 @@
 const express = require('express');
+const { NotExtended } = require('http-errors');
 const router = express.Router();
 
 router.get('/', function(req, res) {
     res.send('...');
 });
 
-router.get('/:mbrNo', function(req, res) {
-    let mbrNo = req.params.mbrNo;
-    let postNo = req.params.postNo;
-    res.send('This is blogMng! ' + mbrNo);
+router.get('/:mbrNo', function(req, res, next) {
+   
+    next();
 });
 
 module.exports = router;
