@@ -4,19 +4,31 @@ const db_config = require('./../../config/database.js');
 let conn = db_config.mysqlInit();
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
+let comCdList = new Array();
+
 module.exports = {
-    comCdList: function () {
-        let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', sqlFormat);
-        console.log(sql);
-        let comCdList = null;
-        conn.query(sql, function(err, result) {
-            if(err){
-                return err;
-            } else{
-                comCdList = result;
+    comCdList: function() {
+        function selectComCdList(callback) {
+            let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', sqlFormat);
+            console.log(sql);
+            conn.query(sql, function(err, result) {
+                if(err){
+                    callback(err, null);
+                } else{
+                    callback(null, result);
+                }
+            });
+        }
+
+        selectComCdList(function(err, data) {
+            if (err) {
+                return err;       
+            } else {           
+                console.log(data); 
+                comCdList = data;
                 return comCdList;
-            }
+            }    
         });
         return comCdList;
-    },
+    }
 };
