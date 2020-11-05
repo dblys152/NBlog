@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const db_config = require('./../../config/database.js')
-var conn = db_config.mysqlInit();
-db_config.mysqlConnect(conn);
+const comCd = require('./../common/comCd.js');
 
 router.get('/:mbrNo/:postNo', function(req, res) {
   let mbrNo = req.params.mbrNo;
   let postNo = req.params.postNo;
-  res.send('This is postMng! ' + mbrNo + '/' + postNo);
+  let comCdList = comCd.comCdList();
+  res.send('This is postMng! ' + mbrNo + '/' + postNo + ' : ' + comCdList[0].COM_CD_NM);
 });
 
 module.exports = router;
