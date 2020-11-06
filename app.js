@@ -17,10 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const db_config = require('./config/database.js');
-let conn = db_config.mysqlInit();
-db_config.mysqlConnect(conn);
-
 app.use(routes);
 
 // catch 404 and forward to error handler
@@ -38,5 +34,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+console.log("This is app!");
 module.exports = app;
