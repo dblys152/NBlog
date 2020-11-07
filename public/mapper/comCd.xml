@@ -8,6 +8,7 @@
               , COM_CD_NM
         FROM    COM_CODE 
         WHERE   1 = 1
+        AND     (#{comCd} IS NULL OR UP_COM_CD = #{comCd})
         AND     DISP_YN = 'Y'
         AND     DEL_YN = 'N'
         ORDER   BY  SEQ

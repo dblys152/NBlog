@@ -1,4 +1,5 @@
 const mysql = require('mysql');
+
 const db_info = {
     host: 'localhost',
     port: '3307',
