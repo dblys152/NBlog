@@ -3,7 +3,7 @@ const router = express.Router();
 const mybatisMapper = require('mybatis-mapper');
 mybatisMapper.createMapper(['database/mapper/post.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
-const dbConfig = require('../../database/config/database.js');
+const dbConfig = require('../../database/config/dbConn.js');
 const comCdModule = require('../common/comCd.js');
 const ctgModule = require('../common/category.js');
 
