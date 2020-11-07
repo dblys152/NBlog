@@ -1,11 +1,11 @@
 const mybatisMapper = require('mybatis-mapper');
-mybatisMapper.createMapper(['public/mapper/comCd.xml']); //매퍼로드
+mybatisMapper.createMapper(['database/mapper/comCd.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
-const dbConfig = require('../../config/database.js');
+const dbConfig = require('../../database/config/database.js');
 
 function comCdData() {
     return {
-        "blgMnuTyCd"   : "101"     //블로그메뉴유형코드
+        "blgMnuTyCd"    : "101"     //블로그메뉴유형코드
       , "prlgFrmCd"     : "102"     //프롤로그형태코드
       , "ctgTyCd"       : "103"     //카테고리유형코드
       , "pstClTyCd"     : "104"     //게시글분류유형코드
@@ -19,9 +19,8 @@ function comCdData() {
     };
 }
 
-function selectComCdList(comCd, callback) {
-    console.log(comCd);
-    let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', {"comCd": comCd}, sqlFormat);
+function selectComCdList(comCdJson, callback) {
+    let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', comCdJson, sqlFormat);
     console.log(sql);
     dbConfig((conn) => {
         conn.query(sql, function(err, result) {

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
-<mapper namespace="ctg">
+<mapper namespace="comCd">
 
-    <select id="selectCtgList">
+    <select id="selectComCdList">
         SELECT  
-                CTG_NO
-              , CTG_NM
+                COM_CD
+              , COM_CD_NM
         FROM    COM_CODE 
         WHERE   1 = 1
+        AND     (#{upComCd} IS NULL OR UP_COM_CD = #{upComCd})
         AND     DISP_YN = 'Y'
         AND     DEL_YN = 'N'
         ORDER   BY  SEQ
