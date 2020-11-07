@@ -1,8 +1,41 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00B7FF;
-}
+/* login */
+#login{background:#fff}
+#login #container{display:table;width:100%;padding:0}
+#login .content{display:table-row;padding:0}
+#login .cont{display:table-cell}
+#login .cont.left{width:40%;padding:140px 0 300px}
+#login .cont.left .main_logo{width:239px;margin:0 auto}
+#login .cont.left .title{display:block;margin-top:20px;letter-spacing:-1px;line-height:1.3em;text-align:center;font-size:24px}
+#login .login_box{width:380px;margin:60px auto 0}
+#login .login_box input[type="text"],#login .login_box input[type="password"]{width:100%;padding:10px;border:0;box-sizing:border-box}
+#login .login_box .inp_list li:last-child{margin-top:10px;padding-top:10px;border-top:1px solid #ebedf2}
+#login .idpw_box{position:relative;margin-top:30px}
+#login .idpw_box .lb_box.right{position:absolute;top:0;right:30px}
+#login .cont.right{position:relative;width:60%;background:url(/resources/images/common/bg_login.jpg) no-repeat 80% 0;background-size:cover}
+#login .cont.right .comt_box{position:absolute;top:516px;left:120px}
+#login .cont.right p{color:#fff}
+#login .cont.right .tit{font-size:40px}
+#login .cont.right .txt{line-height:1.4em;font-size:14px}
+#login .cont.right .txt.pw{margin-top:60px}
+#login .link_pw{position:absolute;top:0;right:0}
+#login .link_pw:hover{text-decoration:underline}
+#login .btn_login{display:block;margin:40px auto 0;padding:15px 30px;border-radius:25px;background:#f4ae16;color:#fff}
+#login .btn_signin{display:block;margin:40px auto 0;padding:15px 30px;border-radius:25px;background:#ae16f4;color:#fff}
+#login .count{display:none;margin:5px 0 0 8px}
+#login .count.on{display:inline-block}
+#login #footer{height:21px;padding-top:7px;background:#303338;color:#fff;text-align:center}
+#login .btn_loginpage{display:block;margin-left:100%;margin-top:15%;padding:10px 20px;border-radius:25px;background:#f4ae16;color:#fff}
+#login .btn_signinpage{display:block;margin-left:100%;margin-top:15%;padding:10px 20px;border-radius:25px;background:#ae16f4;color:#fff}
+
+.notice_board .user_info{position:relative;margin-bottom:15px;padding-top:8px}
+.notice_board .user_info .name{color:#6C7293;font-weight:bold;cursor:pointer}
+.notice_board .user_info .date{margin-left:10px;color:#A9ACC2}
+.notice_board .user_info .edit_box, .notice_board .user_info .save_box{display:none;position:absolute;top:0;right:0}
+.notice_board .user_info .edit_box.on, .notice_board .user_info .save_box.on{display:block}
+.notice_board .comt_write .user_info .name{cursor:default}
+.notice_board .comt_area textarea{width:99%}
+.notice_board .comt_area textarea.focus{border:1px solid #716ACA}
+.notice_board .comt_list{margin-top:30px;-webkit-padding-start:0px}
+.notice_board .comt_list li{margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid #ebedf2}
+.notice_board .comt_desc .txt{line-height:1.2rem}

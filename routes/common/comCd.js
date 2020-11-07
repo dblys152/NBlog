@@ -5,7 +5,7 @@ const dbConfig = require('../../config/database.js');
 
 function comCdData() {
     return {
-        "blogMnuTyCd"   : "101"     //블로그메뉴유형코드
+        "blgMnuTyCd"   : "101"     //블로그메뉴유형코드
       , "prlgFrmCd"     : "102"     //프롤로그형태코드
       , "ctgTyCd"       : "103"     //카테고리유형코드
       , "pstClTyCd"     : "104"     //게시글분류유형코드
