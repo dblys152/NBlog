@@ -1,7 +1,7 @@
+const dbConfig = require('../../database/config/dbConn.js');
 const mybatisMapper = require('mybatis-mapper');
 mybatisMapper.createMapper(['database/mapper/comCd.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
-const dbConfig = require('../../database/config/dbConn.js');
 
 function comCdData() {
     return {

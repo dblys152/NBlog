@@ -14,6 +14,7 @@
     "morgan": "~1.9.1",
     "mybatis-mapper": "^0.6.5",
     "mybatis3": "^0.2.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.1"
   }
 }
