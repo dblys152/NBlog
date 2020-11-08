@@ -8,7 +8,7 @@ const memberMngRouter = require('./member/memberMng.js');
 router.use('/member', memberMngRouter);
 
 const blogMngRouter = require('./blog/blogMng.js');
-const postMngRouter = require('./blog/postMng2.js');
+const postMngRouter = require('./blog/postMng.js');
 router.use('/blog', blogMngRouter, postMngRouter);
 
 console.log("This is index!");

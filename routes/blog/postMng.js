@@ -12,13 +12,11 @@ router.get('/:mbrNo/:postNo', function(req, res) {
     let postNo = req.params.postNo;
     let comCdJson = {"upComCd" : comCdModule.comCdData().pstDispCd};    //게시글전시코드
     comCdModule.selectComCdList(comCdJson, function(result) {
-        console.log(result);
-        ctgModule.selectCtgList(ctgJson, function(result) {
-            console.log(result);
-            res.send('This is postMng! ' + mbrNo + '/' + postNo + ' : ');
+        let comCdStr = JSON.stringify(result);
+        ctgModule.selectCtgList(null, function(result) {
+            res.send('This is postMng! ' + mbrNo + '/' + postNo + ' : ' + comCdStr + JSON.stringify(result));
         });
     });
-    
 });
 
 module.exports = router;

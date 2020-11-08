@@ -2,23 +2,65 @@
 <html lang="ko">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8; pageEncoding=UTF-8">
-	<title>NBlog</title>
-	<link rel="stylesheet" type="text/css" href="/common.css">
+	<title>N블로그</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../../public/stylesheets/common.css"> -->
+	<style>
+		.container{
+			display: flex;
+			flex-direction: column;
+		}
+		header{
+			border-bottom:1px solid gray;
+			padding-left: 20px;
+		}
+		footer{
+			border-top:1px solid gray;
+			padding: 20px;
+			text-align: center;
+		}
+		.content{
+			display: flex;
+		}
+		.content nav{
+			border-right:1px solid gray;
+		}
+		.content aside{
+			border-left:1px solid gray;
+		}
+		nav, aside{
+			flex-basis: 150px;
+			flex-shrink: 0;
+		}
+		main{
+			width: 1280px;
+			padding: 10px;
+		}
+	</style>
 </head>
 <body>
-<div id="wrap">
-	<div id="header" include-html="nav_top.ejs">
+	<div class="container">
+		<header>
+			<h1>NBlog</h1>
+		</header>
+		<section class="content">
+			<nav>
+				<ul>
+					<li>html</li>
+					<li>css</li>
+					<li>js</li>
+				</ul>
+			</nav>
+			<main>
+				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+			</main>
+			<aside>
+				AD
+			</aside>
+		</section>
+		<footer>
+			테스트
+		</footer>
 	</div>
-	<!-- container -->
-	<div id="container">
-		<!-- content -->
-		<div class="main">
-			
-		</div>
-		<!-- //content -->
-	</div>
-	<!-- //container -->
-</div>
 <script>
 $(document).ready(function(){
 	
