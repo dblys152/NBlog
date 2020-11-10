@@ -5,17 +5,17 @@
 	<title>N블로그</title>
 	<style>
 		#container{display: flex;flex-direction: column;}
-		#header,#footer,#content{margin: 0 auto;}
-		#header{height: 54px;vertical-align: middle;}
-		#content{border-top:1px solid gray;border-bottom:1px solid gray;padding: 20px;}
+		#header{height: 54px;border-bottom:1px solid gray;}
+		#content{padding: 20px;}
 		#footer{padding: 20px;}
 		#footer #bottom{text-align: center;}
-		#top,#main,#bottom{width: 1100px;}
-		#top{position: relative;height: 100%;}
-		#top .area_logo{float: left;}
-		#top .area_logo .logo{background-position: -678px -332px;width: 120px;height: 26px;position: relative;margin-top: 14px;color:#ff7f00;};
-		#top .area_search{float: left;}
-		#top .area_search .search_box{position: relative;margin:8px 0 0 19px;float: left;width: 358px;height: 37px;border: 1px solid #ff7f00;border-right: 0;background-color: #fff;}
+		#top,#main,#bottom{width: 1100px;margin: 0 auto;}
+		#top{position: relative;height: 100%;overflow: hidden;}
+		#top .area_logo{float: left;cursor: pointer;}
+		#top .area_logo .logo{background-position: -678px -332px;width: 120px;height: 26px;position: relative;margin-top: 14px;color:#ff7f00;}
+		#top .area_search{float: left; margin:8px 0 0 19px;}
+		#top .area_search .search_box{display: flex;float: left;}
+		#top .area_search .search_box .search{border: 1px solid #ff7f00;border-right: 0;background-color: #fff;}
 		#top .area_search .search_box .dropdown{float: left;width: 99px;height: 35px;margin: 0 0 0 -1px;padding: 3px 0 4px;border-color: #999;}
 		#top .area_search .search_box .textbox{float: left;width: 222px;height: 35px;border: 0;font-size: 12px;font-weight: 600;line-height: 16px;text-indent: 10px;}
 		#top .area_search .search_box .search_btn{float: left;width: 36px;height: 37px;line-height: 35px;background-color: #ff7f00;border: 1px solid #ff7f00;text-align: center;}
@@ -46,8 +46,8 @@
 								<option value="1">블로그</option>
 								<option value="1">별명·이메일</option>
 							</select>
+							<input type="text" class="textbox">
 						</div>
-						<input type="text" class="textbox">
 						<a href="#" class="search_btn">
 							<i class="sp_common icon_search"></i>
 						</a>
