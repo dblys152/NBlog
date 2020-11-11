@@ -4,12 +4,13 @@
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8; pageEncoding=UTF-8">
 	<title>N블로그</title>
 	<style>
-		#container{display: flex;flex-direction: column;}
-		#header{height: 54px;border-bottom:1px solid gray;}
-		#content{padding: 20px;}
-		#footer{padding: 20px;}
-		#footer #bottom{text-align: center;}
-		#top,#main,#bottom{width: 1100px;margin: 0 auto;}
+		#wrap{position: relative;min-width: 1110px;min-height: 100%;padding-bottom: 129px;}
+		#header,#container,#footer{display: block;}
+		#header{height: 54px;border-bottom:1px solid gray;z-index: 3;}
+		#container{position: relative;padding: 20px;z-index: 2;}
+		#footer{position: absolute;left: 0;right: 0;bottom: 0;height: 128px;background-color: #f6f6f6;text-align: center;border-top:1px solid gray;}
+		#footer #bottom{padding-top:40px;text-align: center;}
+		#top,#content,#bottom{width: 1100px;margin: 0 auto;}
 		#top{display: flex;position: relative;height: 100%;overflow: hidden;}
 		#top .area_logo{float: left;cursor: pointer;}
 		#top .area_logo .logo{background-position: -678px -332px;width: 120px;height: 26px;position: relative;margin-top: 14px;color:#ff7f00;}
@@ -19,19 +20,24 @@
 		#top .area_search .search_box .dropdown{float: left;width: 99px;height: 35px;margin: 0 0 0 -1px;padding: 3px 0 4px;border-color: #999;}
 		#top .area_search .search_box .textbox{float: left;width: 222px;height: 35px;border: 0;font-size: 12px;font-weight: 600;line-height: 16px;text-indent: 10px;}
 		#top .area_search .search_box .search_btn{float: left;width: 36px;height: 37px;line-height: 35px;background-color: #ff7f00;border: 1px solid #ff7f00;text-align: center;}
-		#top .area_profile{position: absolute;top: 0;right: 10px;bottom: 0;margin:8px 0 0 19px;overflow: hidden;}
-		#top .area_profile ul{display: flex;list-style: none;}
+		#top .area_profile{position: absolute;top: 0;right: 10px;bottom: 0;margin:8px 0 0 19px;overflow: hidden;display: block;}
+		#top .area_profile ul{position: relative;list-style: none;}
 		#top .area_profile li{cursor: pointer;}
 		#top .area_profile .login_box{padding:12px 0 10px 1px;}
 		#top .area_profile .login_box a{padding:0;padding:0 10px 0 10px;font-size:16px;font-weight:bold;height:54px;}
-		#top .area_profile .login_box .sign_up{border: 2px solid #ff7f00;border-radius: 10%;}
-		#top .area_profile .profile{display: flex;margin-right: 1px;font-size:14px;font-weight:bold;}
-		#top .area_profile span{height:40px;margin:0 0 0 3px;padding:13px 20px 0 5px;}
+		#top .area_profile .login_box .sign_in{border: 2px solid #ff7f00;border-radius: 10%;}
+		#top .area_profile .login_box .sign_in:hover,.sign_up:hover{background-color: #ddd;}
+		#top .area_profile .profile{margin-right: 1px;}
+		#top .area_profile .profile .name_box{display: flex;}
+		#top .area_profile .profile p,span{font-size:14px;font-weight:bold;}
+		#top .area_profile .profile:hover .area_drop_box{display: block;}
+		#top .area_profile .nickname{height:40px;margin:0 0 0 3px;padding:13px 20px 0 5px;}
 		#top .area_profile img{width:40px;height:40px;border-radius: 70%;display: inline-block;}
-		#top .area_profile .area_drop_box{top: 55px;right: 10px;width: 320px;height: 158px;display: block;opacity: 1;background: #fff;position: absolute;}
-		#top .area_profile .area_drop_box .drop_my_content{display: flex;}
-		#top .area_profile .area_drop_box .drop_my_content .drop_img img{width:80px;height:80px;border-radius: 70%;display: inline-block;}
-		#top .area_profile .area_drop_box .drop_my_community a{width: 107px;height: 39px;text-decoration: none !important;}
+		#top .area_profile .area_drop_box{display: block;position: absolute;right: -8px;padding: 9px 5px 4px 4px;width: 214px;height: 155px;background-position: -2px -1310px;z-index: 10;}
+		#top .area_profile .area_drop_box .drop_my_content{display: flex;zoom: 1;height: 91px;padding: 15px 0 10px 15px;}
+		#top .area_profile .area_drop_box .drop_my_content .drop_img img{width:80px;height:80px;border-radius: 70%;}
+		#top .area_profile .area_drop_box .drop_my_content .drop_txt{float: left;width: 210px;margin: 15px 0 0 10px;}
+		#top .area_profile .area_drop_box .drop_my_community a{float: left;width: 106px;display: block;height: 38px;border-top: 1px solid #ebebeb;background-color: #f8f8f8;text-align: center;font-weight: bold;text-decoration: none;letter-spacing: -1px;line-height: 38px;}
 		body,input,textarea,select,button,table{
 			font-family: "나눔고딕","NanumGothic","NanumGothicWebFont","Malgun Gothic","맑은 고딕","Dotum","돋움","Helvetica","Apple SD Gothic Neo","sans-serif";
 			font-size: 12px;
@@ -41,11 +47,13 @@
 			margin: 0;
 			padding: 0;
 		}
+		body{position: relative;}
 		a{text-decoration: none;color: inherit;cursor: pointer;}
+
 	</style>
 </head>
 <body>
-	<div id="container">
+	<div id="wrap">
 		<div id="header">
 			<div id="top">
 				<div class="area_logo">
@@ -72,20 +80,23 @@
 							<a href="#" class="sign_in">Sign in</a>
 							<a href="#" class="sign_up">Sign up</a>
 						</li>
-						<li class="profile" >
-							<img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
-							<span>영트</span>
+						<li class="profile">
+							<div class="name_box">
+								<img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
+								<span class="nickname">영트</span>
+							</div>
+							<span class="ico_arrow"></span>
 							<div class="area_drop_box">
 								<div class="drop_my_content">
 									<div class="drop_img">
 										<img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
 									</div>
 									<div class="drop_txt">
-										<p class="gnb_account">
+										<p>
 											<span>영트</span>님
 											<span class="gnb_txt">설정</span>
 										</p>
-										<span>l1523@naver.com</span>
+										<a href="#">l1523@naver.com</a>
 									</div>
 								</div>
 								<div class="drop_my_community">
@@ -98,8 +109,8 @@
 				</div>
 			</div>
 		</div>
-		<div id="content">
-			<div id="main">
+		<div id="container">
+			<div id="content">
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트

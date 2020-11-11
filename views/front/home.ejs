@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/stylesheets/common.css">
 </head>
 <body>
-	<div id="container">
+	<div id="wrap">
 		<div id="header">
 			<div id="top">
 				<div class="area_logo">
@@ -33,16 +33,38 @@
 							<a href="#" class="sign_in">Sign in</a>
 							<a href="#" class="sign_up">Sign up</a>
 						</li>
-						<li class="profile" >
-							<img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
-							<span><%= MBR_NKNM %></span>
+						<li class="profile">
+							<div class="name_box">
+								<img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
+								<span class="nickname"><%= MBR_NKNM %></span>
+							</div>
+							<span class="ico_arrow"></span>
+							<div class="area_drop_box">
+								<div class="drop_my_content">
+									<div class="drop_img">
+										<img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
+									</div>
+									<div class="drop_txt">
+										<p>
+											<span><%= MBR_NKNM %></span> 님
+											<span class="gnb_txt">설정</span>
+										</p>
+										<a href="#"><%= MBR_EMAIL %></a>
+									</div>
+								</div>
+								<div class="drop_my_community">
+									<a href="https://blog.naver.com/MyBlog.nhn" class="my_blog_link">내 블로그</a>
+									<a href="#" class="logout">로그아웃</a>
+								</div>
+							</div>
 						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<div id="content">
-			<div id="main">
+		<div id="container">
+			<div id="content">
+				<% for(let i = 0; i < 10; i ++) { %>
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
@@ -53,6 +75,7 @@
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
 				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+				<% } %>
 			</div>
 		</div>
 		<div id="footer">
@@ -60,6 +83,6 @@
 				<%= MBR_NKNM %> : <%= MBR_EMAIL %> 
 			<div>
 		</div>
-	</div>
+	</div>	
 </body>
 </html>
