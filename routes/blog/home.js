@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
+const layoutJson = {'layout': 'common/blogLayout'};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -15,7 +16,7 @@ router.get('/', function(req, res, next) {
         .then(result => {
             if (result.error) throw result.error
             console.log(result[0]);
-            res.render('front/home.ejs', result[0]);
+            res.render('front/blog/home.ejs', {...result[0], ...layoutJson});
         });
 });
 
