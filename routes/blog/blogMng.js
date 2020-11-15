@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const dbConfig = require('../../database/config/dbConn.js');
+const mybatisMapper = require('mybatis-mapper');
+mybatisMapper.createMapper(['database/mapper/blog.xml']); //매퍼로드
 const fetch = require('node-fetch');
 const layoutJson = {'layout': 'common/blogLayout'};
 

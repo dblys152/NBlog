@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
           , body : JSON.stringify({"mbrNo":mbrNo})
           , headers: {'Content-Type': 'application/json'}
         })
-        .then(res => res.json())
+        .then(res => res.json())  
         .then(result => {
             if (result.error) throw result.error
             console.log(result[0]);

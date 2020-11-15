@@ -10,7 +10,7 @@ const ctgModule = require('../common/category.js');
 router.get('/:mbrNo/:postNo', function(req, res) {
     let mbrNo = req.params.mbrNo;
     let postNo = req.params.postNo;
-    let comCdJson = {"upComCd" : comCdModule.comCdData().pstDispCd};    //게시글전시코드
+    let comCdJson = {"upComCd" : comCdModule.comCdData().pstDispCd};
     comCdModule.selectComCdList(comCdJson, function(result) {
         let comCdStr = JSON.stringify(result);
         ctgModule.selectCtgList(null, function(result) {
