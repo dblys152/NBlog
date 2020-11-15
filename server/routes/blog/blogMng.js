@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const dbConfig = require('../../database/config/dbConn.js');
+const dbConfig = require('../../../database/config/dbConn.js');
 const mybatisMapper = require('mybatis-mapper');
 mybatisMapper.createMapper(['database/mapper/blog.xml']); //매퍼로드
 const fetch = require('node-fetch');
 const layoutJson = {'layout': 'common/blogLayout'};
+const mbrForm = require('../../models/mbrForm.js').mbrForm;
 
-router.get('/:mbrNo', function(req, res) {
-    let mbrNo = req.params.mbrNo;
+router.get('/:mbrEmail', function(req, res) {
+    mbrForm.mbrEmail = req.params.mbrEmail;
+    console.log(mbrForm);
     fetch('http://' + req.headers.host + '/member/mbrInfo', {
             method: 'post'
-          , body : JSON.stringify({"mbrNo":mbrNo})
+          , body : JSON.stringify(mbrForm)
           , headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())

@@ -2,14 +2,15 @@ const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
 const layoutJson = {'layout': 'common/layout'};
+const mbrForm = require('../../models/mbrForm.js').mbrForm;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    let mbrNo = "M000000002";
-    
+    mbrForm.mbrNo = "M000000002";
+    console.log(mbrForm);
     fetch('http://' + req.headers.host + '/member/mbrInfo', {
             method: 'post'
-          , body : JSON.stringify({"mbrNo":mbrNo})
+          , body : JSON.stringify(mbrForm)
           , headers: {'Content-Type': 'application/json'}
         })
         .then(res => res.json())  

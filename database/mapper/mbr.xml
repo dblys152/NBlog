@@ -22,7 +22,8 @@
         JOIN    COM_CODE    C2
         ON      M.MBR_SX_CD = C2.COM_CD
         WHERE   1 = 1
-        AND     MBR_NO = #{mbrNo}
+        AND     (#{mbrNo} IS NULL OR MBR_NO = #{mbrNo})
+        AND     (#{mbrEmail} IS NULL OR MBR_EMAIL = #{mbrEmail})
     </select>
 
 </mapper>
