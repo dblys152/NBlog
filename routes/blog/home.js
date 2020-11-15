@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const fetch = require('node-fetch');
-const layoutJson = {'layout': 'common/blogLayout'};
+const layoutJson = {'layout': 'common/layout'};
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
