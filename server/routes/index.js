@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
-const homeRouter = require('./blog/home.js');
-const blogMngRouter = require('./blog/blogMng.js');
-const postMngRouter = require('./blog/postMng.js');
-router.use('/', homeRouter, blogMngRouter, postMngRouter);
+const blogRouter = require('./blog/blogRouter.js');
+const postRouter = require('./blog/postRouter.js');
+router.use('/', blogRouter, postRouter);
 
-const mbrMngRouter = require('./member/mbrMng.js');
-router.use('/member', mbrMngRouter);
+const mbrRouter = require('./member/mbrRouter.js');
+router.use('/member', mbrRouter);
 
 console.log("This is index!");
 

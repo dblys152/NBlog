@@ -1,10 +1,10 @@
-const dbConfig = require('../../database/config/dbConn.js');
+const dbConfig = require('../../../database/config/dbConn.js');
 const mybatisMapper = require('mybatis-mapper');
-mybatisMapper.createMapper(['database/mapper/ctg.xml']); //매퍼로드
+mybatisMapper.createMapper(['database/mapper/blog.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
-function selectCtgList(ctgJson, callback) {
-    let sql = mybatisMapper.getStatement('ctg', 'selectCtgList', ctgJson, sqlFormat);
+function selectBlogInfo(blogJson, callback) {
+    let sql = mybatisMapper.getStatement('blog', 'selectBlogInfo', blogJson, sqlFormat);
     console.log(sql);
     dbConfig((conn) => {
         conn.query(sql, function(err, result) {
@@ -16,5 +16,5 @@ function selectCtgList(ctgJson, callback) {
 }
 
 module.exports = {
-    selectCtgList
+    selectBlogInfo
 };

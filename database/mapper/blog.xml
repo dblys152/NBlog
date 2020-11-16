@@ -4,9 +4,18 @@
 
     <select id="selectBlogInfo">
         SELECT  
-                *
-        FROM    BLOG_INFO 
-        WHERE   1 = 1
+                BI.INTG_MBR_NO
+              , BI.BLG_MNU_NO
+              , BI.BLG_NM
+              , BI.BLG_INTRO
+              , BI.TPC_CTG_NO
+              , C.CTG_NM TPC_CTG_NM
+        FROM    BLOG_INFO   BI
+        JOIN    CTG         C 
+        ON      BI.TPC_CTG_NO = C.CTG_NO
+        WHERE   1 = 1   
+        AND     INTG_MBR_NO = #{intgMbrNo}
+        AND     BLG_MNU_NO = #{blgMnuNo}
     </select>
 
 </mapper>
