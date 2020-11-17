@@ -7,8 +7,8 @@ const fetch = require('node-fetch');
 const mbrService = require('../../services/member/mbrService');
 const blogService = require('../../services/blog/blogService');
 
-let mbrModel = require('../../models/member/mbrModel.js');
-let blogModel = require('../../models/blog/blogModel.js');
+const mbrModel = require('../../models/member/mbrModel.js');
+const blogModel = require('../../models/blog/blogModel.js');
 
 router.get('/', function(req, res, next) {
     let mbrForm = mbrModel.newMbrForm();
