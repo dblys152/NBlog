@@ -1,5 +1,5 @@
 let blogInfoForm = new Object();
-function init_blogInfoForm() {
+function initBlogInfoForm() {
     blogInfoForm.intgMbrNo  = null;   //회원번호
     blogInfoForm.blgMnuNo   = null;   //블로그메뉴번호
     blogInfoForm.blgNm      = null;   //블로그명
@@ -8,7 +8,7 @@ function init_blogInfoForm() {
 }
 
 function newBlogInfoForm() {
-    init_blogInfoForm();
+    initBlogInfoForm();
     return blogInfoForm;
 }
 
