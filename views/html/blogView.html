@@ -3,52 +3,12 @@
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8; pageEncoding=UTF-8">
 	<title>N블로그</title>
-	<style>
-		#wrap{position: relative;min-width: 1110px;min-height: 100%;padding-bottom: 129px;}
-		#blogHeader,#container,#footer{display: block;}
-		#blogHeader{position: relative;height: 40px;width: 100%;padding: 0 20px 0 20px;top: 0;left: 0;right: 0;background-color: #fff;align-items: center;}
-		#container{padding: 20px;}
-		.top,.blogTop,.content,.bottom{width: 1100px;margin: 0 auto;}
-		.blogTop{display: flex;position: relative;height: 100%;}
-		.blogTop .area_bar{display: block;position: absolute;top: 0;right: 10px;bottom: 0;margin: 0px 10px 0px 0px;}
-		.blogTop .area_bar ul{display: flex;margin: 0;padding: 2px 0 0 0;letter-spacing: -1px;}
-		.blogTop .area_bar ul li{float: left;padding-top: 8px;padding-left: 7px;}
-		.blogTop .area_bar ul li a:hover,.nickname:hover{text-decoration: underline;}
-		.blogTop .area_bar .profile_box:hover .area_drop_box{display: block;}
-		.blogTop .area_bar .area_drop_box{display: none;position: absolute;top: 30px;right: -8px;width: 300px;height: 150px;background-color: #fff;border: 1px solid #ebebeb;}
-		.area_drop_box p,span{font-size:14px;font-weight:bold;}
-		.area_drop_box .drop_my_content{display: flex;zoom: 1;height: 108px;padding: 15px;}
-		.area_drop_box .drop_my_content .drop_img img{width:80px;height:80px;border-radius: 70%;}
-		.area_drop_box .drop_my_content .drop_txt{float: left;width: 210px;margin: 15px 0 0px 15px;}
-		.area_drop_box .drop_my_community{display: flex;float: left;}
-		.area_drop_box .drop_my_community a{width: 149px;height: 40px;border-top: 1px solid #ebebeb;border-right: 1px solid #ebebeb;background-color: #f8f8f8;text-align: center;font-weight: bold;text-decoration: none;line-height: 38px;}
-		
-		#footer{position: absolute;left: 0;right: 0;bottom: 0;height: 128px;background-color: #f6f6f6;text-align: center;}
-		.bottom .copyright{margin-top: 20px;font-size: 10px;color: #9b9b9b;}
-		
-		body,input,textarea,select,button,table{
-			font-family: 'Noto Sans KR', sans-serif;
-			font-weight: 400;
-			font-size: 12px;
-			line-height: 1.25;
-		}
-		body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select{
-			margin: 0;
-			padding: 0;
-		}
-		body{position: relative;}
-		ul{list-style: none;}
-		a{text-decoration: none;color: inherit;cursor: pointer;}
-		* {
-		  box-sizing: border-box;
-		}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="C:\Users\82104\Desktop\프로젝트\N블로그\NBlog\public\stylesheets\common.css">
 </head>
 <body>
 	<div id="wrap">
 		<div id="blogHeader">
-			<div class="blogTop">
+			<div class="blog_top">
 				<div class="area_bar">
 					<ul>
 						<li>
@@ -87,21 +47,51 @@
 					</ul>
 				</div>
 			</div>
+			<div class="blog_top_title">
+				<div class="blog_title">
+					<h1 class="blog_title_txt">여행을 좋아하는 개발자 블로그</h1>
+				</div>
+				<div class="blog_menu">
+					<table>
+						<tbody>
+							<tr>
+								<td class="menu1">
+									<ul>
+										<li>프롤로그</li>
+										<li>블로그</li>
+									</ul>
+								</td>
+								<td class="menu2">
+									<ul>
+										<li>태그</li>
+										<li>방명록</li>
+									</ul>
+								</td>
+							</tr>	
+						</tbody>
+					</table>
+				</div>
+				<div>
+					<a href="#">글쓰기</a>
+				</div>
+			</div>
 		</div>
 		<div id="container">
 			<div class="content blog">
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
-				레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+				<div>
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+					레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
+				</div>
 			</div>
 		</div>
 		<div id="footer">
