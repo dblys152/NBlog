@@ -20,4 +20,6 @@ function newMbrForm() {
     return mbrForm;
 }
 
-exports.newMbrForm = newMbrForm;
+module.exports = {
+    newMbrForm
+}

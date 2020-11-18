@@ -16,6 +16,7 @@
     "mybatis-mapper": "^0.6.5",
     "mybatis3": "^0.2.2",
     "mysql": "^2.18.1",
+    "mysql2": "^2.2.5",
     "node-fetch": "^2.6.1"
   }
 }

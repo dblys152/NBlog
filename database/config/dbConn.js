@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2/promise');
 
 const db_info = {
     host: 'localhost',
@@ -6,17 +6,15 @@ const db_info = {
     user: 'root',
     password: 'dudtjr',
     database: 'n_blog',
-    connectionLimit: 30
-}
+    connectionLimit: 10
+};
 
-let pool = mysql.createPool(db_info);
+const pool = mysql.createPool(db_info);
 
-function getMysqlConn(callback) {
-    pool.getConnection(function(err, conn) {
-        if(!err) {
-            callback(conn);
-        }
-    });
-}
+const getMysqlConn = async () => { 
+    return await pool.getConnection(async conn => conn);
+};
 
-module.exports = getMysqlConn;
+module.exports = {
+    getMysqlConn
+};

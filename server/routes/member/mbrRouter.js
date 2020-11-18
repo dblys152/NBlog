@@ -4,11 +4,10 @@ const router = express.Router();
 const mbrService = require('../../services/member/mbrService');
 
 /* GET users listing. */
-router.post('/mbrInfo', function(req, res) {
+router.post('/mbrInfo', async (req, res) => {
     let mbrJson = req.body;
-    mbrService.selectMbrInfo(mbrJson, function(result) {
-        res.send(result);
-    });
+    let mbrInfo = await mbrService.selectMbrInfo(mbrJson);
+    res.send(mbrInfo);
 });
 
 module.exports = router;
