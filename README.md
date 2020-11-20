@@ -6,7 +6,6 @@
      
 * Server : Node.js + Express.js
 * View engin : ejs
-* Language : TypeScript
 * NBlog ERD : https://blog.naver.com/l1523/222129870418
 ---
 #### [프로젝트 기능]
