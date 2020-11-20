@@ -20,22 +20,17 @@ function comCdData() {
 }
 
 const selectComCdList = async (comCdJson) => {
+    const conn = await dbConfig.getMysqlConn();
+    if(!conn) return false;
     try {
-        const conn = await dbConfig.getMysqlConn();
-        try {
-            let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', comCdJson, sqlFormat);
-            console.log(sql);
-            let [comCdList] = await conn.query(sql);
-            console.log(comCdList);
-            conn.release();
-            return comCdList;
-        } catch(err) {
-            conn.release();
-            console.log('Qeury error!');
-            return false;
-        }
+        let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', comCdJson, sqlFormat);
+        let [comCdList] = await conn.query(sql);
+        conn.release();
+        console.log(sql);
+        console.log(comCdList);
+        return comCdList;
     } catch(err) {
-        console.log('DB error!');
+        console.log(err);
         return false;
     }
 }

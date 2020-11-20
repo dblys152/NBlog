@@ -12,7 +12,13 @@ const db_info = {
 const pool = mysql.createPool(db_info);
 
 const getMysqlConn = async () => { 
-    return await pool.getConnection(async conn => conn);
+    try {
+        const conn = await pool.getConnection(async conn => conn);
+        return conn;
+    } catch(err) {
+        console.log(err);
+        return false;
+    }
 };
 
 module.exports = {

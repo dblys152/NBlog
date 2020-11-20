@@ -4,22 +4,17 @@ mybatisMapper.createMapper(['database/mapper/mbr.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
 const selectMbrInfo = async (mbrJson) => {
+    const conn = await dbConfig.getMysqlConn();
+    if(!conn) return false;
     try {
-        const conn = await dbConfig.getMysqlConn();
-        try {
-            let sql = mybatisMapper.getStatement('mbr', 'selectMbrInfo', mbrJson, sqlFormat);
-            console.log(sql);
-            let [mbrInfo] = await conn.query(sql);
-            console.log(mbrInfo);
-            conn.release();
-            return mbrInfo[0];
-        } catch(err) {
-            conn.release();
-            console.log('Qeury error!');
-            return false;
-        }
+        let sql = mybatisMapper.getStatement('mbr', 'selectMbrInfo', mbrJson, sqlFormat);
+        let [mbrInfo] = await conn.query(sql);
+        conn.release();
+        console.log(sql);
+        console.log(mbrInfo);
+        return mbrInfo[0];
     } catch(err) {
-        console.log('DB error!');
+        console.log(err);
         return false;
     }
 }
