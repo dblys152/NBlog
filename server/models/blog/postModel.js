@@ -25,6 +25,4 @@ function newPostClForm() {
     return postClForm;
 }
 
-module.exports = {
-    newPostClForm
-}
+exports.newPostClForm = newPostClForm;

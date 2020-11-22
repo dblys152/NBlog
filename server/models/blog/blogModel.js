@@ -12,6 +12,4 @@ function newBlogInfoForm() {
     return blogInfoForm;
 }
 
-module.exports = {
-    newBlogInfoForm
-}
+exports.newBlogInfoForm = newBlogInfoForm;
