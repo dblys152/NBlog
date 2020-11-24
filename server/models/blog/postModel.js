@@ -32,7 +32,7 @@ function initPostForm() {
     postForm.tpcCtgNo   = null;   //주제카테고리번호
     postForm.pstTtl     = null;   //게시글제목
     postForm.pstLtCntn  = null;   //게시글일부내용
-    postForm.pstCntn    = null;     //게시글내용
+    postForm.pstCntn    = null;   //게시글내용
     postForm.pstDispCd  = null;   //게시글전시코드
     postForm.topPstYn   = null;   //상단고정여부
     postForm.wrtDtt     = null;   //작성일시
@@ -52,3 +52,48 @@ function newPostForm() {
     return postForm;
 }
 exports.newPostForm = newPostForm;
+
+let tagForm = new Object();
+function initTagForm() {
+    tagForm.pstNo   = null;   //게시글번호
+    tagForm.tagSeq  = null;   //태그순번
+    tagForm.tagNm   = null;   //태그명
+}
+function newTagForm() {
+    initTagForm();
+    return tagForm;
+}
+exports.newTagForm = newTagForm;
+
+let cmntForm = new Object();
+function initCmntForm() {
+    cmntForm.cmntNo     = null;   //댓글번호
+    cmntForm.pstNo      = null;   //게시글번호
+    cmntForm.cmntCntn   = null;   //댓글내용
+    cmntForm.upCmntNo   = null;   //상위댓글번호
+    cmntForm.wrtMbrNo   = null;   //작성자회원번호
+    cmntForm.wrtDtt     = null;   //작성일시
+    cmntForm.delYn      = null;   //삭제여부
+    cmntForm.regNo      = null;   //등록자
+    cmntForm.regDtt     = null;   //등록일시
+    cmntForm.modNo      = null;   //수정자
+    cmntForm.modDtt     = null;   //수정일시
+}
+function newCmntForm() {
+    initCmntForm();
+    return cmntForm;
+}
+exports.newCmntForm = newCmntForm;
+
+let rcmItemForm = new Object();
+function initRcmItemForm() {
+    rcmItemForm.rcmIdntCd   = null;   //추천식별코드
+    rcmItemForm.rcmIdntNo   = null;   //추천식별번호
+    rcmItemForm.rcmMbrNo    = null;   //추천회원번호
+    rcmItemForm.rcmDtt      = null;   //추천일시
+}
+function newRcmItemForm() {
+    initRcmItemForm();
+    return rcmItemForm;
+}
+exports.newRcmItemForm = newRcmItemForm;
