@@ -14,10 +14,8 @@ function initMbrForm() {
     mbrForm.lastLgnDtt  = null;   //최근로그인일시
     mbrForm.mbrWthdDtt  = null;   //회원탈퇴일시
 }
-
 function newMbrForm() {
     initMbrForm();
     return mbrForm;
 }
-
 exports.newMbrForm = newMbrForm;

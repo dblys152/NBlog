@@ -1,28 +1,54 @@
 let postClForm = new Object();
 function initPostClForm() {
-    mbrForm.pstClNo       = null;   //게시글분류번호
-    mbrForm.intgMbrNo     = null;   //회원번호
-    mbrForm.blgMnuNo      = null;   //블로그메뉴번호
-    mbrForm.pstClTyCd     = null;   //게시글분류유형코드
-    mbrForm.pstClNm       = null;   //게시글분류명
-    mbrForm.upPstClNo     = null;   //상위게시글분류번호
-    mbrForm.tpcCtgNo      = null;   //주제카테고리번호
-    mbrForm.dispYn        = null;   //전시여부
-    mbrForm.dispTyCd      = null;   //전시유형코드
-    mbrForm.listDispYn    = null;   //목록노출여부
-    mbrForm.listDispCnt   = null;   //목록노출갯수
-    mbrForm.thmbRtCd      = null;   //섬네일비율코드
-    mbrForm.seq           = null;   //정렬순서
-    mbrForm.delYn         = null;   //삭제여부
-    mbrForm.regNo         = null;   //등록자
-    mbrForm.regDtt        = null;   //등록일시
-    mbrForm.modNo         = null;   //수정자
-    mbrForm.modDtt        = null;   //수정일시
+    postClForm.pstClNo       = null;   //게시글분류번호
+    postClForm.intgMbrNo     = null;   //회원번호
+    postClForm.blgMnuNo      = null;   //블로그메뉴번호
+    postClForm.pstClTyCd     = null;   //게시글분류유형코드
+    postClForm.pstClNm       = null;   //게시글분류명
+    postClForm.upPstClNo     = null;   //상위게시글분류번호
+    postClForm.tpcCtgNo      = null;   //주제카테고리번호
+    postClForm.dispYn        = null;   //전시여부
+    postClForm.dispTyCd      = null;   //전시유형코드
+    postClForm.listDispYn    = null;   //목록노출여부
+    postClForm.listDispCnt   = null;   //목록노출갯수
+    postClForm.thmbRtCd      = null;   //섬네일비율코드
+    postClForm.seq           = null;   //정렬순서
+    postClForm.delYn         = null;   //삭제여부
+    postClForm.regNo         = null;   //등록자
+    postClForm.regDtt        = null;   //등록일시
+    postClForm.modNo         = null;   //수정자
+    postClForm.modDtt        = null;   //수정일시
 }
-
 function newPostClForm() {
     initPostClForm();
     return postClForm;
 }
-
 exports.newPostClForm = newPostClForm;
+
+let postForm = new Object();
+function initPostForm() {
+    postForm.pstNO      = null;   //게시글번호
+    postForm.pstClNo    = null;   //게시글분류번호
+    postForm.tpcCtgNo   = null;   //주제카테고리번호
+    postForm.pstTtl     = null;   //게시글제목
+    postForm.pstLtCntn  = null;   //게시글일부내용
+    postForm.pstCntn    = null;     //게시글내용
+    postForm.pstDispCd  = null;   //게시글전시코드
+    postForm.topPstYn   = null;   //상단고정여부
+    postForm.wrtDtt     = null;   //작성일시
+    postForm.viewCnt    = null;   //조회수
+    postForm.cmntYn     = null;   //댓글가능여부
+    postForm.rcmYn      = null;   //추천가능여부
+    postForm.pstStDtt   = null;   //게시시작일시
+    postForm.pstEdDtt   = null;   //게시종료일시
+    postForm.delYn      = null;   //삭제여부
+    postForm.regNo      = null;   //등록자
+    postForm.regDtt     = null;   //등록일시
+    postForm.modNo      = null;   //수정자
+    postForm.modDtt     = null;   //수정일시
+}
+function newPostForm() {
+    initPostForm();
+    return postForm;
+}
+exports.newPostForm = newPostForm;
