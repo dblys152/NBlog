@@ -14,11 +14,10 @@ function initMbrForm() {
     mbrForm.lastLgnDtt  = null;   //최근로그인일시
     mbrForm.mbrWthdDtt  = null;   //회원탈퇴일시
 }
-function newMbrForm() {
+exports.newMbrForm = () => {
     initMbrForm();
     return mbrForm;
-}
-exports.newMbrForm = newMbrForm;
+};
 
 let snsMbrForm = new Object();
 function initSnsMbrForm() {
@@ -33,11 +32,10 @@ function initSnsMbrForm() {
     snsMbrForm.lastLgnDtt   = null;   //SNS최근로그인일시
     snsMbrForm.smbrWthdDtt  = null;   //SNS회원탈퇴일시
 }
-function newSnsMbrForm() {
+exports.newSnsMbrForm = () => {
     initSnsMbrForm();
     return snsMbrForm;
-}
-exports.newSnsMbrForm = newSnsMbrForm;
+};
 
 let mbrSbscForm = new Object();
 function initMbrSbscForm() {
@@ -46,8 +44,7 @@ function initMbrSbscForm() {
     mbrSbscForm.sbscDtt     = null;   //구독일시
     mbrSbscForm.ntfYn       = null;   //알림여부
 }
-function newMbrSbscForm() {
+exports.newMbrSbscForm = () => {
     initMbrSbscForm();
     return mbrSbscForm;
-}
-exports.newMbrSbscForm = newMbrSbscForm;
+};

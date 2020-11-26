@@ -3,7 +3,7 @@ const mybatisMapper = require('mybatis-mapper');
 mybatisMapper.createMapper(['server/database/mapper/comCd.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
-const selectComCdList = async (comCdJson) => {
+exports.selectComCdList = async (comCdJson) => {
     const conn = await dbConfig.getMysqlConn();
     if(!conn) return false;
     try {
@@ -17,5 +17,4 @@ const selectComCdList = async (comCdJson) => {
         console.log(err);
         return false;
     }
-}
-exports.selectComCdList = selectComCdList;
+};

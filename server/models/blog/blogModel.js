@@ -18,11 +18,10 @@ function initBlogMenuForm() {
     blogMenuForm.modNo      = null;   //수정자
     blogMenuForm.modDtt     = null;   //수정일시
 }
-function newBlogMenuForm() {
+exports.newBlogMenuForm = () => {
     initBlogMenuForm();
     return blogMenuForm;
-}
-exports.newBlogMenuForm = newBlogMenuForm;
+};
 
 let topMenuSetForm = new Object();
 function initTopMenuSetForm() {
@@ -30,11 +29,10 @@ function initTopMenuSetForm() {
     topMenuSetForm.pstClNo      = null;   //게시글분류번호
     topMenuSetForm.seq          = null;   //정렬순서
 }
-function newTopMenuSetForm() {
+exports.newTopMenuSetForm = () => {
     initTopMenuSetForm();
     return topMenuSetForm;
-}
-exports.newTopMenuSetForm = newTopMenuSetForm;
+};
 
 let blogInfoForm = new Object();
 function initBlogInfoForm() {
@@ -44,11 +42,10 @@ function initBlogInfoForm() {
     blogInfoForm.blgIntro   = null;   //블로그소개
     blogInfoForm.tpcCtgNo   = null;   //주제카테고리번호
 }
-function newBlogInfoForm() {
+exports.newBlogInfoForm = () => {
     initBlogInfoForm();
     return blogInfoForm;
-}
-exports.newBlogInfoForm = newBlogInfoForm;
+};
 
 let prlgDmnForm = new Object();
 function initPrlgDmnForm() {
@@ -58,11 +55,10 @@ function initPrlgDmnForm() {
     prlgDmnForm.ncsYn       = null;   //필수여부
     prlgDmnForm.delYn       = null;   //삭제여부
 }
-function newPrlgDmnForm() {
+exports.newPrlgDmnForm = () => {
     initPrlgDmnForm();
     return prlgDmnForm;
-}
-exports.newPrlgDmnForm = newPrlgDmnForm;
+};
 
 let prlgSetForm = new Object();
 function initPrlgSetForm() {
@@ -80,8 +76,7 @@ function initPrlgSetForm() {
     prlgSetForm.modNo           = null;   //수정자
     prlgSetForm.modDtt          = null;   //수정일시
 }
-function newPrlgSetForm() {
+exports.newPrlgSetForm = () => {
     initPrlgSetForm();
     return prlgSetForm;
-}
-exports.newPrlgSetForm = newPrlgSetForm;
+};

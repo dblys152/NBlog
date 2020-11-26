@@ -19,11 +19,10 @@ function initPostClForm() {
     postClForm.modNo         = null;   //수정자
     postClForm.modDtt        = null;   //수정일시
 }
-function newPostClForm() {
+exports.newPostClForm = () => {
     initPostClForm();
     return postClForm;
-}
-exports.newPostClForm = newPostClForm;
+};
 
 let postForm = new Object();
 function initPostForm() {
@@ -47,11 +46,10 @@ function initPostForm() {
     postForm.modNo      = null;   //수정자
     postForm.modDtt     = null;   //수정일시
 }
-function newPostForm() {
+exports.newPostForm = () => {
     initPostForm();
     return postForm;
-}
-exports.newPostForm = newPostForm;
+};
 
 let tagForm = new Object();
 function initTagForm() {
@@ -59,11 +57,10 @@ function initTagForm() {
     tagForm.tagSeq  = null;   //태그순번
     tagForm.tagNm   = null;   //태그명
 }
-function newTagForm() {
+exports.newTagForm = () => {
     initTagForm();
     return tagForm;
-}
-exports.newTagForm = newTagForm;
+};
 
 let cmntForm = new Object();
 function initCmntForm() {
@@ -79,11 +76,10 @@ function initCmntForm() {
     cmntForm.modNo      = null;   //수정자
     cmntForm.modDtt     = null;   //수정일시
 }
-function newCmntForm() {
+exports.newCmntForm = () => {
     initCmntForm();
     return cmntForm;
-}
-exports.newCmntForm = newCmntForm;
+};
 
 let rcmItemForm = new Object();
 function initRcmItemForm() {
@@ -92,8 +88,7 @@ function initRcmItemForm() {
     rcmItemForm.rcmMbrNo    = null;   //추천회원번호
     rcmItemForm.rcmDtt      = null;   //추천일시
 }
-function newRcmItemForm() {
+exports.newRcmItemForm = () => {
     initRcmItemForm();
     return rcmItemForm;
-}
-exports.newRcmItemForm = newRcmItemForm;
+};

@@ -26,4 +26,28 @@
         AND     (#{mbrEmail} IS NULL OR MBR_EMAIL = #{mbrEmail})
     </select>
 
+    <select id="selectLoginMbr">
+        SELECT  
+                MBR_NO
+              , MBR_EMAIL
+              , MBR_NKNM
+              , MBR_INTRO
+              , C.COM_CD_NM MBR_STAT
+              , C2.COM_CD_NM MBR_SX
+              , MBR_JN_DTT
+              , PW_ERR_CNT
+              , PREV_PW
+              , PW_CHG_DTT
+              , LAST_LGN_DTT
+              , MBR_WTHD_DTT
+        FROM    MBR         M
+        JOIN    COM_CODE    C
+        ON      M.MBR_STAT_CD = C.COM_CD
+        JOIN    COM_CODE    C2
+        ON      M.MBR_SX_CD = C2.COM_CD
+        WHERE   1 = 1
+        AND     MBR_EMAIL = #{mbrEmail}
+        AND     MBR_PW = SHA2(#{mbrPw}, 256)
+    </select>
+
 </mapper>
