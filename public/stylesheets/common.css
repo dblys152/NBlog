@@ -1,7 +1,9 @@
 body,input,textarea,select,button,table{
     font-family: "나눔고딕","NanumGothic","NanumGothicWebFont","Malgun Gothic","맑은 고딕","Dotum","돋움","Helvetica","Apple SD Gothic Neo","sans-serif";
-    font-size: 12px;
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 18px;
+    border: 0;
+    outline: 0;
 }
 body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fieldset, legend, input, textarea, button, select{
     margin: 0;
@@ -10,6 +12,7 @@ body, p, h1, h2, h3, h4, h5, h6, ul, ol, li, dl, dt, dd, table, th, td, form, fi
 body{position: relative;}
 ul{list-style: none;}
 a{text-decoration: none;color: inherit;cursor: pointer;}
+button{cursor: pointer;border-radius: 5px;}
 * {
     box-sizing: border-box;
 }
@@ -23,14 +26,14 @@ a{text-decoration: none;color: inherit;cursor: pointer;}
 
 .top{display: flex;position: relative;height: 100%;}
 .top .area_logo{float: left;}
-.top .area_logo .logo{width: 120px;height: 26px;margin-top: 14px;color:#ff7f00;}
+.top .area_logo .logo{width: 120px;height: 26px;margin-top: 16px;color:#ff7f00;}
 .top .area_search{float: left; margin:8px 0 0 19px;}
 .top .area_search .search_box{display: flex;float: left;}
 .top .area_search .search_box .search{border: 1px solid #ff7f00;border-right: 0;background-color: #fff;}
-.top .area_search .search_box .dropdown{float: left;width: 99px;height: 35px;margin: 0 0 0 -1px;padding: 3px 0 4px;border-color: #999;}
+.top .area_search .search_box .dropdown{float: left;width: 99px;height: 35px;margin: 0 0 0 5px;padding: 3px 0 4px;border-color: #999;}
 .top .area_search .search_box .textbox{float: left;width: 222px;height: 35px;border: 0;font-size: 12px;font-weight: 600;line-height: 16px;text-indent: 10px;}
 .top .area_search .search_box .search_btn{float: left;width: 36px;height: 37px;line-height: 35px;background-color: #ff7f00;border: 1px solid #ff7f00;text-align: center;}
-.top .area_profile{position: absolute;top: 0;right: 10px;bottom: 0;margin:8px 0 0 19px;display: block;}
+.top .area_profile{position: absolute;top: 0;right: 10px;bottom: 0;margin:6px 0 0 19px;display: block;}
 .top .area_profile ul{display: flex;position: relative;}
 .top .area_profile .login_box{padding:12px 0 10px 1px;}
 .top .area_profile .login_box a{padding:0;padding:0 10px 0 10px;font-size:16px;font-weight:bold;height:54px;}
@@ -39,19 +42,18 @@ a{text-decoration: none;color: inherit;cursor: pointer;}
 .top .area_profile .profile_box{display: flex;margin-right: 1px;}
 .top .area_profile .profile_box .name_box{display: flex;margin:0 0 0 3px;padding:12px 20px 0 5px;}
 .top .area_profile .profile_box .name_box .nickname{padding-right: 10px;}
-.top .area_profile .profile_box p,span{font-size:14px;font-weight:bold;margin-bottom: 2px;}
+.top .area_profile .txt{font-size:14px;font-weight:bold;margin-bottom: 2px;}
 .top .area_profile:hover .area_drop_box{display: block;}
 .top .area_profile img{width:40px;height:40px;border-radius: 70%;display: inline-block;}
 .top .area_profile .area_drop_box{display: none;position: absolute;top: 45px;right: -8px;width: 300px;height: 150px;background-color: #fff;border: 1px solid #ebebeb;}
-.area_drop_box p,span{font-size:14px;font-weight:bold;}
-.area_drop_box .drop_my_content{display: flex;zoom: 1;height: 108px;padding: 15px;}
-.area_drop_box .drop_my_content .drop_img img{width:80px;height:80px;border-radius: 70%;}
-.area_drop_box .drop_my_content .drop_txt{float: left;width: 210px;margin: 15px 0 0px 15px;}
-.area_drop_box .drop_my_community{display: flex;float: left;}
-.area_drop_box .drop_my_community a{width: 149px;height: 40px;border-top: 1px solid #ebebeb;border-right: 1px solid #ebebeb;background-color: #f8f8f8;text-align: center;font-weight: bold;text-decoration: none;line-height: 38px;}
+.top .area_profile .area_drop_box .drop_my_content{display: flex;zoom: 1;height: 108px;padding: 15px;}
+.top .area_profile .area_drop_box .drop_my_content .drop_img img{width:80px;height:80px;border-radius: 70%;}
+.top .area_profile .area_drop_box .drop_my_content .drop_txt{float: left;width: 210px;margin: 15px 0 0px 15px;}
+.top .area_profile .area_drop_box .drop_my_community{display: flex;float: left;}
+.top .area_profile .area_drop_box .drop_my_community a{width: 149px;height: 40px;border-top: 1px solid #ebebeb;border-right: 1px solid #ebebeb;background-color: #f8f8f8;text-align: center;font-weight: bold;text-decoration: none;line-height: 38px;}
 
 .blog_top{display: flex;position: relative;height: 40px;}
-.blog_top .area_bar{display: block;position: absolute;top: 0;right: 10px;bottom: 0;margin: 0px 10px 0px 0px;}
+.blog_top .area_bar{display: block;position: absolute;top: 0;right: 10px;bottom: 0;margin: 0 10px 0 0;}
 .blog_top .area_bar ul{display: flex;margin: 0;padding: 2px 0 0 0;letter-spacing: -1px;}
 .blog_top .area_bar ul li{float: left;padding-top: 8px;padding-left: 7px;}
 .blog_top .area_bar ul li a:hover,.nickname:hover{text-decoration: underline;}
@@ -67,11 +69,14 @@ a{text-decoration: none;color: inherit;cursor: pointer;}
 .blog_top_title .blog_menu .menu2 ul{float: right;padding-right: 12px;}
 
 #container{padding: 20px;}
+#container input{height:36px;outline: 1px solid gray;margin: 5px 0;padding: 5px;border-radius: 5px;}
+#container input.err{outline: 1px solid red;}
 .content.home{margin-top:54px;}
-
 
 
 #footer{position: absolute;left: 0;right: 0;bottom: 0;height: 128px;background-color: #f6f6f6;text-align: center;}
 #footer .bottom{padding-top:40px;text-align: center;}
 .bottom ul li{font-weight: bold;font-size: 14px;}
 .bottom .copyright{margin-top: 20px;font-size: 10px;}
+
+

@@ -1,31 +1,19 @@
 /* login */
-#login{background:#fff}
-#login #container{display:table;width:100%;padding:0}
-#login .content{display:table-row;padding:0}
-#login .cont{display:table-cell}
-#login .cont.left{width:40%;padding:140px 0 300px}
-#login .cont.left .main_logo{width:239px;margin:0 auto}
-#login .cont.left .title{display:block;margin-top:20px;letter-spacing:-1px;line-height:1.3em;text-align:center;font-size:24px}
-#login .login_box{width:380px;margin:60px auto 0}
-#login .login_box input[type="text"],#login .login_box input[type="password"]{width:100%;padding:10px;border:0;box-sizing:border-box}
-#login .login_box .inp_list li:last-child{margin-top:10px;padding-top:10px;border-top:1px solid #ebedf2}
-#login .idpw_box{position:relative;margin-top:30px}
-#login .idpw_box .lb_box.right{position:absolute;top:0;right:30px}
-#login .cont.right{position:relative;width:60%;background:url(/resources/images/common/bg_login.jpg) no-repeat 80% 0;background-size:cover}
-#login .cont.right .comt_box{position:absolute;top:516px;left:120px}
-#login .cont.right p{color:#fff}
-#login .cont.right .tit{font-size:40px}
-#login .cont.right .txt{line-height:1.4em;font-size:14px}
-#login .cont.right .txt.pw{margin-top:60px}
-#login .link_pw{position:absolute;top:0;right:0}
-#login .link_pw:hover{text-decoration:underline}
-#login .btn_login{display:block;margin:40px auto 0;padding:15px 30px;border-radius:25px;background:#f4ae16;color:#fff}
-#login .btn_signin{display:block;margin:40px auto 0;padding:15px 30px;border-radius:25px;background:#ae16f4;color:#fff}
-#login .count{display:none;margin:5px 0 0 8px}
-#login .count.on{display:inline-block}
-#login #footer{height:21px;padding-top:7px;background:#303338;color:#fff;text-align:center}
-#login .btn_loginpage{display:block;margin-left:100%;margin-top:15%;padding:10px 20px;border-radius:25px;background:#f4ae16;color:#fff}
-#login .btn_signinpage{display:block;margin-left:100%;margin-top:15%;padding:10px 20px;border-radius:25px;background:#ae16f4;color:#fff}
+.login{background:#fff}
+.login .login_box{width:400px;height:500px;padding:30px;border: 1px solid orange;margin:100px auto 200px auto}
+.login .login_box input{width:100%}
+.login .login_box .btn_base{width:100%;height:30px;background:#f4ae16;color:#fff;margin:15px 0}
+.login .login_box .btn_base.signup{margin:75px 0 15px 0}
+.login .login_box .login_ttl_box{display: block;margin-bottom: 20px;text-align: center;margin: 10px 0 30px 0}
+.login .login_box .login_ttl_txt{font-size: 32px;font-weight:bold}
+.login .login_box .login_ttl_txt.orange{color: orange}
+.login .login_box .passImg{width:80px;height:80px;margin-bottom: 20px;}
+.login .login_box .link_box{margin: 20px 0;text-align: center;}
+.login .login_box .link_box .signup_link,.login_link{font-weight:bold;color: orange}
+.login .login_box .pass_lose{margin: 10px 0 20px 0;text-align: center;font-size: 12px;}
+.login .login_box .sns_box{margin: 45px 0 20px 0;text-align: center}
+.login .login_box .sns_box .sns_btn_box{margin: 20px auto}
+.login .login_box .sns_box .sns_btn_box img{width:40px;height:40px;border-radius: 70%;margin: 0 5px;cursor: pointer;}
 
 .notice_board .user_info{position:relative;margin-bottom:15px;padding-top:8px}
 .notice_board .user_info .name{color:#6C7293;font-weight:bold;cursor:pointer}
