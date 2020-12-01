@@ -12,3 +12,21 @@
     레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
     레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
 </div>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    let loginBtn = document.getElementById('blogLogin');
+    if(loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            location.href="/login?url=/blog/<%= blgMbrNo %>";
+        });
+    }
+
+    let logoutBtn = document.getElementById('blogLogout');
+    if(logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            location.href="/logout?url=/blog/<%= blgMbrNo %>";
+        });
+    }
+});
+
+</script>

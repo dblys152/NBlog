@@ -19,14 +19,16 @@
     </div>
     <div class="area_profile">
         <ul>
-            <li class="login_box" style="display:none;">
-                <a href="#" class="sign_in">Sign in</a>
-                <a href="#" class="sign_up">Sign up</a>
+            <% if(mbrNo == '') { %>
+            <li class="login_box" >
+                <a href="/login" class="sign_in">로그인</a>
+                <a href="/signup" class="sign_up">회원가입</a>
             </li>
+            <% } else { %>
             <li class="profile_box">
                 <img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
                 <div class="name_box">
-                    <span class="nickname"><%= (typeof MBR_NKNM != 'undefined' ? MBR_NKNM : "") %></span>▼
+                    <span class="txt nickname"><%= mbrNknm %></span>▼
                 </div>
                 <span class="ico_arrow"></span>
                 <div class="area_drop_box">
@@ -35,19 +37,20 @@
                             <a href="#"><img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80"></a>
                         </div>
                         <div class="drop_txt">
-                            <p>
-                                <a href="#"><%= (locals.MBR_NKNM) ? MBR_NKNM : "" %></a>님
+                            <p class="txt">
+                                <a href="#"><%= mbrNknm %></a>님
                                 설정
                             </p>
-                            <a href="#"><%= (locals.MBR_EMAIL) ? MBR_EMAIL : "" %></a>
+                            <a href="#"><%= mbrEmail %></a>
                         </div>
                     </div>
                     <div class="drop_my_community">
-                        <a href="/<%= (locals.MBR_EMAIL) ? MBR_EMAIL : "" %>" class="my_blog">내 블로그</a>
-                        <a href="#" class="logout">로그아웃</a>
+                        <a href="/blog/<%= mbrNo %>" class="my_blog">내 블로그</a>
+                        <a href="/logout" class="logout">로그아웃</a>
                     </div>
                 </div>
             </li>
+            <% } %>
         </ul>
     </div>
 </div>

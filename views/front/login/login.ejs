@@ -1,0 +1,31 @@
+<div class="content home login">
+    <div class="login_box">
+        <form id="loginForm" method="POST">
+            <input type="hidden" name="url" value="<%= url %>">
+            <div class="login_ttl_box">
+                <span class="login_ttl_txt orange">N 블로그</span>
+            </div> 
+            <input type="text" name="mbrEmail" placeholder="이메일 주소">
+            <input type="password" name="mbrPw" placeholder="비밀번호">
+            <button type="button" class="btn_base" id="login">로그인</button>
+            <div class="link_box pass_lose"><a href="/pw_reset">비밀번호를 잊으셨나요?</a></div>
+            <div class="link_box">계정이 없으신가요? <a href="/signup" class="signup_link">가입하기</a></div>
+            <div class="sns_box">
+                <span class="">SNS계정으로 시작하기</span>
+                <div class="sns_btn_box">
+                    <img src="/images/naver.png">
+                    <img src="/images/kakaotalk.png">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('login').addEventListener('click', () => {
+        document.getElementById('loginForm').submit();
+    });
+
+});
+</script>

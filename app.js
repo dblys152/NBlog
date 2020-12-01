@@ -19,10 +19,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.locals.MBR_NO = 'M000000002';
-app.locals.MBR_EMAIL = 'l1523@naver.com';
-app.locals.MBR_NKNM = '영트';
-
 app.use(routes);
 
 app.use((req, res, next) => {

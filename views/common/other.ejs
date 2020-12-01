@@ -1,0 +1,13 @@
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    switch('<%= flag %>') {
+        case 'login': 
+            alert('사용자 정보가 일치하지 않습니다.');
+            history.back();
+            break;
+        default:
+            alert('해당 플래그를 찾을 수 없습니다.');
+            history.back();
+    }
+});
+</script>

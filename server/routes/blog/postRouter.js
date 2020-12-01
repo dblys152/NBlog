@@ -6,7 +6,7 @@ const ctgService = require('../../services/common/ctgService.js');
 
 const comCdModel = require('../../models/common/comCdModel.js');
 
-router.get('/:mbrEmail/:postNo', async (req, res) => {
+router.get('/', async (req, res) => {
     let mbrEmail = req.params.mbrEmail;
     let postNo = req.params.postNo;
     let comCdJson = {"upComCd" : comCdModel.comCdData().pstDispCd};

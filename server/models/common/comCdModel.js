@@ -1,4 +1,5 @@
-exports.comCdData = {
+exports.comCdData = () => {
+    return {
         "blgMnuTyCd"    : "101"     //블로그메뉴유형코드
       , "prlgFrmCd"     : "102"     //프롤로그형태코드
       , "ctgTyCd"       : "103"     //카테고리유형코드
@@ -10,6 +11,7 @@ exports.comCdData = {
       , "mbrStatCd"     : "109"     //회원상태코드
       , "mbrSxCd"       : "110"     //회원성별코드
       , "rprtRsnCd"     : "111"     //신고사유코드
+    };
 };
 
 let fileForm = new Object();

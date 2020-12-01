@@ -8,7 +8,7 @@ exports.selectMbrInfo = async (mbrJson) => {
 
 exports.selectLoginMbr = async (mbrEmail, mbrPw) => {
     let mbrJson = mbrModel.newMbrForm();
-    mbrForm.mbrEmail = mbrEmail;
-    mbrForm.mbrPw = mbrPw;
+    mbrJson.mbrEmail = mbrEmail;
+    mbrJson.mbrPw = mbrPw;
     return await mbrDao.selectLoginMbr(mbrJson);
 };
