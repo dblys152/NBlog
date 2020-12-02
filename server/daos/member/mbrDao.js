@@ -1,6 +1,6 @@
-const dbConfig = require('../../database/config/dbConn');
+const dbConfig = require('../../config/dbConn');
 const mybatisMapper = require('mybatis-mapper');
-mybatisMapper.createMapper(['server/database/mapper/mbr.xml']); //매퍼로드
+mybatisMapper.createMapper(['server/config/mapper/mbr.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
 exports.selectMbrInfo = async (mbrJson) => {
