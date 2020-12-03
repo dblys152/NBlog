@@ -2,13 +2,12 @@ const express = require('express');
 const router = express.Router();
 const layoutJson = {'layout': 'common/layout'};
 const jwt = require('jsonwebtoken');
-const jwtKey = require('../../models/jwtKey.js');
-const { jwtMW } = require('../../models/jwtMW.js');
+const jwtKey = require('../../config/jwtKey.js');
 
 const mbrService = require('../../services/member/mbrService');
 
 /* 로그인 화면 */
-router.get('/login', jwtMW, (req, res) => {
+router.get('/login', (req, res) => {
     let url = req.query.url;
     res.render('front/login/login.ejs', {...{url: url}, ...layoutJson});
 });
@@ -44,19 +43,19 @@ router.post('/login', async (req, res) => {
 });
 
 /* 로그아웃 */
-router.get('/logout', jwtMW, (req, res) => {
+router.get('/logout', (req, res) => {
     let url = req.query.url;
     res.cookie('mbr_jwt', '', {expires: new Date(0)});
     res.redirect(url == null || url == '' ? '/' : url);
 });
 
 /* 회원가입 화면 */
-router.get('/signup', jwtMW, (req, res) => {
+router.get('/signup', (req, res) => {
     res.render('front/login/signup.ejs', layoutJson);
 });
 
 /* 비밀번호 찾기 화면 */
-router.get('/pw_reset', jwtMW, (req, res) => {
+router.get('/pw_reset', (req, res) => {
     res.render('front/login/pwReset.ejs', layoutJson);
 });
 
