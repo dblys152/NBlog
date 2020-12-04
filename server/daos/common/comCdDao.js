@@ -8,9 +8,9 @@ exports.selectComCdList = async (comCdJson) => {
     if(!conn) return false;
     try {
         let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', comCdJson, sqlFormat);
+        console.log(sql);
         let [comCdList] = await conn.query(sql);
         conn.release();
-        console.log(sql);
         console.log(comCdList);
         return comCdList;
     } catch(err) {

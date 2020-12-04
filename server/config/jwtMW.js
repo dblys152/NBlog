@@ -12,7 +12,12 @@ exports.jwtMW = function(req, res, next){
             res.locals.mbrNknm = payload.mbrNknm;
             next();
         } catch(e){
-            return res.status(401).send();
+            console.log('Session expiration!');
+            res.locals.mbrNo = '';
+            res.locals.mbrEmail = '';
+            res.locals.mbrNknm = '';
+            next();
+            //return res.status(401).send();
         }
     } else {
         res.locals.mbrNo = '';

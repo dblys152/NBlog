@@ -8,9 +8,9 @@ exports.selectCtgList = async (ctgJson) => {
     if(!conn) return false;
     try {
         let sql = mybatisMapper.getStatement('ctg', 'selectCtgList', ctgJson, sqlFormat);
+        console.log(sql);
         let [ctgList] = await conn.query(sql);
         conn.release();
-        console.log(sql);
         console.log(ctgList);
         return ctgList;
     } catch(err) {

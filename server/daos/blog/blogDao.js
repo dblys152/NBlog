@@ -8,9 +8,9 @@ exports.selectBlogInfo = async (blogJson) => {
     if(!conn) return false;
     try {
         let sql = mybatisMapper.getStatement('blog', 'selectBlogInfo', blogJson, sqlFormat);
+        console.log(sql);
         let [blogInfo] = await conn.query(sql);
         conn.release();
-        console.log(sql);
         console.log(blogInfo);
         return blogInfo[0];
     } catch(err) {

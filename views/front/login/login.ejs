@@ -23,9 +23,41 @@
 
 <script>
 window.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('login').addEventListener('click', () => {
-        document.getElementById('loginForm').submit();
-    });
+    let form = document.forms["loginForm"]; //로그인 폼
 
+    //input에서 엔터 시 로그인
+    for(let i = 0; i < form.elements.length; i++) {
+        if(form.elements[i].type != 'hidden' && form.elements[i].type != 'button') {
+            form.elements[i].addEventListener('keyup', (e) => {
+                if (event.keyCode === 13) {
+                    fn_login(form);
+                }
+            });
+        }
+    }
+
+    //로그인 버튼 클릭 시 로그인
+    document.getElementById('login').addEventListener('click', () => {
+        fn_login(form);
+    });
 });
+
+function fn_login(form) {
+    let mbrEmailInp = form[fname="mbrEmail"];
+    if(mbrEmailInp.value.trim() == '') {
+        alert('이메일을 입력해주세요.');
+        mbrEmailInp.value = mbrEmailInp.value.trim();
+        mbrEmailInp.focus();
+        return;
+    }
+    
+    let mbrPwInp = form[fname="mbrPw"];
+    if(mbrPwInp.value.trim() == '') {
+        alert('비밀번호를 입력해주세요.');
+        mbrPwInp.focus();
+        return;
+    }
+
+    form.submit();
+}
 </script>

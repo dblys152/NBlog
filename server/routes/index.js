@@ -15,7 +15,7 @@ const postRouter = require('./blog/postRouter.js');
 router.use('/post', postRouter);
 
 const mbrRouter = require('./member/mbrRouter.js');
-router.use('/member', loginRouter, mbrRouter);
+router.use('/member', mbrRouter);
 
 console.log("This is index!");
 

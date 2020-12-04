@@ -26,7 +26,6 @@ router.get('/blog/:blgMbrNo', async (req, res) => {
     blogInfoForm.intgMbrNo = mbrInfo.MBR_NO;
     blogInfoForm.blgMnuNo = 'BM01';
     let blogInfo = await blogService.selectBlogInfo(blogInfoForm);
-    console.log(blgMbrNo);
     res.render('front/blog/blogView.ejs', {...{'blgMbrNo': blgMbrNo}, ...{'mbrInfo': mbrInfo}, ...{'blogInfo': blogInfo}, ...blogLayoutJson});
 });
 
