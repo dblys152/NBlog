@@ -23,6 +23,43 @@ exports.newBlogMenuForm = () => {
     return blogMenuForm;
 };
 
+exports.setBlogMenuJson = [
+    {
+        blgMnuNo: 'BM01'
+      , blgMnuNm: '블로그'
+      , rprsMnuYn: 'Y'
+      , ncsYn: 'Y'
+      , useYn: 'Y'
+      , blgMnuTyCd: '101101'
+      , pagPstCnt: 1
+      , prlgFrmCd: null
+      , ntfYn: null
+    }
+  , {
+        blgMnuNo: 'BM02'
+      , blgMnuNm: '프롤로그'
+      , rprsMnuYn: 'N'
+      , ncsYn: 'Y'
+      , useYn: 'N'
+      , blgMnuTyCd: '101102'
+      , pagPstCnt: null
+      , prlgFrmCd: '102101'   /* 글강조 */  
+      , ntfYn: null
+    }
+    , {
+        blgMnuNo: 'BM03'
+      , blgMnuNm: '방명록'
+      , rprsMnuYn: 'N'
+      , ncsYn: 'Y'
+      , useYn: 'Y'
+      , blgMnuTyCd: '101103'
+      , pagPstCnt: null
+      , prlgFrmCd: null
+      , ntfYn: 'Y'
+    }
+];
+
+
 let topMenuSetForm = new Object();
 function initTopMenuSetForm() {
     topMenuSetForm.intgMbrNo    = null;   //회원번호
@@ -80,3 +117,6 @@ exports.newPrlgSetForm = () => {
     initPrlgSetForm();
     return prlgSetForm;
 };
+
+
+

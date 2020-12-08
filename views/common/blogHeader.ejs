@@ -47,18 +47,21 @@
     <div class="blog_menu">
         <div class="menu1">
             <ul>
-                <li><a href="#">프롤로그</a></li>
-                <li><a href="#">블로그</a></li>
+                <% for(let i = 0; i < blogMenuList.length - 1; i++) { %>
+                    <li><a href="#"><%= blogMenuList[i].BLG_MNU_NM %></a></li>
+                <% } %>
             </ul>
         </div>
         <div class="menu2">
             <ul>
                 <li><a href="#">태그</a></li>
-                <li><a href="#">방명록</a></li>
+                <li><a href="#"><%= blogMenuList[blogMenuList.length - 1].BLG_MNU_NM %></a></li>
             </ul>
         </div>
     </div>
     <div>
+        <% if(blogInfo.INTG_MBR_NO == mbrNo) { %>
         <a href="/blog/<%= mbrNo %>/write">글쓰기</a>
+        <% } %>
     </div>
 </div>

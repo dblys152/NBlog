@@ -2,6 +2,59 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 <mapper namespace="blog">
 
+    <insert id="insertBlogMenu">
+        INSERT INTO BLOG_MENU   (
+                                    INTG_MBR_NO
+                                  , BLG_MNU_NO
+                                  , BLG_MNU_NM
+                                  , RPRS_MNU_YN
+                                  , NCS_YN
+                                  , USE_YN
+                                  , BLG_MNU_TY_CD
+                                  , PAG_PST_CNT
+                                  , PRLG_FRM_CD
+                                  , NTF_YN
+                                  , SEQ
+                                  , REG_NO
+                                  , REG_DTT
+                                  , MOD_NO
+                                  , MOD_DTT
+                                ) 
+        SELECT 
+                #{intgMbrNo}
+              , #{blgMnuNo}
+              , #{blgMnuNm}
+              , #{rprsMnuYn}
+              , #{ncsYn}
+              , #{useYn}
+              , #{blgMnuTyCd}
+              , ${pagPstCnt}
+              , #{prlgFrmCd}
+              , #{ntfYn}
+              , (SELECT IFNULL(MAX(SEQ) + 1, 1) FROM BLOG_MENU WHERE INTG_MBR_NO = #{intgMbrNo})
+              , #{regNo}
+              , NOW()
+              , #{regNo}
+              , NOW()
+    </insert>
+
+    <insert id="insertBlogInfo">
+        INSERT INTO BLOG_INFO   (
+                                    INTG_MBR_NO
+                                  , BLG_MNU_NO
+                                  , BLG_NM
+                                  , BLG_INTRO
+                                  , TPC_CTG_NO
+                                ) 
+        VALUES                  (
+                                    #{intgMbrNo}
+                                  , #{blgMnuNo}
+                                  , CONCAT(#{mbrNknm}, '님의 블로그')
+                                  , NULL
+                                  , '99'  /* 주제카테고리: 선택안함 */
+                                );
+    </insert>
+
     <select id="selectBlogInfo">
         SELECT  
                 BI.INTG_MBR_NO
@@ -16,6 +69,18 @@
         WHERE   1 = 1   
         AND     INTG_MBR_NO = #{intgMbrNo}
         AND     BLG_MNU_NO = #{blgMnuNo}
+    </select>
+
+    <select id="selectBlogMenuList">
+        SELECT  
+                BLG_MNU_NO
+              , BLG_MNU_NM
+        FROM    BLOG_MENU
+        WHERE   1 = 1
+        AND     INTG_MBR_NO = #{intgMbrNo}
+        AND     USE_YN = 'Y'
+        AND     DEL_YN = 'N'
+        ORDER   BY  SEQ
     </select>
 
 </mapper>

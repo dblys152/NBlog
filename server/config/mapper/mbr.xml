@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 <mapper namespace="mbr">
 
+    <select id="selectMbrEmailCnt">
+        SELECT  COUNT(*) cnt
+        FROM    MBR
+        WHERE   MBR_EMAIL = #{mbrEmail}
+    </select>
+
+    <select id="selectNewMbrNo">
+        <!-- SELECT CONCAT('M', RIGHT(1000000000 + SUBSTR(MAX(MBR_NO), 2, 10) + 1, 9)) mbrNo FROM MBR -->
+        SELECT CONCAT('M', RIGHT(1000000000 + NEXTVAL(MBR_SEQ), 9)) mbrNo
+    </select>
+
     <insert id="insertMbr">
         INSERT  INTO MBR    (
                                 MBR_NO     
@@ -19,7 +30,7 @@
                               , MBR_WTHD_DTT
                             )
         SELECT
-                (SELECT CONCAT('M', RIGHT(1000000000 + SUBSTR(MAX(MBR_NO), 2, 10) + 1, 9)) FROM MBR)
+                #{mbrNo}
               , #{mbrEmail}
               , SHA2(#{mbrPw}, 256)
               , #{mbrNknm}   
@@ -33,12 +44,6 @@
               , NULL
               , NULL
     </insert>
-
-    <select id="selectMbrEmailCnt">
-        SELECT  COUNT(*) cnt
-        FROM    MBR
-        WHERE   MBR_EMAIL = #{mbrEmail}
-    </select>
 
     <select id="selectMbrInfo">
         SELECT  

@@ -17,14 +17,14 @@ window.addEventListener('DOMContentLoaded', () => {
     let loginBtn = document.getElementById('blogLogin');
     if(loginBtn) {
         loginBtn.addEventListener('click', () => {
-            location.href="/login?url=/blog/<%= blgMbrNo %>";
+            location.href="/login?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
         });
     }
 
     let logoutBtn = document.getElementById('blogLogout');
     if(logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            location.href="/logout?url=/blog/<%= blgMbrNo %>";
+            location.href="/logout?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
         });
     }
 });

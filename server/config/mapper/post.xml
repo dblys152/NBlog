@@ -2,6 +2,46 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 <mapper namespace="post">
 
+    <insert id="insertPostClass">
+        INSERT INTO POST_CLASS  (
+                                    INTG_MBR_NO
+                                  , BLG_MNU_NO
+                                  , PST_CL_TY_CD
+                                  , PST_CL_NM
+                                  , UP_PST_CL_NO
+                                  , TPC_CTG_NO
+                                  , PST_CNT_DISP_YN
+                                  , DISP_YN
+                                  , DISP_TY_CD
+                                  , LIST_DISP_YN
+                                  , LIST_DISP_CNT
+                                  , THMB_RT_CD
+                                  , SEQ
+                                  , REG_NO
+                                  , REG_DTT
+                                  , MOD_NO
+                                  , MOD_DTT
+                                ) 
+        SELECT
+                #{intgMbrNo}
+              , #{blgMnuNo}
+              , #{pstClTyCd}
+              , #{pstClNm}
+              , ${upPstClNo}
+              , #{tpcCtgNo}
+              , #{pstCntDispYn}
+              , #{dispYn}
+              , #{dispTyCd}
+              , #{listDispYn}
+              , ${listDispCnt}
+              , #{thmbRtCd}
+              , #{seq}
+              , #{regNo}
+              , NOW()
+              , #{regNo}
+              , NOW()
+    </insert>
+
     <select id="selectPostList">
         SELECT  
                 *

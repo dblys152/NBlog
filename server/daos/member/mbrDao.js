@@ -3,6 +3,22 @@ const mybatisMapper = require('mybatis-mapper');
 mybatisMapper.createMapper(['server/config/mapper/mbr.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
+exports.selectNewMbrNo = async () => {
+    const conn = await dbConfig.getMysqlConn();
+    if(!conn) throw "DB connection error";
+    try {
+        let sql = mybatisMapper.getStatement('mbr', 'selectNewMbrNo', null, sqlFormat);
+        console.log(sql);
+        let [row] = await conn.query(sql);
+        conn.release();
+        console.log(row[0].mbrNo);
+        return row[0].mbrNo;
+    } catch(err) {
+        console.log(err);
+        throw err;
+    }
+};
+
 exports.insertMbr = async (mbrForm) => {
     const conn = await dbConfig.getMysqlConn();
     if(!conn) throw "DB connection error";
@@ -10,9 +26,9 @@ exports.insertMbr = async (mbrForm) => {
         let sql = mybatisMapper.getStatement('mbr', 'insertMbr', mbrForm, sqlFormat);
         console.log(sql);
         await conn.execute(sql);
-        conn.release();
-        return true;
+        return conn;
     } catch(err) {
+        conn.rollback();
         console.log(err);
         throw err;
     }

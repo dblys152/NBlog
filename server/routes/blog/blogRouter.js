@@ -30,9 +30,20 @@ router.get('/blog/:blgMbrNo', async (req, res) => {
 
         let blogInfoForm = blogModel.newBlogInfoForm();
         blogInfoForm.intgMbrNo = mbrInfo.MBR_NO;
-        blogInfoForm.blgMnuNo = 'BM01';
+        blogInfoForm.blgMnuNo = blogModel.setBlogMenuJson[0].blgMnuNo;
         let blogInfo = await blogService.selectBlogInfo(blogInfoForm);
-        res.render('front/blog/blogView.ejs', {...{'blgMbrNo': blgMbrNo}, ...{'mbrInfo': mbrInfo}, ...{'blogInfo': blogInfo}, ...blogLayoutJson});
+        let blogMenuList = await blogService.selectBlogMenuList(blogInfoForm);
+        res.locals.blogInfo = blogInfo;
+        res.locals.blogMenuList = blogMenuList;
+        res.render(
+                    'front/blog/blogView.ejs'
+                  , {
+                        //...{'blgMbrNo': blgMbrNo}
+                      //, ...{'blogInfo': blogInfo}
+                      //, ...{'blogMenuList': blogMenuList}
+                      ...blogLayoutJson
+                    }
+        );
     } catch(e) {
         console.log(e);
         res.status(500).send();

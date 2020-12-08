@@ -6,6 +6,7 @@ const db_info = {
     user: 'root',
     password: 'dudtjr',
     database: 'n_blog',
+    multipleStatements: true,
     connectionLimit: 10
 };
 
