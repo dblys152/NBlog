@@ -7,6 +7,7 @@ exports.insertMbr = async (mbrEmail, mbrPw, mbrNknm) => {
     mbrForm.mbrEmail = mbrEmail;
     mbrForm.mbrPw = mbrPw;
     mbrForm.mbrNknm = mbrNknm;
+
     return await mbrDao.insertMbr(mbrForm);
 };
 

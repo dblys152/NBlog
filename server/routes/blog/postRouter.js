@@ -10,10 +10,16 @@ router.get('/', async (req, res) => {
     let mbrEmail = req.params.mbrEmail;
     let postNo = req.params.postNo;
     let comCdJson = {"upComCd" : comCdModel.comCdData().pstDispCd};
-    let comCdList = await comCdService.selectComCdList(comCdJson);
-    let comCdStr = JSON.stringify(comCdList);
-    let ctgList = await ctgService.selectCtgList(null);
-    res.send('This is postMng! ' + mbrEmail + '/' + postNo + ' : ' + comCdStr + JSON.stringify(ctgList));
+    try {
+        let comCdList = await comCdService.selectComCdList(comCdJson);
+
+        let comCdStr = JSON.stringify(comCdList);
+        let ctgList = await ctgService.selectCtgList(null);
+        res.send('This is postMng! ' + mbrEmail + '/' + postNo + ' : ' + comCdStr + JSON.stringify(ctgList));
+    } catch(e) {
+        console.log(e);
+        res.status(500).send();
+    }
 });
 
 module.exports = router;

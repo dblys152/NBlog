@@ -14,31 +14,36 @@ router.get('/login', (req, res) => {
 //로그인
 router.post('/login', async (req, res) => {
     let { url, mbrEmail, mbrPw } = req.body;
-    let mbrInfo = await mbrService.selectLoginMbr(mbrEmail, mbrPw);
-    if(mbrInfo != null) {
-        console.log('Login Success!');
-        //jwt 토큰 생성
-        let accessToken = jwt.sign(
-            {
-                mbrNo: mbrInfo.MBR_NO
-              , mbrEmail: mbrInfo.MBR_EMAIL
-              , mbrNknm: mbrInfo.MBR_NKNM
+    try {
+        let mbrInfo = await mbrService.selectLoginMbr(mbrEmail, mbrPw);
+        if(mbrInfo != null) {
+            console.log('Login Success!');
+            //jwt 토큰 생성
+            let accessToken = jwt.sign(
+                {
+                    mbrNo: mbrInfo.MBR_NO
+                , mbrEmail: mbrInfo.MBR_EMAIL
+                , mbrNknm: mbrInfo.MBR_NKNM
+                }
+            , jwtKey.secret   //토큰 비밀키
+            , {
+                    algorithm: "HS256"
+                , expiresIn: "5m"
+                }
+            );
+            //쿠키 등록
+            res.cookie("mbr_jwt", accessToken, {httpOnly: true});
+            if(url) {
+                res.redirect(url);
+            } else {
+                res.redirect('/');
             }
-          , jwtKey.secret   //토큰 비밀키
-          , {
-                algorithm: "HS256"
-              , expiresIn: "5m"
-            }
-        );
-        //쿠키 등록
-        res.cookie("mbr_jwt", accessToken, {httpOnly: true});
-        if(url) {
-            res.redirect(url);
         } else {
-            res.redirect('/');
+            res.redirect('/common/other?flag=login');
         }
-    } else {
-        res.redirect('/common/other?flag=login');
+    } catch(e) {
+        console.log(e);
+        res.status(500).send();
     }
 });
 

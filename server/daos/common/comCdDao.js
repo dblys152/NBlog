@@ -5,7 +5,7 @@ const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
 exports.selectComCdList = async (comCdJson) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) return false;
+    if(!conn) throw "DB connection error";
     try {
         let sql = mybatisMapper.getStatement('comCd', 'selectComCdList', comCdJson, sqlFormat);
         console.log(sql);
@@ -15,6 +15,6 @@ exports.selectComCdList = async (comCdJson) => {
         return comCdList;
     } catch(err) {
         console.log(err);
-        return false;
+        throw err;
     }
 };

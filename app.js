@@ -11,7 +11,7 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.set('layout', 'common/layout');
+app.set('layout', 'common/layout.ejs');
 app.use(expressLayouts);
 app.use(logger('dev'));
 app.use(express.json());
@@ -42,5 +42,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('common/error');
 });
-console.log("This is app!");
+console.log("Server start!");
 module.exports = app;

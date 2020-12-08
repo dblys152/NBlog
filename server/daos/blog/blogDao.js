@@ -5,7 +5,7 @@ const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
 exports.selectBlogInfo = async (blogJson) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) return false;
+    if(!conn) throw "DB connection error";
     try {
         let sql = mybatisMapper.getStatement('blog', 'selectBlogInfo', blogJson, sqlFormat);
         console.log(sql);
@@ -15,6 +15,6 @@ exports.selectBlogInfo = async (blogJson) => {
         return blogInfo[0];
     } catch(err) {
         console.log(err);
-        return false;
+        throw err;
     }
 };

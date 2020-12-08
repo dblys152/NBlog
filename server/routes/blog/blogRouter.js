@@ -12,21 +12,31 @@ const blogModel = require('../../models/blog/blogModel.js');
 router.get('/', async (req, res) => {
     let mbrForm = mbrModel.newMbrForm();
     mbrForm.mbrNo = "M000000002";
-    let mbrInfo = await mbrService.selectMbrInfo(mbrForm);
-    res.render('front/blog/blogHome.ejs', {...mbrInfo[0], ...layoutJson});
+    try {
+        let mbrInfo = await mbrService.selectMbrInfo(mbrForm);
+        res.render('front/blog/blogHome.ejs', {...mbrInfo[0], ...layoutJson});
+    } catch(e) {
+        console.log(e);
+        res.status(500).send();
+    }
 });
 
 router.get('/blog/:blgMbrNo', async (req, res) => {
     let blgMbrNo = req.params.blgMbrNo;
     let mbrForm = mbrModel.newMbrForm();
     mbrForm.mbrNo = blgMbrNo;
-    let mbrInfo = await mbrService.selectMbrInfo(mbrForm);
+    try {
+        let mbrInfo = await mbrService.selectMbrInfo(mbrForm);
 
-    let blogInfoForm = blogModel.newBlogInfoForm();
-    blogInfoForm.intgMbrNo = mbrInfo.MBR_NO;
-    blogInfoForm.blgMnuNo = 'BM01';
-    let blogInfo = await blogService.selectBlogInfo(blogInfoForm);
-    res.render('front/blog/blogView.ejs', {...{'blgMbrNo': blgMbrNo}, ...{'mbrInfo': mbrInfo}, ...{'blogInfo': blogInfo}, ...blogLayoutJson});
+        let blogInfoForm = blogModel.newBlogInfoForm();
+        blogInfoForm.intgMbrNo = mbrInfo.MBR_NO;
+        blogInfoForm.blgMnuNo = 'BM01';
+        let blogInfo = await blogService.selectBlogInfo(blogInfoForm);
+        res.render('front/blog/blogView.ejs', {...{'blgMbrNo': blgMbrNo}, ...{'mbrInfo': mbrInfo}, ...{'blogInfo': blogInfo}, ...blogLayoutJson});
+    } catch(e) {
+        console.log(e);
+        res.status(500).send();
+    }
 });
 
 module.exports = router;

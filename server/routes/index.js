@@ -17,6 +17,4 @@ router.use('/post', postRouter);
 const mbrRouter = require('./member/mbrRouter.js');
 router.use('/member', mbrRouter);
 
-console.log("This is index!");
-
 module.exports = router;

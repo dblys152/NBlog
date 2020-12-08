@@ -5,22 +5,22 @@ const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
 exports.insertMbr = async (mbrForm) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) return false;
+    if(!conn) throw "DB connection error";
     try {
         let sql = mybatisMapper.getStatement('mbr', 'insertMbr', mbrForm, sqlFormat);
         console.log(sql);
         await conn.execute(sql);
         conn.release();
-        return 1;
+        return true;
     } catch(err) {
         console.log(err);
-        return -1;
+        throw err;
     }
 };
 
 exports.selectMbrEmailCnt = async (mbrEmail) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) return false;
+    if(!conn) throw "DB connection error";
     try {
         let sql = mybatisMapper.getStatement('mbr', 'selectMbrEmailCnt', {"mbrEmail": mbrEmail}, sqlFormat);
         console.log(sql);
@@ -30,13 +30,13 @@ exports.selectMbrEmailCnt = async (mbrEmail) => {
         return row[0].cnt;
     } catch(err) {
         console.log(err);
-        return -1;
+        throw err;
     }
 }
 
 exports.selectMbrInfo = async (mbrForm) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) return false;
+    if(!conn) throw "DB connection error";
     try {
         let sql = mybatisMapper.getStatement('mbr', 'selectMbrInfo', mbrForm, sqlFormat);
         console.log(sql);
@@ -46,6 +46,6 @@ exports.selectMbrInfo = async (mbrForm) => {
         return mbrInfo[0];
     } catch(err) {
         console.log(err);
-        return false;
+        throw err;
     }
 };
