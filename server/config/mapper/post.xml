@@ -22,24 +22,25 @@
                                   , MOD_NO
                                   , MOD_DTT
                                 ) 
-        SELECT
-                #{intgMbrNo}
-              , #{blgMnuNo}
-              , #{pstClTyCd}
-              , #{pstClNm}
-              , ${upPstClNo}
-              , #{tpcCtgNo}
-              , #{pstCntDispYn}
-              , #{dispYn}
-              , #{dispTyCd}
-              , #{listDispYn}
-              , ${listDispCnt}
-              , #{thmbRtCd}
-              , #{seq}
-              , #{regNo}
-              , NOW()
-              , #{regNo}
-              , NOW()
+        VALUES                  (
+                                    #{intgMbrNo}
+                                  , #{blgMnuNo}
+                                  , #{pstClTyCd}
+                                  , #{pstClNm}
+                                  , ${upPstClNo}
+                                  , #{tpcCtgNo}
+                                  , #{pstCntDispYn}
+                                  , #{dispYn}
+                                  , #{dispTyCd}
+                                  , #{listDispYn}
+                                  , ${listDispCnt}
+                                  , #{thmbRtCd}
+                                  , #{seq}
+                                  , #{regNo}
+                                  , NOW()
+                                  , #{regNo}
+                                  , NOW()
+                                )
     </insert>
 
     <select id="selectPostList">

@@ -29,20 +29,21 @@
                               , LAST_LGN_DTT
                               , MBR_WTHD_DTT
                             )
-        SELECT
-                #{mbrNo}
-              , #{mbrEmail}
-              , SHA2(#{mbrPw}, 256)
-              , #{mbrNknm}   
-              , '109101'    /* 사용중 */
-              , '110103'    /* 성별 모름 */
-              , NULL  
-              , NOW() 
-              , 0  
-              , NULL
-              , NULL 
-              , NULL
-              , NULL
+        VALUES              (
+                                #{mbrNo}
+                              , #{mbrEmail}
+                              , SHA2(#{mbrPw}, 256)
+                              , #{mbrNknm}   
+                              , '109101'    /* 사용중 */
+                              , '110103'    /* 성별 모름 */
+                              , NULL  
+                              , NOW() 
+                              , 0  
+                              , NULL
+                              , NULL 
+                              , NULL
+                              , NULL
+                            )
     </insert>
 
     <select id="selectMbrInfo">
