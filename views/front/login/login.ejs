@@ -1,3 +1,6 @@
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 <div class="content home login">
     <div class="login_box">
         <form id="loginForm" method="POST">
@@ -12,7 +15,9 @@
             <div class="link_box">계정이 없으신가요? <a href="/signup" class="signup_link">가입하기</a></div>
             <div class="sns_box">
                 <span class="">SNS계정으로 시작하기</span>
+                <div id="naver_id_login"></div>
                 <div class="sns_btn_box">
+                    
                     <img src="/images/naver.png">
                     <img src="/images/kakaotalk.png">
                 </div>
@@ -21,7 +26,16 @@
     </div>
 </div>
 
+
 <script>
+//네이버아이디로로그인 버튼 노출 영역
+var naver_id_login = new naver_id_login("WqpFj01vvHM5pzWBvB6f", "http://localhost:3000/");
+var state = naver_id_login.getUniqState();
+naver_id_login.setButton("white", 20, 30);
+naver_id_login.setDomain("http://localhost:3000/");
+naver_id_login.setState(state);
+naver_id_login.setPopup();
+naver_id_login.init_naver_id_login();
 window.addEventListener('DOMContentLoaded', () => {
     let form = document.forms["loginForm"]; //로그인 폼
 

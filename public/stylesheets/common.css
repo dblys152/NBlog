@@ -39,7 +39,7 @@ button{cursor: pointer;border-radius: 5px;}
 .top .area_profile .login_box a{display:inline-block;height:30px;padding:0;padding:4px 10px 0 10px;font-size:16px;font-weight:bold;}
 .top .area_profile .login_box .sign_in{border: 2px solid #ff7f00;border-radius: 5px}
 .top .area_profile .login_box .sign_up{border: 2px solid gray;border-radius: 5px}
-.top .area_profile .login_box .sign_in:hover,.sign_up:hover{background-color: #ddd;border-radius: 5%;}
+.top .area_profile .login_box .sign_in:hover,.sign_up:hover{background-color: #ddd;border-radius: 5px;}
 .top .area_profile .profile_box{display: flex;margin-right: 1px;}
 .top .area_profile .profile_box .name_box{display: flex;margin:0 0 0 3px;padding:12px 20px 0 5px;}
 .top .area_profile .profile_box .name_box .nickname{padding-right: 10px;}

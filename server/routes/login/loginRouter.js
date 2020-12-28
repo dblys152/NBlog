@@ -64,4 +64,15 @@ router.get('/pw_reset', (req, res) => {
     res.render('front/login/pwReset.ejs', layoutJson);
 });
 
+const client_id = 'WqpFj01vvHM5pzWBvB6f';
+const client_secret = 'N_bLU_lWYx';
+const state = "NB";
+const redirectURI = encodeURI("http://localhost:3000/");
+
+router.get('/naverlogin', (req, res) => {
+    let api_url = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
+    res.writeHead(200, {'Content-Type': 'text/html;charset=utf-8'});
+    res.end("<a href='"+ api_url + "'><img height='50' src='http://static.nid.naver.com/oauth/small_g_in.PNG'/></a>");
+});
+
 module.exports = router;
