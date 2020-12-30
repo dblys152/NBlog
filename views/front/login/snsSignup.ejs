@@ -1,0 +1,55 @@
+<div class="content home login">
+    <div class="login_box">
+        <form id="mbrForm">
+            <div class="login_ttl_box">
+                <span class="login_ttl_txt">가입정보 입력</span>
+            </div> 
+            <input type="text" name="mbrNknm" placeholder="사용할 닉네임" maxlength="10">
+            <input type="hidden" name="accessToken" value="<%= access_token %>">
+            <button type="button" class="btn_base" id="signup">가입</button>
+            <div class="link_box">이미 계정이 있으신가요? <a href="/login" class="login_link">로그인하기</a></div>
+        </form>
+    </div>
+</div>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    //가입 버튼 클릭 시 회원가입
+    document.getElementById('signup').addEventListener('click', fn_snsSignup);
+});
+
+function fn_snsSignup() {
+    let form = document.forms["mbrForm"];
+    let mbrNknmInp = form[fname="mbrNknm"];
+    if(mbrNknmInp.value.trim() == '') {
+        alert('사용할 닉네임을 입력해주세요.');
+        mbrNknmInp.value = mbrNknmInp.value.trim();
+        mbrNknmInp.focus();
+        return;
+    }
+
+    fn_save();
+}
+
+function fn_save() {
+    let dataForm = new FormData(document.querySelector('#mbrForm'));
+    fetch (
+        '/member/sns/add'
+      , {
+            method: 'POST'
+          , body: dataForm
+      }  
+    ).then(res => res.json())
+    .then(res => {
+        if(res.ret > 0) {
+            alert('가입 성공하였습니다. 로그인 화면으로 이동합니다.');
+            location.href = "/login";
+        } else {
+            alert('가입 실패하였습니다.');
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+        alert('가입 실패하였습니다.');
+    });
+}
+</script>
