@@ -11,8 +11,8 @@ let fn_accessToken = (mbrNo, mbrEmail, smbrUid, mbrNknm) => {
     let accessToken = jwt.sign(
         {
             mbrNo: mbrNo
-          , mbrEmail: mbrEmail
-          , smbrUid: smbrUid
+          , mbrEmail: (mbrEmail == null ? '' : mbrEmail)
+          , smbrUid: (smbrUid == null ? '' : smbrUid)
           , mbrNknm: mbrNknm
         }
       , jwtKey.secret   //토큰 비밀키
@@ -56,15 +56,14 @@ router.post('/login', async (req, res) => {
 });
 
 /* 네이버 연동 회원가입 및 로그인 */
-const client_id = 'WqpFj01vvHM5pzWBvB6f';
-const client_secret = 'N_bLU_lWYx';
-const redirectURI = encodeURI("http://localhost:3000/sns/signup");
 router.get('/naverLoginCall', (req, res) => {
-    let url = req.query.url;
+    let client_secret = 'N_bLU_lWYx';
+    let client_id = 'WqpFj01vvHM5pzWBvB6f';
+    let redirectURI = encodeURI("http://localhost:3000/naverLoginCall");
+    let url = req.query.state;
     let code = req.query.code;
-    let state = req.query.state;
     api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
-     + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
+     + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code;
     let request = require('request');
     let options = {
         url: api_url,
@@ -107,6 +106,71 @@ router.get('/naverLoginCall', (req, res) => {
         } else {
             res.status(response.statusCode).end();
             console.log('error = ' + response.statusCode);
+            console.log('response: ' + JSON.stringify(response.body));
+        }
+    });
+});
+
+/* 카카오 연동 회원가입 및 로그인 */
+router.get('/kakaoLoginCall', (req, res) => {
+    let client_secret = 'uwEEM54A7kc3H7UHd8ihs7ujemtpXgpQ';
+    let client_id = '390bd20f4240efdcb3be81e1c556beb8';
+    let redirectURI = encodeURI("http://localhost:3000/kakaoLoginCall");
+    let url = req.query.state;
+    let code = req.query.code;
+    api_url = 'https://kauth.kakao.com/oauth/token';
+    let request = require('request');
+    let options = {
+        url: api_url,
+        form: {
+            "grant_type": "authorization_code"
+          , "client_id": client_id
+          , "client_secret": client_secret
+          , "redirect_uri": redirectURI
+          , "code": code
+        }
+    };
+    request.post(options, (error, response, body) => {
+        if (!error && response.statusCode == 200) {
+            let token = JSON.parse(body);
+            api_url = 'https://kapi.kakao.com/v2/user/me';
+            let header = "Bearer " + token.access_token;
+            options = {
+                url: api_url,
+                headers: {'Authorization': header}
+            };
+            request.get(options, async (error, response, body) => {
+                if (!error && response.statusCode == 200) {
+                    let result = JSON.parse(body);
+                    let smbrInfo = await mbrService.selectLoginMbr(null, null, result.id);
+                    if(smbrInfo != null) {
+                        await mbrService.updateMbrLoginDtt(null, smbrInfo.MBR_NO);  //마지막 로그인 일시 업데이트
+                        let accessToken = fn_accessToken(smbrInfo.MBR_NO, null, smbrInfo.SMBR_UID, smbrInfo.MBR_NKNM);  //jwt 토큰 생성
+                        res.cookie("mbr_jwt", accessToken, {httpOnly: true});   //쿠키 등록
+                        if(url) {
+                            res.redirect(url);
+                        } else {
+                            res.redirect('/');
+                        }
+                    } else {
+                        resultForm = {};
+                        resultForm.id = result.id;
+                        resultForm.nickname = result.kakao_account.profile.nickname;
+                        resultForm.email = result.kakao_account.email;
+                        res.render('front/login/snsSignup.ejs', {...resultForm, ...layoutJson});
+                    }
+                } else {
+                    console.log('error');
+                    if(response != null) {
+                        res.status(response.statusCode).end();
+                        console.log('error = ' + response.statusCode);
+                    }
+                }
+            });
+        } else {
+            res.status(response.statusCode).end();
+            console.log('error = ' + response.statusCode);
+            console.log('response: ' + JSON.stringify(response.body));
         }
     });
 });

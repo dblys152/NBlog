@@ -18,19 +18,25 @@
                 
                 <div class="sns_btn_box">
                     <%
-                        const client_id = 'WqpFj01vvHM5pzWBvB6f';
-                        const client_secret = 'N_bLU_lWYx';
-                        const state = "NB";
-                        let redirectURI = '';
-                        if(url == null || url == '') {
-                            redirectURI = encodeURI("http://localhost:3000/naverLoginCall");
-                        } else {
-                            redirectURI = encodeURI("http://localhost:3000/naverLoginCall?url=" + url);
+                        let n_redirectURI = encodeURI("http://localhost:3000/naverLoginCall");
+                        let n_state = '';
+                        if(url != null && url != '') {
+                            n_state = url;
                         }
-                        let apiURL = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
+                        const n_client_id = 'WqpFj01vvHM5pzWBvB6f';
+                        let n_apiURL = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + n_client_id + '&redirect_uri=' + n_redirectURI + '&state=' + n_state;
                     %>
-                    <a href="<%=apiURL%>"><img src="/images/naver.png"></a>
-                    <img src="/images/kakaotalk.png">
+                    <a href="<%= n_apiURL %>"><img src="/images/naver.png"></a>
+                    <%
+                        let k_redirectURI = encodeURI("http://localhost:3000/kakaoLoginCall");
+                        let k_state = "";
+                        if(url != null && url != '') {
+                            k_state = url;
+                        }
+                        const k_client_id = '390bd20f4240efdcb3be81e1c556beb8';
+                        let k_apiURL = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=' + k_client_id + '&redirect_uri=' + k_redirectURI + '&state=' + k_state;
+                    %>
+                    <a href="<%= k_apiURL %>"><img src="/images/kakaotalk.png"></a>
                 </div>
             </div>
         </form>
