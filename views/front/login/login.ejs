@@ -21,7 +21,12 @@
                         const client_id = 'WqpFj01vvHM5pzWBvB6f';
                         const client_secret = 'N_bLU_lWYx';
                         const state = "NB";
-                        const redirectURI = encodeURI("http://localhost:3000/naverLoginCall");
+                        let redirectURI = '';
+                        if(url == null || url == '') {
+                            redirectURI = encodeURI("http://localhost:3000/naverLoginCall");
+                        } else {
+                            redirectURI = encodeURI("http://localhost:3000/naverLoginCall?url=" + url);
+                        }
                         let apiURL = 'https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=' + client_id + '&redirect_uri=' + redirectURI + '&state=' + state;
                     %>
                     <a href="<%=apiURL%>"><img src="/images/naver.png"></a>

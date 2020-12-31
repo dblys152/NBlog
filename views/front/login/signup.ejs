@@ -60,14 +60,11 @@ function fn_signup() {
 
 function fn_save() {
     let dataForm = new FormData(document.querySelector('#mbrForm'));
-    fetch (
-        '/member/add'
-      , {
-            method: 'POST'
-          , body: dataForm
-      }  
-    ).then(res => res.json())
-    .then(res => {
+    fetch('/member/add', {
+        method: 'POST'
+      , body: dataForm
+    }).then(res => res.json()
+    ).then(res => {
         if(res.ret > 0 && res.ret == 1) {
             alert('가입 성공하였습니다. 로그인 화면으로 이동합니다.');
             location.href = "/login";

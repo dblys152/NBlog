@@ -6,18 +6,25 @@ const mbrModel = require('../../models/member/mbrModel');
 const blogModel = require('../../models/blog/blogModel');
 const postModel = require('../../models/blog/postModel');
 
-exports.insertMbr = async (mbrEmail, mbrPw, mbrNknm) => {
-    let mbrForm = mbrModel.newMbrForm();
-    mbrForm.mbrEmail = mbrEmail;
-    mbrForm.mbrPw = mbrPw;
-    mbrForm.mbrNknm = mbrNknm;
-
+exports.insertMbr = async (mbrEmail, mbrPw, mbrNknm, smbrUid) => {
+    let mbrForm = {};
+    if(smbrUid == null) {
+        mbrForm = mbrModel.newMbrForm();
+        mbrForm.mbrEmail = mbrEmail;
+        mbrForm.mbrPw = mbrPw;
+        mbrForm.mbrNknm = mbrNknm;  
+    } else {
+        mbrForm = mbrModel.newSnsMbrForm();
+        mbrForm.smbrEmail = mbrEmail;
+        mbrForm.smbrNknm = mbrNknm;
+        mbrForm.smbrUid = smbrUid;
+    }
     try {
-        let mbrNo = await mbrDao.selectNewMbrNo();  //회원번호 생성
+        let mbrNo = await mbrDao.selectNewMbrNo(smbrUid);       //회원번호 생성
         if(mbrNo) {
             mbrForm.mbrNo = mbrNo;
-            let conn = await mbrDao.insertMbr(mbrForm);     //회원등록
-
+            let conn = await mbrDao.insertMbr(mbrForm);     //회원등록   
+            
             let blogMenuForm = blogModel.newBlogMenuForm();
             blogMenuForm.intgMbrNo = mbrNo;
             let setBlogMenuJson = blogModel.setBlogMenuJson;
@@ -77,9 +84,18 @@ exports.selectMbrInfo = async (mbrForm) => {
     return await mbrDao.selectMbrInfo(mbrForm);
 };
 
-exports.selectLoginMbr = async (mbrEmail, mbrPw) => {
-    let mbrForm = mbrModel.newMbrForm();
+exports.selectLoginMbr = async (mbrEmail, mbrPw, smbrUid) => {
+    let mbrForm = {};
     mbrForm.mbrEmail = mbrEmail;
     mbrForm.mbrPw = mbrPw;
+    mbrForm.smbrUid = smbrUid;
     return await mbrDao.selectMbrInfo(mbrForm);
+};
+
+exports.updateMbrLoginDtt = async (mbrNo, smbrNo) => {
+    await mbrDao.updateMbrLoginDtt(mbrNo, smbrNo);
+};
+
+exports.updateMbrPwErr = async (mbrEmail) => {
+    await mbrDao.updateMbrPwErr(mbrEmail);
 };

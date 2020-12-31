@@ -9,12 +9,14 @@ exports.jwtMW = function(req, res, next){
             let payload = jwt.verify(accessToken, jwtKey.secret);   //token decode
             res.locals.mbrNo = payload.mbrNo;
             res.locals.mbrEmail = payload.mbrEmail;
+            res.locals.smbrUid = payload.smbrUid;
             res.locals.mbrNknm = payload.mbrNknm;
             next();
         } catch(e){
             console.log('Session expiration!');
             res.locals.mbrNo = '';
             res.locals.mbrEmail = '';
+            res.locals.smbrUid = '';
             res.locals.mbrNknm = '';
             next();
             //return res.status(401).send();
@@ -22,6 +24,7 @@ exports.jwtMW = function(req, res, next){
     } else {
         res.locals.mbrNo = '';
         res.locals.mbrEmail = '';
+        res.locals.smbrUid = '';
         res.locals.mbrNknm = '';
         next();
     } 

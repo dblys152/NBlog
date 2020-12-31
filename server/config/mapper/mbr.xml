@@ -13,6 +13,11 @@
         SELECT CONCAT('M', RIGHT(1000000000 + NEXTVAL(MBR_SEQ), 9)) mbrNo
     </select>
 
+    <select id="selectNewSnsMbrNo">
+        <!-- SELECT CONCAT('S', RIGHT(1000000000 + SUBSTR(MAX(SMBR_NO), 2, 10) + 1, 9)) mbrNo FROM SMBR -->
+        SELECT CONCAT('S', RIGHT(1000000000 + NEXTVAL(SMBR_SEQ), 9)) mbrNo
+    </select>
+
     <insert id="insertMbr">
         INSERT  INTO MBR    (
                                 MBR_NO     
@@ -46,31 +51,126 @@
                             )
     </insert>
 
+    <insert id="insertSnsMbr">
+        INSERT  INTO SNS_MBR  (
+                                SMBR_NO     
+                              , SMBR_UID      
+                              , SMBR_NKNM   
+                              , SMBR_STAT_CD 
+                              , SMBR_SX_CD   
+                              , SMBR_INTRO
+                              , SMBR_EMAIL  
+                              , SMBR_JN_DTT       
+                              , LAST_LGN_DTT
+                              , SMBR_WTHD_DTT
+                              )
+        VALUES                (
+                                #{mbrNo}
+                              , #{smbrUid}
+                              , #{smbrNknm}   
+                              , '109101'    /* 사용중 */
+                              , '110103'    /* 성별 모름 */
+                              , NULL
+                              , #{smbrEmail} 
+                              , NOW() 
+                              , NOW() 
+                              , NULL
+                              )
+    </insert>
+
     <select id="selectMbrInfo">
         SELECT  
-                MBR_NO
-              , MBR_EMAIL
-              , MBR_NKNM
-              , MBR_INTRO
+                M.MBR_NO
+              , M.MBR_EMAIL
+              , M.SMBR_UID
+              , M.MBR_NKNM
+              , M.MBR_INTRO
               , C.COM_CD_NM MBR_STAT
               , C2.COM_CD_NM MBR_SX
-              , MBR_JN_DTT
-              , PW_ERR_CNT
-              , PREV_PW
-              , PW_CHG_DTT
-              , LAST_LGN_DTT
-              , MBR_WTHD_DTT
-        FROM    MBR         M
+              , M.MBR_JN_DTT
+              , M.PW_ERR_CNT
+              , M.PREV_PW
+              , M.PW_CHG_DTT
+              , M.LAST_LGN_DTT
+              , M.MBR_WTHD_DTT
+        FROM    (
+                    SELECT	
+                            MBR_NO
+                          , MBR_EMAIL
+                          , NULL		SMBR_UID
+                          , MBR_NKNM
+                          , MBR_STAT_CD
+                          , MBR_SX_CD
+                          , MBR_INTRO
+                          , MBR_JN_DTT
+                          , PW_ERR_CNT
+                          , PREV_PW
+                          , PW_CHG_DTT
+                          , LAST_LGN_DTT
+                          , MBR_WTHD_DTT
+                    FROM    MBR
+                    WHERE   1 = 1
+                    <choose>
+                    <when test="mbrNo != null and mbrNo != ''">
+                    AND     MBR_NO = #{mbrNo}
+                    </when>
+                    <otherwise>
+                    AND     MBR_EMAIL = #{mbrEmail}
+                    <if test="mbrPw != null and mbrPw != ''">
+                    AND     MBR_PW = SHA2(#{mbrPw}, 256)
+                    </if>
+                    </otherwise>
+                    </choose>
+                    UNION	ALL
+                    SELECT	
+                            SMBR_NO
+                          , SMBR_EMAIL
+                          , SMBR_UID
+                          , SMBR_NKNM
+                          , SMBR_STAT_CD
+                          , SMBR_SX_CD
+                          , SMBR_INTRO
+                          , SMBR_JN_DTT
+                          , NULL
+                          , NULL
+                          , NULL
+                          , LAST_LGN_DTT
+                          , SMBR_WTHD_DTT
+                    FROM    SNS_MBR
+                    WHERE   1 = 1
+                    <choose>
+                    <when test="mbrNo != null and mbrNo != ''">
+                    AND     SMBR_NO = #{mbrNo}
+                    </when>
+                    <otherwise>
+                    AND		  SMBR_UID = #{smbrUid}
+                    </otherwise>
+                    </choose>
+                )	  M
         JOIN    COM_CODE    C
         ON      M.MBR_STAT_CD = C.COM_CD
         JOIN    COM_CODE    C2
         ON      M.MBR_SX_CD = C2.COM_CD
         WHERE   1 = 1
-        AND     (#{mbrNo} IS NULL OR MBR_NO = #{mbrNo})
-        AND     (#{mbrEmail} IS NULL OR MBR_EMAIL = #{mbrEmail})
-        <if test="mbrPw != null and mbrPw != ''">
-        AND     MBR_PW = SHA2(#{mbrPw}, 256)
-        </if>
     </select>
+
+    <update id="updateMbrLoginDtt">
+        UPDATE  MBR
+        SET     LAST_LGN_DTT = NOW()
+              , PW_ERR_CNT = 0
+        WHERE   MBR_NO = #{mbrNo}
+    </update>
+
+    <update id="updateSnsMbrLoginDtt">
+        UPDATE  SNS_MBR
+        SET     LAST_LGN_DTT = NOW()
+        WHERE   SMBR_NO = #{smbrNo}
+    </update>
+
+    <update id="updateMbrPwErr">
+        UPDATE  MBR
+        SET     PW_ERR_CNT = (SELECT MAX(PW_ERR_CNT) + 1 FROM MBR WHERE MBR_NO = #{mbrNo})
+        WHERE   MBR_NO = #{mbrNo}
+    </update>
 
 </mapper>

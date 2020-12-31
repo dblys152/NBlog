@@ -14,9 +14,20 @@ router.post('/add', upload.array(), async (req, res) => {
         } else if(mbrEmailCnt < 0){     //SELECT 오류
             res.json({'ret': -1});
         } else {
-            await mbrService.insertMbr(mbrEmail, mbrPw, mbrNknm);
+            await mbrService.insertMbr(mbrEmail, mbrPw, mbrNknm, null);
             res.json({'ret': 1});
         }
+    } catch(e) {
+        console.log(e);
+        res.status(500).send();
+    }
+});
+
+router.post('/sns/add', upload.array(), async (req, res) => {
+    let { smbrNknm, smbrUid, smbrEmail } = req.body;
+    try {
+        await mbrService.insertMbr(smbrEmail, null, smbrNknm, smbrUid);
+        res.json({'ret': 1});
     } catch(e) {
         console.log(e);
         res.status(500).send();
