@@ -29,7 +29,7 @@ button{cursor: pointer;border-radius: 5px;}
 .top .area_logo .logo{width: 120px;height: 26px;margin-top: 16px;color:#ff7f00;}
 .top .area_search{float: left; margin:8px 0 0 19px;}
 .top .area_search .search_box{display: flex;float: left;}
-.top .area_search .search_box .search{border: 1px solid #ff7f00;border-right: 0;background-color: #fff;}
+.top .area_search .search_box .search{display: flex;float: left;border: 1px solid #ff7f00;border-right: 0;background-color: #fff;}
 .top .area_search .search_box .dropdown{float: left;width: 99px;height: 35px;margin: 0 0 0 5px;padding: 3px 0 4px;border-color: #999;}
 .top .area_search .search_box .textbox{float: left;width: 222px;height: 35px;border: 0;font-size: 12px;font-weight: 600;line-height: 16px;text-indent: 10px;}
 .top .area_search .search_box .search_btn{float: left;width: 36px;height: 37px;line-height: 35px;background-color: #ff7f00;border: 1px solid #ff7f00;text-align: center;}

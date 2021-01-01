@@ -25,14 +25,13 @@
                         <div class="drop_txt">
                             <p class="txt">
                                 <a href="#"><%= mbrNknm %></a>님
-                                설정
+                                <i class="fas fa-cogs fa-spin"></i>
                             </p>
                             <a href="#"><%= (mbrEmail == '' ? smbrUid : mbrEmail) %></a>
                         </div>
                     </div>
                     <div class="drop_my_community">
                         <a href="/blog/<%= mbrNo %>" class="my_blog">내 블로그</a>
-                        <!-- <a href="#" onclick="location.href='/logout?url='+location.pathname" class="logout" id="blogLogout" data-sns="<%= sns %>"> -->
                         <a href="#" class="logout" id="blogLogout" data-sns="<%= sns %>">로그아웃</a>
                     </div>
                 </div>
@@ -66,3 +65,25 @@
         <% } %>
     </div>
 </div>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    let logoutBtn = document.getElementById('blogLogout');
+    if(logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            let path = location.pathname;
+            let sns = logoutBtn.getAttribute('data-sns');
+            if(sns == 'naver') {
+                location.href = "/logout?url=" + path + "&sns=naver";
+            } else if(sns == 'kakao') {
+                let client_id = '390bd20f4240efdcb3be81e1c556beb8';
+                let redirectURI = encodeURI("http://localhost:3000/logout");
+                location.href = "https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + redirectURI + "&state=" + path;
+            } else {
+                //location.href = "/logout?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
+                location.href = "/logout?url=" + path;
+            }
+            
+        });
+    }
+});
+</script>

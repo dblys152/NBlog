@@ -20,23 +20,6 @@ window.addEventListener('DOMContentLoaded', () => {
             location.href="/login?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
         });
     }
-    
-    let logoutBtn = document.getElementById('blogLogout');
-    if(logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            let sns = logoutBtn.getAttribute('data-sns');
-            if(sns == 'naver') {
-                location.href = "/logout?url=/blog/<%= blogInfo.INTG_MBR_NO %>&sns=naver";
-            } else if(sns == 'kakao') {
-                let client_id = '390bd20f4240efdcb3be81e1c556beb8';
-                let redirectURI = encodeURI("http://localhost:3000/logout");
-                location.href = "https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + redirectURI + "&state=/blog/<%= blogInfo.INTG_MBR_NO %>";
-            } else {
-                location.href = "/logout?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
-            }
-            
-        });
-    }
 });
 
 </script>
