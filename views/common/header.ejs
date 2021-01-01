@@ -46,7 +46,14 @@
                     </div>
                     <div class="drop_my_community">
                         <a href="/blog/<%= mbrNo %>" class="my_blog">내 블로그</a>
-                        <a href="/logout" class="logout">로그아웃</a>
+                        <% if(sns == 'kakao') { 
+                            let client_id = '390bd20f4240efdcb3be81e1c556beb8';
+                            let redirectURI = encodeURI("http://localhost:3000/logout");
+                        %>
+                            <a href="https://kauth.kakao.com/oauth/logout?client_id=<%= client_id %>&logout_redirect_uri=<%= redirectURI %>" class="logout">로그아웃</a>
+                        <% } else { %>
+                            <a href="/logout" class="logout">로그아웃</a>
+                        <% } %>
                     </div>
                 </div>
             </li>

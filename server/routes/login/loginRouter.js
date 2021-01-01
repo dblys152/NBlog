@@ -3,17 +3,21 @@ const router = express.Router();
 const layoutJson = {'layout': 'common/layout'};
 const jwt = require('jsonwebtoken');
 const jwtKey = require('../../config/jwtKey.js');
+const request = require('request');
 
 const mbrService = require('../../services/member/mbrService');
+const e = require('express');
 
 /* jwt 토큰 생성 함수 */
-let fn_accessToken = (mbrNo, mbrEmail, smbrUid, mbrNknm) => {
+let fn_accessToken = (mbrNo, mbrNknm, mbrEmail, smbrUid, snsToken, sns) => {
     let accessToken = jwt.sign(
         {
             mbrNo: mbrNo
+          , mbrNknm: mbrNknm
           , mbrEmail: (mbrEmail == null ? '' : mbrEmail)
           , smbrUid: (smbrUid == null ? '' : smbrUid)
-          , mbrNknm: mbrNknm
+          , snsToken: (snsToken == null ? '' : snsToken)
+          , sns: (sns == null ? '' : sns)
         }
       , jwtKey.secret   //토큰 비밀키
       , {
@@ -38,13 +42,9 @@ router.post('/login', async (req, res) => {
         if(mbrInfo != null) {
             console.log('Login Success!');
             await mbrService.updateMbrLoginDtt(mbrInfo.MBR_NO, null);   //마지막 로그인 일시 업데이트
-            let accessToken = fn_accessToken(mbrInfo.MBR_NO, mbrInfo.MBR_EMAIL, null, mbrInfo.MBR_NKNM);    //jwt 토큰 생성
+            let accessToken = fn_accessToken(mbrInfo.MBR_NO, mbrInfo.MBR_NKNM, mbrInfo.MBR_EMAIL, null, null, null);    //jwt 토큰 생성
             res.cookie("mbr_jwt", accessToken, {httpOnly: true});   //쿠키 등록
-            if(url) {
-                res.redirect(url);
-            } else {
-                res.redirect('/');
-            }
+            res.redirect(url == null || url == '' ? '/' : url);
         } else {
             await mbrService.updateMbrPwErr(mbrEmail); //회원 비밀번호 오류 횟수 증가
             res.redirect('/common/other?flag=login');
@@ -62,9 +62,8 @@ router.get('/naverLoginCall', (req, res) => {
     let redirectURI = encodeURI("http://localhost:3000/naverLoginCall");
     let url = req.query.state;
     let code = req.query.code;
-    api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
+    let api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
      + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code;
-    let request = require('request');
     let options = {
         url: api_url,
         headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret}
@@ -72,11 +71,9 @@ router.get('/naverLoginCall', (req, res) => {
     request.get(options, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             let token = JSON.parse(body);
-            api_url = 'https://openapi.naver.com/v1/nid/me';
             let header = "Bearer " + token.access_token;
-            console.log(header);
             options = {
-                url: api_url,
+                url: 'https://openapi.naver.com/v1/nid/me',
                 headers: {'Authorization': header}
             };
             request.get(options, async (error, response, body) => {
@@ -85,28 +82,26 @@ router.get('/naverLoginCall', (req, res) => {
                     let smbrInfo = await mbrService.selectLoginMbr(null, null, result.id);
                     if(smbrInfo != null) {
                         await mbrService.updateMbrLoginDtt(null, smbrInfo.MBR_NO);  //마지막 로그인 일시 업데이트
-                        let accessToken = fn_accessToken(smbrInfo.MBR_NO, null, smbrInfo.SMBR_UID, smbrInfo.MBR_NKNM);  //jwt 토큰 생성
+                        let accessToken = fn_accessToken(smbrInfo.MBR_NO, smbrInfo.MBR_NKNM, null, smbrInfo.SMBR_UID, token.access_token, 'naver');  //jwt 토큰 생성
                         res.cookie("mbr_jwt", accessToken, {httpOnly: true});   //쿠키 등록
-                        if(url) {
-                            res.redirect(url);
-                        } else {
-                            res.redirect('/');
-                        }
+                        res.redirect(url == null || url == '' ? '/' : url);
                     } else {
                         res.render('front/login/snsSignup.ejs', {...result, ...layoutJson});
                     }
                 } else {
-                    console.log('error');
+                    console.log('error'); 
                     if(response != null) {
-                        res.status(response.statusCode).end();
+                        //res.status(response.statusCode).end();
                         console.log('error = ' + response.statusCode);
                     }
+                    res.redirect(url == null || url == '' ? '/login' : url);
                 }
             });
         } else {
-            res.status(response.statusCode).end();
+            //res.status(response.statusCode).end();
             console.log('error = ' + response.statusCode);
-            console.log('response: ' + JSON.stringify(response.body));
+            console.log('response: ' + JSON.stringify(response));
+            res.redirect(url == null || url == '' ? '/login' : url);
         }
     });
 });
@@ -118,10 +113,8 @@ router.get('/kakaoLoginCall', (req, res) => {
     let redirectURI = encodeURI("http://localhost:3000/kakaoLoginCall");
     let url = req.query.state;
     let code = req.query.code;
-    api_url = 'https://kauth.kakao.com/oauth/token';
-    let request = require('request');
     let options = {
-        url: api_url,
+        url: 'https://kauth.kakao.com/oauth/token',
         form: {
             "grant_type": "authorization_code"
           , "client_id": client_id
@@ -133,10 +126,9 @@ router.get('/kakaoLoginCall', (req, res) => {
     request.post(options, (error, response, body) => {
         if (!error && response.statusCode == 200) {
             let token = JSON.parse(body);
-            api_url = 'https://kapi.kakao.com/v2/user/me';
             let header = "Bearer " + token.access_token;
             options = {
-                url: api_url,
+                url: 'https://kapi.kakao.com/v2/user/me',
                 headers: {'Authorization': header}
             };
             request.get(options, async (error, response, body) => {
@@ -145,13 +137,9 @@ router.get('/kakaoLoginCall', (req, res) => {
                     let smbrInfo = await mbrService.selectLoginMbr(null, null, result.id);
                     if(smbrInfo != null) {
                         await mbrService.updateMbrLoginDtt(null, smbrInfo.MBR_NO);  //마지막 로그인 일시 업데이트
-                        let accessToken = fn_accessToken(smbrInfo.MBR_NO, null, smbrInfo.SMBR_UID, smbrInfo.MBR_NKNM);  //jwt 토큰 생성
+                        let accessToken = fn_accessToken(smbrInfo.MBR_NO, smbrInfo.MBR_NKNM, null, smbrInfo.SMBR_UID, token.access_token, 'kakao');  //jwt 토큰 생성
                         res.cookie("mbr_jwt", accessToken, {httpOnly: true});   //쿠키 등록
-                        if(url) {
-                            res.redirect(url);
-                        } else {
-                            res.redirect('/');
-                        }
+                        res.redirect(url == null || url == '' ? '/' : url);
                     } else {
                         resultForm = {};
                         resultForm.id = result.id;
@@ -162,15 +150,17 @@ router.get('/kakaoLoginCall', (req, res) => {
                 } else {
                     console.log('error');
                     if(response != null) {
-                        res.status(response.statusCode).end();
+                        //res.status(response.statusCode).end();
                         console.log('error = ' + response.statusCode);
                     }
+                    res.redirect(url == null || url == '' ? '/login' : url);
                 }
             });
         } else {
-            res.status(response.statusCode).end();
+            //res.status(response.statusCode).end();
             console.log('error = ' + response.statusCode);
             console.log('response: ' + JSON.stringify(response.body));
+            res.redirect(url == null || url == '' ? '/login' : url);
         }
     });
 });
@@ -178,8 +168,29 @@ router.get('/kakaoLoginCall', (req, res) => {
 /* 로그아웃 */
 router.get('/logout', (req, res) => {
     let url = req.query.url;
-    res.cookie('mbr_jwt', '', {expires: new Date(0)});
-    res.redirect(url == null || url == '' ? '/' : url);
+    if(req.query.state != null && req.query.state != '') {
+        url = req.query.state;
+    }
+    if(req.query.sns == 'naver') {
+        let options = {
+            url: 'https://nid.naver.com/nidlogin.logout'
+        };
+        request.post(options, (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                res.cookie('mbr_jwt', '', {expires: new Date(0)});
+                res.redirect(url == null || url == '' ? '/' : url);
+            } else {
+                console.log('error');
+                if(response != null) {
+                    res.status(response.statusCode).end();
+                    console.log('error = ' + response.statusCode);
+                }
+            }
+        });
+    } else {
+        res.cookie('mbr_jwt', '', {expires: new Date(0)});
+        res.redirect(url == null || url == '' ? '/' : url);
+    }
 });
 
 /* 비밀번호 찾기 화면 */
