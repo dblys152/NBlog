@@ -1,4 +1,9 @@
 <div class="content blog">
+    <div>
+        <% if(Object.keys(payload).length > 0 && blogInfo.INTG_MBR_NO == payload.mbrNo) { %>
+        <a href="/blog/<%= payload.mbrNo %>/write">글쓰기</a>
+        <% } %>
+    </div>
     레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
     레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트
     레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트 레이아웃 테스트

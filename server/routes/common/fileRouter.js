@@ -20,6 +20,7 @@ let upload = multer({
 });
 
 router.post('/uploadImg', upload.single('file'), (req, res) => {
+    console.log('imgUp');
     res.json({
         "location": '/img/postImg/' + req.file.filename
     });
