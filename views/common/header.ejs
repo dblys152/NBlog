@@ -7,8 +7,8 @@
             <div class="search">
                 <select class="dropdown">
                     <option value="1">글</option>
-                    <option value="1">블로그</option>
-                    <option value="1">별명·이메일</option>
+                    <option value="2">블로그</option>
+                    <option value="3">별명·이메일</option>
                 </select>
                 <i class="fas fa-grip-lines-vertical fa-lg" style="color: orange;margin: auto 0;"></i>
                 <input type="text" class="textbox">
@@ -21,7 +21,7 @@
     </div>
     <div class="area_profile">
         <ul>
-            <% if(mbrNo == '') { %>
+            <% if(Object.keys(payload).length == 0 || payload.mbrNo == '') { %>
             <li class="login_box" >
                 <a href="/login" class="sign_in">로그인</a>
                 <a href="/signup" class="sign_up">회원가입</a>
@@ -30,7 +30,7 @@
             <li class="profile_box">
                 <img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
                 <div class="name_box">
-                    <span class="txt nickname"><%= mbrNknm %></span>▼
+                    <span class="txt nickname"><%= payload.mbrNknm %></span>▼
                 </div>
                 <span class="ico_arrow"></span>
                 <div class="area_drop_box">
@@ -40,15 +40,15 @@
                         </div>
                         <div class="drop_txt">
                             <p class="txt">
-                                <a href="#"><%= mbrNknm %></a>님
+                                <a href="#"><%= payload.mbrNknm %></a>님&nbsp;
                                 <i class="fas fa-cogs fa-spin"></i>
                             </p>
-                            <a href="#"><%= (mbrEmail == '' ? smbrUid : mbrEmail) %></a>
+                            <a href="#"><%= (payload.mbrEmail == '' ? payload.smbrUid : payload.mbrEmail) %></a>
                         </div>
                     </div>
                     <div class="drop_my_community">
-                        <a href="/blog/<%= mbrNo %>" class="my_blog">내 블로그</a>
-                        <% if(sns == 'kakao') { 
+                        <a href="/blog/<%= payload.mbrNo %>" class="my_blog">내 블로그</a>
+                        <% if(payload.sns == 'kakao') { 
                             let client_id = '390bd20f4240efdcb3be81e1c556beb8';
                             let redirectURI = encodeURI("http://localhost:3000/logout");
                         %>

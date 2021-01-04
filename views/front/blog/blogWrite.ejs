@@ -1,0 +1,62 @@
+<div class="content blog">
+    <div class="board_filed">
+        <input type="text" name="postTitle" value="" placeholder="제목을 입력하세요." style="width:100%"/>
+		<textarea name="contents" class="edit_contents"></textarea>
+    </div>
+</div>
+<script type="text/javascript" src="/tinymce/tinymce.min.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+    tinymce.init({
+        selector: ".edit_contents",
+        theme: "modern",
+        language_url: '/tinymce/langs/ko_KR.js',
+        menubar:false,
+        height: 600,
+        plugins: "autolink autosave code link media image table textcolor autoresize paste",
+        toolbar: "undo redo | fontselect | fontsizeselect | bold underline italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link media custom_image image code",
+        automatic_uploads: true,
+        file_picker_types: 'image',
+        /* and here's our custom image picker*/
+        images_upload_url: '/file/uploadImg',
+		paste_data_images: true,
+		image_dimensions: false,
+		// setup: function (editor) {
+		// 	editor.on('init', function(args) {
+		// 		editor = args.target;
+		// 		editor.on('NodeChange', function(e) {
+		// 			if (e && e.element.nodeName.toLowerCase() == 'img') {
+		// 				width = e.element.width;
+		// 				height = e.element.height;
+		// 				if (width > 1000) {
+		// 					height = height / (width / 1000);
+		// 					width = 1000;
+		// 				}
+		// 				tinyMCE.DOM.setAttribs(e.element, {'width': width, 'height': height});
+		// 			}
+		// 		});
+		// 	});
+		// },
+        //images_upload_base_path: '/resources/images/post',
+        file_picker_callback: function(cb, value, meta) {
+			var input = document.createElement('input');
+			input.setAttribute('type', 'file');
+			input.setAttribute('accept', 'image/*');
+			input.onchange = function() {
+				var file = this.files[0];
+				var reader = new FileReader();
+				reader.onload = function () {
+					var id = 'blobid' + (new Date()).getTime();
+					var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+					var base64 = reader.result.split(',')[1];
+					var blobInfo = blobCache.create(id, file, base64);
+					blobCache.add(blobInfo);
+					cb(blobInfo.blobUri(), { title: file.name });
+				};
+				reader.readAsDataURL(file);
+			};
+			input.click();
+		}
+    });
+});
+</script>

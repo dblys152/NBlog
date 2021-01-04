@@ -20,7 +20,7 @@
 
     <insert id="insertMbr">
         INSERT  INTO MBR    (
-                                MBR_NO     
+                                MBR_NO
                               , MBR_EMAIL  
                               , MBR_PW     
                               , MBR_NKNM   
@@ -169,8 +169,8 @@
 
     <update id="updateMbrPwErr">
         UPDATE  MBR
-        SET     PW_ERR_CNT = (SELECT MAX(PW_ERR_CNT) + 1 FROM MBR WHERE MBR_NO = #{mbrNo})
-        WHERE   MBR_NO = #{mbrNo}
+        SET     PW_ERR_CNT = (SELECT MAX(PW_ERR_CNT) + 1 FROM MBR WHERE MBR_NO = #{mbrEmail})
+        WHERE   MBR_NO = #{mbrEmail}
     </update>
 
 </mapper>

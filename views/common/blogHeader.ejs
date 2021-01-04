@@ -7,14 +7,14 @@
             <li>
                 <a href="#">이웃 블로그</a>
             </li>
-            <% if(mbrNo == '') { %>
+            <% if(Object.keys(payload).length == 0 || payload.mbrNo == '') { %>
             <li class="login_box">
                 <a href="#" class="sign_in" id="blogLogin">로그인</a>
             </li>
             <% } else { %>
             <li class="profile_box">
                 <div class="name_box">
-                    <span class="txt nickname"><%= mbrNknm %></span>▼
+                    <span class="txt nickname"><%= payload.mbrNknm %></span>▼
                 </div>
                 <span class="ico_arrow"></span>
                 <div class="area_drop_box">
@@ -24,15 +24,15 @@
                         </div>
                         <div class="drop_txt">
                             <p class="txt">
-                                <a href="#"><%= mbrNknm %></a>님
+                                <a href="#"><%= payload.mbrNknm %></a>님&nbsp;
                                 <i class="fas fa-cogs fa-spin"></i>
                             </p>
-                            <a href="#"><%= (mbrEmail == '' ? smbrUid : mbrEmail) %></a>
+                            <a href="#"><%= (payload.mbrEmail == '' ? payload.smbrUid : payload.mbrEmail) %></a>
                         </div>
                     </div>
                     <div class="drop_my_community">
-                        <a href="/blog/<%= mbrNo %>" class="my_blog">내 블로그</a>
-                        <a href="#" class="logout" id="blogLogout" data-sns="<%= sns %>">로그아웃</a>
+                        <a href="/blog/<%= payload.mbrNo %>" class="my_blog">내 블로그</a>
+                        <a href="#" class="logout" id="blogLogout" data-sns="<%= payload.sns %>">로그아웃</a>
                     </div>
                 </div>
             </li>
@@ -60,13 +60,20 @@
         </div>
     </div>
     <div>
-        <% if(blogInfo.INTG_MBR_NO == mbrNo) { %>
+        <% if(Object.keys(payload).length == 0 && blogInfo.INTG_MBR_NO == payload.mbrNo) { %>
         <a href="/blog/<%= mbrNo %>/write">글쓰기</a>
         <% } %>
     </div>
 </div>
 <script>
 window.addEventListener('DOMContentLoaded', () => {
+    let loginBtn = document.getElementById('blogLogin');
+    if(loginBtn) {
+        loginBtn.addEventListener('click', () => {
+            location.href="/login?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
+        });
+    }
+
     let logoutBtn = document.getElementById('blogLogout');
     if(logoutBtn) {
         logoutBtn.addEventListener('click', () => {

@@ -11,10 +11,10 @@ router.use('/', blogRouter, loginRouter);
 const commonRouter = require('./common/commonRouter.js');
 router.use('/common', commonRouter);
 
-const postRouter = require('./blog/postRouter.js');
-router.use('/post', postRouter);
-
 const mbrRouter = require('./member/mbrRouter.js');
 router.use('/member', mbrRouter);
+
+const fileRouter = require('./common/fileRouter.js');
+router.use('/file', fileRouter);
 
 module.exports = router;

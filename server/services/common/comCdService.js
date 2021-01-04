@@ -1,5 +1,17 @@
+const dbConfig = require('../../config/dbConn.js');
+
 const comCdDao = require('../../daos/common/comCdDao');
 
-exports.selectComCdList = async (comCdJson) => {
-    return await comCdDao.selectComCdList(comCdJson);
+exports.selectComCdList = async (res, comCdJson) => {
+    const conn = await dbConfig.getMysqlConn();
+    if(!conn) throw "DB connection error";
+    try {
+        let comCdList = await comCdDao.selectComCdList(conn, comCdJson);
+        conn.release();
+        return comCdList;
+    } catch(err) {
+        conn.release();
+        console.log(err);
+        res.status(500).send();
+    }
 };
