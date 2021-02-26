@@ -1,28 +1,31 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
+const fs = require('fs');
 const path = require('path');
 
-let storage = multer.diskStorage({
-    destination: (req, file, cb, res) => {
-        cb(null, 'img/postImg/');
-    },
-    filename: (req, file, cb, res) => {
-        var name = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
-        cb(null, name);
-
-        return name;
-    }
-});
-
+let today = new Date();
+let ym = today.getFullYear() + "-" + (today.getMonth() >= 9 ? dt.getMonth() + 1 : "0" + (today.getMonth() + 1));
 let upload = multer({
-    storage: storage
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            let dir = 'public/images/postImg/' + ym;
+            if(!fs.existsSync(dir)) {
+                fs.mkdirSync(dir);
+            }
+            cb(null, dir);
+        },
+        filename: (req, file, cb) => {
+            var name = file.fieldname + '-' + Date.now() + path.extname(file.originalname);
+            cb(null, name);
+           
+        }
+    })
 });
 
-router.post('/uploadImg', upload.single('file'), (req, res) => {
-    console.log('imgUp');
+router.post('/uploadImg', upload.single('file'), (req, res) => { 
     res.json({
-        "location": '/img/postImg/' + req.file.filename
+        "location": '/images/postImg/' + ym + "/" + req.file.filename
     });
 });
 

@@ -61,6 +61,8 @@ router.get('/naverLoginCall', (req, res) => {
                         res.cookie("mbr_jwt", accessToken, {httpOnly: true});   //쿠키 등록
                         res.redirect(url == null || url == '' ? '/' : url);
                     } else {
+                        result.nickname = result.nickname == null ? '' : result.nickname;
+                        result.email = result.email == null ? '' : result.email;
                         res.render('front/login/snsSignup.ejs', {...result, ...layoutJson});
                     }
                 } else {

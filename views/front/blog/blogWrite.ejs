@@ -11,8 +11,8 @@ window.addEventListener('DOMContentLoaded', () => {
         selector: ".edit_contents",
         theme: "modern",
         language_url: '/tinymce/langs/ko_KR.js',
-        menubar:false,
-        height: 600,
+		menubar:false,
+		height: "600px",
         plugins: "autolink autosave code link media image table textcolor autoresize paste",
         toolbar: "undo redo | fontselect | fontsizeselect | bold underline italic forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | table link media custom_image image code",
         automatic_uploads: true,
@@ -21,35 +21,38 @@ window.addEventListener('DOMContentLoaded', () => {
         images_upload_url: '/file/uploadImg',
 		paste_data_images: true,
 		image_dimensions: false,
-		// setup: function (editor) {
-		// 	editor.on('init', function(args) {
-		// 		editor = args.target;
-		// 		editor.on('NodeChange', function(e) {
-		// 			if (e && e.element.nodeName.toLowerCase() == 'img') {
-		// 				width = e.element.width;
-		// 				height = e.element.height;
-		// 				if (width > 1000) {
-		// 					height = height / (width / 1000);
-		// 					width = 1000;
-		// 				}
-		// 				tinyMCE.DOM.setAttribs(e.element, {'width': width, 'height': height});
-		// 			}
-		// 		});
-		// 	});
-		// },
-        //images_upload_base_path: '/resources/images/post',
+		setup: function (editor) {
+			editor.on('init', function(args) {
+				editor = args.target;
+				editor.on('NodeChange', function(e) {
+					if (e && e.element.nodeName.toLowerCase() == 'img') {
+						width = e.element.width;
+						height = e.element.height;
+						if (width > 1000) {
+							height = height / (width / 1000);
+							width = 1000;
+						}
+						tinyMCE.DOM.setAttribs(e.element, {'width': width, 'height': height});
+					}
+				});
+				
+				setTimeout(function(){ //wait for tinymce to load
+				 	document.getElementById(editor.id + '_ifr').style.height = '600px';
+				}, 100);
+			});	
+		},
         file_picker_callback: function(cb, value, meta) {
-			var input = document.createElement('input');
+			let input = document.createElement('input');
 			input.setAttribute('type', 'file');
 			input.setAttribute('accept', 'image/*');
 			input.onchange = function() {
-				var file = this.files[0];
-				var reader = new FileReader();
+				let file = this.files[0];
+				let reader = new FileReader();
 				reader.onload = function () {
-					var id = 'blobid' + (new Date()).getTime();
-					var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
-					var base64 = reader.result.split(',')[1];
-					var blobInfo = blobCache.create(id, file, base64);
+					let id = 'blobid' + (new Date()).getTime();
+					let blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+					let base64 = reader.result.split(',')[1];
+					let blobInfo = blobCache.create(id, file, base64);
 					blobCache.add(blobInfo);
 					cb(blobInfo.blobUri(), { title: file.name });
 				};
@@ -57,6 +60,6 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 			input.click();
 		}
-    });
+	});	
 });
 </script>
