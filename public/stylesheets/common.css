@@ -70,15 +70,14 @@ button{cursor: pointer;border-radius: 5px;}
 .blog_top_title .blog_menu .menu2{position: absolute;width: 300px;top:0;right:0;}
 .blog_top_title .blog_menu .menu2 ul{float: right;padding-right: 12px;}
 
-#container{padding: 20px;}
+#container{padding: 20px;margin:54px auto 100px auto}
 #container input{height:36px;outline: 1px solid gray;margin: 5px 0;padding: 5px;border-radius: 5px;}
 #container input.err{outline: 1px solid red;}
-.content.home{margin-top:54px;}
-
 
 #footer{position: absolute;left: 0;right: 0;bottom: 0;height: 128px;background-color: #f6f6f6;text-align: center;}
 #footer .bottom{padding-top:40px;text-align: center;}
 .bottom ul li{font-weight: bold;font-size: 14px;}
 .bottom .copyright{margin-top: 20px;font-size: 10px;}
+
 
 

@@ -15,6 +15,50 @@
 .login .login_box .sns_box .sns_btn_box{margin: 20px auto}
 .login .login_box .sns_box .sns_btn_box img{width:40px;height:40px;border-radius: 70%;margin: 0 5px;cursor: pointer;}
 
+/* button */
+.btn_wrap{display:-ms-flex;display:flex;position:relative;margin-top:30px}
+.btn_wrap.cent{-ms-justify-content:center;justify-content:center}
+.btn_wrap.right{-ms-justify-content:flex-end;justify-content:flex-end}
+
+.btn_wrap .btn_base{margin:0 3px}
+.btn_base{display:inline-block;width:100px;height:40px;padding:7px 13px;border:1px solid #5867dd;border-radius:5px;background:#5867dd;color:#fff;line-height:1;vertical-align:top;text-align:center;font-size:14px;box-sizing:border-box}
+.btn_base.submit{border:1px solid orange;background:#fff;color:#000;text-transform:uppercase;letter-spacing:2.5px;box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);transition: all 0.3s ease 0s;outline:none;}
+.btn_base.submit:hover {background-color: orange;box-shadow: 0px 15px 20px rgba(229, 150, 46, 0.4);color: #fff;transform: translateY(-7px);}
+.btn_base.rev{border:1px solid lightgray;background:#fff;color:#000}
+.btn_base.gray{border:1px solid #c5cbda;background:#ccd1de;color:#2f3336}
+.btn_base.gray_rev{border:1px solid #c5cbda;background:#fff;color:#2f3336}
+.btn_base.blue{border:1px solid #36a3f7;background:#36a3f7;color:#fff}
+.btn_base.blue_rev{border:1px solid #36a3f7;background:#fff;color:#2f3336}
+.btn_base.green{border:1px solid #10c469;background:#10c469;color:#fff}
+.btn_base.red{border:1px solid #f4516c;background:#f4516c;color:#fff}
+.btn_base.small{min-width:auto;padding:5px 8px}
+
+.submitBtn {
+    width: 100px;
+    height: 40px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border:1px solid orange;
+    border-radius: 5px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+/* popup */
+.pop_layer{display:none;position: absolute;width:550px;height:600px;border:1px solid orange;}
+.pop_layer .pop_body{margin:30px}
+.option_line{display:flex;margin-bottom:20px;}
+.set_ttl{padding-top: 10px;flex: 0 0 90px;}
+.set_option{flex: 1;align-self: center;}
+
+
+
 .notice_board .user_info{position:relative;margin-bottom:15px;padding-top:8px}
 .notice_board .user_info .name{color:#6C7293;font-weight:bold;cursor:pointer}
 .notice_board .user_info .date{margin-left:10px;color:#A9ACC2}

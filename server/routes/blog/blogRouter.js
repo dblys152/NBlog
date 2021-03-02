@@ -42,23 +42,29 @@ router.get('/blog/:blgMbrNo/write', async (req, res) => {
     let mbrForm = mbrModel.newMbrForm();
     mbrForm.mbrNo = blgMbrNo;
     let mbrInfo = await mbrService.selectMbrInfo(res, mbrForm);
+    
+    if(res.locals.payload.mbrNo == blgMbrNo && mbrInfo != null) {
+        let blogInfoForm = blogModel.newBlogInfoForm();
+        blogInfoForm.intgMbrNo = mbrInfo.MBR_NO;
+        blogInfoForm.blgMnuNo = blogModel.setBlogMenuJson[0].blgMnuNo;
+        let blogInfo = await blogService.selectBlogInfo(res, blogInfoForm);
+        let blogMenuList = await blogService.selectBlogMenuList(res, blogInfoForm);
+        res.locals.blogInfo = blogInfo;
+        res.locals.blogMenuList = blogMenuList;
+        res.render(
+                    'front/blog/blogWrite.ejs'
+                    , {
+                        //...{'blgMbrNo': blgMbrNo}
+                        //, ...{'blogInfo': blogInfo}
+                        //, ...{'blogMenuList': blogMenuList}
+                        ...blogLayoutJson
+                    }
+        );
+    } else {
+        res.redirect('/common/other?flag=access');
+    }
 
-    let blogInfoForm = blogModel.newBlogInfoForm();
-    blogInfoForm.intgMbrNo = mbrInfo.MBR_NO;
-    blogInfoForm.blgMnuNo = blogModel.setBlogMenuJson[0].blgMnuNo;
-    let blogInfo = await blogService.selectBlogInfo(res, blogInfoForm);
-    let blogMenuList = await blogService.selectBlogMenuList(res, blogInfoForm);
-    res.locals.blogInfo = blogInfo;
-    res.locals.blogMenuList = blogMenuList;
-    res.render(
-                'front/blog/blogWrite.ejs'
-                , {
-                    //...{'blgMbrNo': blgMbrNo}
-                    //, ...{'blogInfo': blogInfo}
-                    //, ...{'blogMenuList': blogMenuList}
-                    ...blogLayoutJson
-                }
-    );
+    
 });
 
 module.exports = router;

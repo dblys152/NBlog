@@ -2,7 +2,55 @@
     <div class="board_filed">
         <input type="text" name="postTitle" value="" placeholder="제목을 입력하세요." style="width:100%"/>
 		<textarea name="contents" class="edit_contents"></textarea>
-    </div>
+		<div class="btn_wrap right">
+			<button type="button" class="btn_base submit btn_pop_layer">등록</button>
+			<button type="button" class="btn_base rev">취소</button>
+		</div>
+	</div>
+	<div class="pop_layer post_write">
+		<div class="pop_body">
+			<div class="option_line">
+				<strong class="set_ttl">카테고리</strong>
+				<div class="set_option">
+					<select>
+						<option>선택하세요.</option>
+					</select>	
+				</div>
+			</div>
+			<div class="option_line">
+				<strong class="set_ttl">카테고리</strong>
+				<div class="set_option">
+					<select>
+						<option>선택하세요.</option>
+					</select>	
+				</div>
+			</div>
+			<div class="option_line">
+				<strong class="set_ttl">카테고리</strong>
+				<div class="set_option">
+					<select>
+						<option>선택하세요.</option>
+					</select>	
+				</div>
+			</div>
+			<div class="option_line">
+				<strong class="set_ttl">카테고리</strong>
+				<div class="set_option">
+					<select>
+						<option>선택하세요.</option>
+					</select>	
+				</div>
+			</div>
+			<div class="option_line">
+				<strong class="set_ttl">카테고리</strong>
+				<div class="set_option">
+					<select>
+						<option>선택하세요.</option>
+					</select>	
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <script type="text/javascript" src="/tinymce/tinymce.min.js"></script>
 <script>
@@ -25,7 +73,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			editor.on('init', function(args) {
 				editor = args.target;
 				editor.on('NodeChange', function(e) {
-					if (e && e.element.nodeName.toLowerCase() == 'img') {
+					if (e && e.element.nodeName.toLowerCase() == 'img') {	//이미지 사이즈 자동 조정
 						width = e.element.width;
 						height = e.element.height;
 						if (width > 1000) {

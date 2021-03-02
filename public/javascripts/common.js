@@ -36,5 +36,41 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     }
     /* //이메일 형식 체크 */
+
+    let popBtnList = document.getElementsByClassName('btn_pop_layer');
+    for(let popBtn of popBtnList) {
+        popBtn.addEventListener('click', () => {
+            let popLayer = document.getElementsByClassName('pop_layer')[0];
+            fadeIn(popLayer, "block");
+        });
+    }
+
+    // ** FADE OUT FUNCTION **
+    function fadeOut(el) {
+        el.style.opacity = 1;
+        (function fade() {
+            if ((el.style.opacity -= .1) < 0) {
+                el.style.display = "none";
+            } else {
+                requestAnimationFrame(fade);
+            }
+        })();
+    };
+
+    // ** FADE IN FUNCTION **
+    function fadeIn(el, display) {
+        console.log(el);
+        el.style.opacity = 0;
+        el.style.display = display || "block";
+        (function fade() {
+            var val = parseFloat(el.style.opacity);
+            if (!((val += .1) >= 1)) {
+                el.style.opacity = val;
+                requestAnimationFrame(fade);
+            }
+        })();
+    };
+    
+
 });
 

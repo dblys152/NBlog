@@ -24,9 +24,8 @@ let fn_accessToken = (mbrNo, mbrNknm, mbrEmail, smbrUid, snsToken, sns) => {
 exports.fn_accessToken = fn_accessToken;
 
 /* jwt 토큰 인증 */
-exports.jwtMW = function(req, res, next){
+exports.jwtMW = (req, res, next) => {
     let accessToken = req.cookies.mbr_jwt;
-
     if (accessToken){
         try{  
             let payload = jwt.verify(accessToken, jwtKey.secret);   //token decode
