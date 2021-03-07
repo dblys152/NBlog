@@ -3,14 +3,25 @@
         <input type="text" name="postTitle" value="" placeholder="제목을 입력하세요." style="width:100%"/>
 		<textarea name="contents" class="edit_contents"></textarea>
 		<div class="btn_wrap right">
-			<button type="button" class="btn_base submit btn_pop_layer">등록</button>
+			<button type="button" class="btn_base orange" id="btn_post_write">등록</button>
 			<button type="button" class="btn_base rev">취소</button>
 		</div>
 	</div>
-	<div class="pop_layer post_write">
+
+	<div class="popup" id="popPostWrite">
 		<div class="pop_body">
+			<span class="close">&times;</span>
 			<div class="option_line">
 				<strong class="set_ttl">카테고리</strong>
+				<div class="set_option">
+					<select class="selectbox" style="width: 390px;">
+						<option>선택하세요.</option>
+						<option>여행</option>
+					</select>	
+				</div>
+			</div>
+			<div class="option_line">
+				<strong class="set_ttl">취미</strong>
 				<div class="set_option">
 					<select>
 						<option>선택하세요.</option>
@@ -18,35 +29,94 @@
 				</div>
 			</div>
 			<div class="option_line">
-				<strong class="set_ttl">카테고리</strong>
+				<strong class="set_ttl">공개 설정</strong>
 				<div class="set_option">
-					<select>
-						<option>선택하세요.</option>
-					</select>	
+					<ul class="align_list">
+						<li>
+							<label class="lb_box">
+								<span class="txt_label">전체공개</span>
+								<input type="radio" name="flag" value="1"/>
+								<span class="mark rdo"></span>
+							</label>
+						</li>
+						<li>
+							<label class="lb_box">
+								<span class="txt_label">이웃공개</span>
+								<input type="radio" name="flag" value="2"/>
+								<span class="mark rdo"></span>
+							</label>
+						</li>
+						<li>
+							<label class="lb_box">
+								<span class="txt_label">비공개</span>
+								<input type="radio" name="flag" value="3"/>
+								<span class="mark rdo"></span>
+							</label>
+						</li>
+					</ul>
+					<p class="sub_txt">모든 사람이 볼 수 있습니다.</p>
 				</div>
 			</div>
 			<div class="option_line">
-				<strong class="set_ttl">카테고리</strong>
+				<strong class="set_ttl">발행 설정</strong>
 				<div class="set_option">
-					<select>
-						<option>선택하세요.</option>
-					</select>	
+					<ul class="align_list">
+						<li>
+							<label class="lb_box">
+								<span class="txt_label">댓글허용</span>
+								<input type="checkbox" name="chk" value="1"/>
+								<span class="mark chk"></span>
+							</label>
+						</li>
+						<li>
+							<label class="lb_box">
+								<span class="txt_label">공감허용</span>
+								<input type="checkbox" name="chk" value="2"/>
+								<span class="mark chk"></span>
+							</label>
+						</li>
+					</ul>	
 				</div>
 			</div>
 			<div class="option_line">
-				<strong class="set_ttl">카테고리</strong>
+				<strong class="set_ttl">태그설정</strong>
 				<div class="set_option">
-					<select>
-						<option>선택하세요.</option>
-					</select>	
+					<textarea class="tag_box" name="tagList"></textarea>
 				</div>
 			</div>
 			<div class="option_line">
-				<strong class="set_ttl">카테고리</strong>
+				<strong class="set_ttl">발행 시간</strong>
 				<div class="set_option">
-					<select>
-						<option>선택하세요.</option>
-					</select>	
+					<ul class="align_list">
+						<li>
+							<label class="lb_box">
+								<span class="txt_label">현재</span>
+								<input type="radio" name="dispTime" value="1"/>
+								<span class="mark rdo"></span>
+							</label>
+						</li>
+						<li>
+							<label class="lb_box">
+								<span class="txt_label">예약</span>
+								<input type="radio" name="dispTime" value="2"/>
+								<span class="mark rdo"></span>
+							</label>
+						</li>
+					</ul>
+					<p class="sub_txt">선택한 시간으로 예약 게시됩니다.</p>
+					<input type="text">
+					<input type="text" style="width: 50px;">:
+					<input type="text" style="width: 50px;">
+				</div>
+			</div>
+			<div class="field_box">
+				<label class="lb_box">
+					<span class="txt_label">공지사항으로 등록</span>
+					<input type="checkbox" name="chk" value="1"/>
+					<span class="mark chk"></span>
+				</label>
+				<div class="field_right">
+					<button type="button" class="btn_base submit" id="btn_post_write">등록</button>
 				</div>
 			</div>
 		</div>
@@ -83,10 +153,6 @@ window.addEventListener('DOMContentLoaded', () => {
 						tinyMCE.DOM.setAttribs(e.element, {'width': width, 'height': height});
 					}
 				});
-				
-				setTimeout(function(){ //wait for tinymce to load
-				 	document.getElementById(editor.id + '_ifr').style.height = '600px';
-				}, 100);
 			});	
 		},
         file_picker_callback: function(cb, value, meta) {
@@ -108,6 +174,22 @@ window.addEventListener('DOMContentLoaded', () => {
 			};
 			input.click();
 		}
-	});	
+	});
+
+	var modal = document.getElementById('popPostWrite');
+	var btn = document.getElementById("btn_post_write");
+	var span = document.getElementsByClassName("close")[0];                                          
+	btn.onclick = function() {
+		modal.style.display = "block";
+	}
+	span.onclick = function() {
+		modal.style.display = "none";
+	}
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+
 });
 </script>

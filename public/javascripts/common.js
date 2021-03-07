@@ -37,10 +37,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     /* //이메일 형식 체크 */
 
-    let popBtnList = document.getElementsByClassName('btn_pop_layer');
+    let popBtnList = document.getElementsByClassName('btn_post_write');
     for(let popBtn of popBtnList) {
         popBtn.addEventListener('click', () => {
-            let popLayer = document.getElementsByClassName('pop_layer')[0];
+            let popLayer = document.getElementsByClassName('popup')[0];
             fadeIn(popLayer, "block");
         });
     }
