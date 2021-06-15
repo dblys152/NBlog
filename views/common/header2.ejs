@@ -1,0 +1,65 @@
+<div class="top">
+    <div class="area_logo">
+        <h2 class="logo"><a href="/">N블로그</a></h2>
+    </div>
+    <div class="area_search">
+        <div class="search_box">
+            <div class="search">
+                <select class="form-control">
+                    <option value="1">글</option>
+                    <option value="2">블로그</option>
+                    <option value="3">별명·이메일</option>
+                </select>
+                <i class="fas fa-grip-lines-vertical fa-lg" style="color: orange;margin: auto 0;"></i>
+                <input type="text" class="textbox">
+            </div>
+            <a href="#" class="search_btn">
+                <!-- <i class="fas fa-box-open fa-lg" style="color:#ffffff;"></i> -->
+                <i class="fas fa-search fa-lg" style="color: #ffffff;"></i>
+            </a>
+        </div>
+    </div>
+    <div class="area_profile">
+        <ul>
+            <% if(Object.keys(payload).length == 0 || payload.mbrNo == '') { %>
+            <li class="login_box" >
+                <a href="/login" class="sign_in">로그인</a>
+                <a href="/signup" class="sign_up">회원가입</a>
+            </li>
+            <% } else { %>
+            <li class="profile_box">
+                <img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80">
+                <div class="name_box">
+                    <span class="txt nickname"><%= payload.mbrNknm %></span>▼
+                </div>
+                <span class="ico_arrow"></span>
+                <div class="area_drop_box">
+                    <div class="drop_my_content">
+                        <div class="drop_img">
+                            <a href="#"><img src="https://phinf.pstatic.net/contact/20200706_251/1594042077178qQQwA_JPEG/1534588212758-01-01.jpeg?type=s80"></a>
+                        </div>
+                        <div class="drop_txt">
+                            <p class="txt">
+                                <a href="#"><%= payload.mbrNknm %></a>님&nbsp;
+                                <i class="fas fa-cogs fa-spin"></i>
+                            </p>
+                            <a href="#"><%= (payload.mbrEmail == '' ? payload.smbrUid : payload.mbrEmail) %></a>
+                        </div>
+                    </div>
+                    <div class="drop_my_community">
+                        <a href="/blog/<%= payload.mbrNo %>" class="my_blog">내 블로그</a>
+                        <% if(payload.sns == 'kakao') { 
+                            let client_id = '390bd20f4240efdcb3be81e1c556beb8';
+                            let redirectURI = encodeURI("http://localhost:3000/logout");
+                        %>
+                            <a href="https://kauth.kakao.com/oauth/logout?client_id=<%= client_id %>&logout_redirect_uri=<%= redirectURI %>" class="logout">로그아웃</a>
+                        <% } else { %>
+                            <a href="/logout" class="logout">로그아웃</a>
+                        <% } %>
+                    </div>
+                </div>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+</div>

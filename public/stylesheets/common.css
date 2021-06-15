@@ -25,8 +25,8 @@ button{cursor: pointer;border-radius: 5px;}
 .top,.blog_top,.blog_top_title,.content,.bottom{width: 1100px;margin: 0 auto;}
 
 .top{display: flex;position: relative;height: 100%;}
-.top .area_logo{float: left;}
-.top .area_logo .logo{width: 120px;height: 26px;margin-top: 16px;color:#ff7f00;}
+.top .area_logo{float: left !important;}
+.top .area_logo .logo{width: 120px;height: 26px;margin-top: 16px;color:#ff7f00 !important;}
 .top .area_search{float: left; margin:8px 0 0 19px;}
 .top .area_search .search_box{display: flex;float: left;}
 .top .area_search .search_box .search{display: flex;float: left;border: 1px solid #ff7f00;border-right: 0;background-color: #fff;}
@@ -40,13 +40,13 @@ button{cursor: pointer;border-radius: 5px;}
 .top .area_profile .login_box .sign_in{border: 2px solid #ff7f00;border-radius: 5px}
 .top .area_profile .login_box .sign_up{border: 2px solid gray;border-radius: 5px}
 .top .area_profile .login_box .sign_in:hover,.sign_up:hover{background-color: #ddd;border-radius: 5px;}
-.top .area_profile .profile_box{display: flex;margin-right: 1px;cursor: pointer;}
-.top .area_profile .profile_box .name_box{display: flex;margin:0 0 0 3px;padding:12px 20px 0 5px;}
-.top .area_profile .profile_box .name_box .nickname{padding-right: 10px;}
-.top .area_profile .txt{font-size:14px;font-weight:bold;margin-bottom: 2px;}
-.top .area_profile .profile_box.on .area_drop_box{display: block;}
-.top .area_profile img{width:40px;height:40px;border-radius: 70%;display: inline-block;}
-.top .area_profile .area_drop_box{display: none;position: absolute;top: 45px;right: -8px;width: 300px;height: 150px;background-color: #fff;border: 1px solid #ebebeb;}
+.top .profile_box{display: flex;margin-right: 1px;cursor: pointer;}
+.top .profile_box .name_box{display: flex;margin:0 0 0 3px;padding:12px 20px 0 5px;}
+.top .profile_box .name_box .nickname{padding-right: 10px;}
+.top .txt{font-size:14px;font-weight:bold;margin-bottom: 2px;}
+.top .profile_box.on .area_drop_box{display: block;}
+.top img{width:40px;height:40px;border-radius: 70%;display: inline-block;}
+.top .area_drop_box{display: none;position: absolute;top: 45px;right: -8px;width: 300px;height: 150px;background-color: #fff;border: 1px solid #ebebeb;}
 .area_drop_box .drop_my_content{display: flex;zoom: 1;height: 108px;padding: 15px;}
 .area_drop_box .drop_my_content .drop_img img{width:80px;height:80px;border-radius: 70%;}
 .area_drop_box .drop_my_content .drop_txt{float: left;width: 210px;margin: 15px 0 0px 15px;}
