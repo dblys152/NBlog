@@ -1,5 +1,5 @@
 const mybatisMapper = require('mybatis-mapper');
-mybatisMapper.createMapper(['server/mapper/blog.xml']); //매퍼로드
+mybatisMapper.createMapper(['mapper/blog.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
 exports.insertBlogMenu = async (conn, blogMenuForm) => {
