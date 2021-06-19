@@ -2,20 +2,20 @@ const express = require('express');
 const router = express.Router();
 const layoutJson = {'layout': 'common/layout'};
 const jwt = require('jsonwebtoken');
-const { fn_accessToken } = require('../../../config/jwtMW');
+const { fn_accessToken } = require('../../../middleware/jwtMW');
 const request = require('request');
 
 const mbrService = require('../../member/service/mbrService');
 
 /* 로그인 화면 */
-router.get('/login', (req, res) => {
+router.get('/login', (req, res, next) => {
     let url = req.query.url;
     if(req.verify) res.redirect(url == null || url == '' ? '/' : url)
     else res.render('front/login/login.ejs', {...{url: url}, ...layoutJson});
 });
 
 /* 회원 로그인 */
-router.post('/login', async (req, res) => {
+router.post('/login', async (req, res, next) => {
     let { url, mbrEmail, mbrPw } = req.body;
     let mbrInfo = await mbrService.selectLoginMbr(res, mbrEmail, mbrPw, null);
     if(mbrInfo != null) {
