@@ -8,9 +8,9 @@ const mbrModel = require('../model/mbrModel');
 const blogModel = require('../../blog/model/blogModel');
 const postModel = require('../../blog/model/postModel');
 
-exports.insertMbr = async (res, mbrEmail, mbrPw, mbrNknm, smbrUid) => {
+exports.insertMbr = async (mbrEmail, mbrPw, mbrNknm, smbrUid) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) throw "DB connection error";
+    if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
         conn.beginTransaction();    //트랜잭션 시작
 
@@ -71,95 +71,91 @@ exports.insertMbr = async (res, mbrEmail, mbrPw, mbrNknm, smbrUid) => {
             postClForm.regNo = 'M000000001';
             await postDao.insertPostClass(conn, postClForm);
             console.log('commit!!!');
-            conn.commit();
-            conn.release();
+            conn.commit();              //트랜잭션 종료(COMMIT)
+            conn.release();             //DB연결 반환
         } else {
-            conn.release();
-            console.log("MbrNo not found!");
-            res.status(500).send();
+            throw {"status": 500, "message": "등록된 회원이 없습니다."};
         }
     } catch(err) {
-        conn.rollback();
-        conn.release();
-        console.log(err);
-        res.status(500).send();
+        conn.rollback();            //트랜잭션 종료(ROLLBACK)
+        conn.release();             //DB연결 반환
+        throw err;
     }
 };
 
-exports.selectMbrEmailCnt = async (res, mbrEmail) => {
+exports.selectMbrEmailCnt = async (mbrEmail) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) throw "DB connection error";
+    if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
         let mbrEmailCnt = await mbrDao.selectMbrEmailCnt(conn, mbrEmail);
-        conn.release();
+        conn.release();             //DB연결 반환
         return mbrEmailCnt;
     } catch(err) {
-        conn.release();
-        console.log(err);
-        res.status(500).send();
+        conn.release();             //DB연결 반환
+        throw err;
     }
 }
 
-exports.selectMbrInfo = async (res, mbrForm) => {
+exports.selectMbrInfo = async (mbrForm) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) throw "DB connection error";
+    if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
         let mbrInfo = await mbrDao.selectMbrInfo(conn, mbrForm);
-        conn.release();
+        conn.release();             //DB연결 반환
         return mbrInfo;
     } catch(err) {
-        conn.release();
-        console.log(err);
-        res.status(500).send();
+        conn.release();             //DB연결 반환
+        throw err;
     }
 };
 
-exports.selectLoginMbr = async (res, mbrEmail, mbrPw, smbrUid) => {
+exports.selectLoginMbr = async (mbrEmail, mbrPw, smbrUid) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) throw "DB connection error";
+    if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
         let mbrForm = {};
         mbrForm.mbrEmail = mbrEmail;
         mbrForm.mbrPw = mbrPw;
         mbrForm.smbrUid = smbrUid;
         let mbrInfo = await mbrDao.selectMbrInfo(conn, mbrForm);
-        conn.release();
+        conn.release();             //DB연결 반환
         return mbrInfo;
     } catch(err) {
-        conn.release();
-        console.log(err);
-        res.status(500).send();
+        conn.release();             //DB연결 반환
+        throw err;
     }
 };
 
-exports.updateMbrLoginDtt = async (res, mbrNo, smbrNo) => {
+exports.updateMbrLoginDtt = async (mbrNo, smbrNo) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) throw "DB connection error";
+    if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
         conn.beginTransaction();    //트랜잭션 시작
+
         await mbrDao.updateMbrLoginDtt(conn, mbrNo, smbrNo);
-        conn.commit();
-        conn.release();
+
+        conn.commit();              //트랜잭션 종료(COMMIT)
+        conn.release();             //DB연결 반환
     } catch(err) {
-        conn.rollback();
-        conn.release();
-        console.log(err);
-        res.status(500).send();
+        conn.rollback();            //트랜잭션 종료(ROLLBACK)
+        conn.release();             //DB연결 반환
+        throw err;
     }
 };
 
-exports.updateMbrPwErr = async (res, mbrEmail) => {
+exports.updateMbrPwErr = async (mbrEmail) => {
     const conn = await dbConfig.getMysqlConn();
-    if(!conn) throw "DB connection error";
+    if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
         conn.beginTransaction();    //트랜잭션 시작
+
         await mbrDao.updateMbrPwErr(conn, mbrEmail);
-        conn.commit();
-        conn.release();
+
+        conn.commit();              //트랜잭션 종료(COMMIT)
+        conn.release();             //DB연결 반환
     } catch(err) {
-        conn.rollback();
-        conn.release();
-        console.log(err);
-        res.status(500).send();
+        conn.rollback();            //트랜잭션 종료(ROLLBACK)
+        conn.release();             //DB연결 반환
+        throw err;
     }
 };

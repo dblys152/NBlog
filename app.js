@@ -39,8 +39,7 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
-  res.render('common/error');
+  res.status(err.status || 500).json({message: err.message});
 });
 console.log("Server start!");
 module.exports = app;

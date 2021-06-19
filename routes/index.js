@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { jwtMW } = require('../config/jwtMW');       //jwt 미들웨어
+const { jwtMW } = require('../middleware/jwtMW');       //jwt 미들웨어
 router.use(jwtMW);
 
 const blogRouter = require('./blog/controller/blogController');

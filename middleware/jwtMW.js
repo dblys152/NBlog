@@ -1,4 +1,4 @@
-const jwtKey = require('./jwtKey.js');
+const jwtKey = require('../config/jwtKey.js');
 const jwt = require('jsonwebtoken');
 const e = require('express');
 
