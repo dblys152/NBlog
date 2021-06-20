@@ -14,6 +14,8 @@ class PostClForm {
     #upPstClNo      = {value: null, dataType: "number", required: true};
     tpcCtgNo        = null;   //주제카테고리번호
     #tpcCtgNo       = {value: null, dataType: "string", required: true};
+    pstCntDispYn    = null;   //글갯수표시여부
+    #pstCntDispYn   = {value: null, dataType: "string", required: true};
     dispYn          = null;   //전시여부
     #dispYn         = {value: null, dataType: "string", required: true};
     dispTyCd        = null;   //전시유형코드
@@ -67,6 +69,7 @@ class PostClForm {
     setPstClNm(pstClNm) { PostClForm.typeCheck(this.#pstClNm, pstClNm, "pstClNm"); this.pstClNm = this.#pstClNm.value; }
     setUpPstClNo(upPstClNo) { PostClForm.typeCheck(this.#upPstClNo, upPstClNo, "upPstClNo"); this.upPstClNo = this.#upPstClNo.value; }
     setTpcCtgNo(tpcCtgNo) { PostClForm.typeCheck(this.#tpcCtgNo, tpcCtgNo, "tpcCtgNo"); this.tpcCtgNo = this.#tpcCtgNo.value; }
+    setPstCntDispYn(pstCntDispYn) { PostClForm.typeCheck(this.#pstCntDispYn, pstCntDispYn, "pstCntDispYn"); this.pstCntDispYn = this.#pstCntDispYn.value; }
     setDispYn(dispYn) { PostClForm.typeCheck(this.#dispYn, dispYn, "dispYn"); this.dispYn = this.#dispYn.value; }
     setDispTyCd(dispTyCd) { PostClForm.typeCheck(this.#dispTyCd, dispTyCd, "dispTyCd"); this.dispTyCd = this.#dispTyCd.value; }
     setListDispYn(listDispYn) { PostClForm.typeCheck(this.#listDispYn, listDispYn, "listDispYn"); this.listDispYn = this.#listDispYn.value; }
@@ -113,7 +116,7 @@ class PostForm extends PostClForm {
     tagNm       = null;   //태그명
     #tagNm      = {value: null, dataType: "string", required: true};
 
-    constructor() {}
+    constructor() { super(); }
 
     setPstNo(pstNo) { PostForm.typeCheck(this.#pstNo, pstNo, "pstNo"); this.pstNo = this.#pstNo.value; }
     setTpcCtgNo(tpcCtgNo) { PostForm.typeCheck(this.#tpcCtgNo, tpcCtgNo, "tpcCtgNo"); this.tpcCtgNo = this.#tpcCtgNo.value; }

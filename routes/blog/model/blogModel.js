@@ -79,7 +79,7 @@ class BlogMenuForm extends BlogForm {
     note        = null;   //비고
     #note       = {value: null, dataType: "string", required: false};
 
-    constructor() {}
+    constructor() { super(); }
 
     setBlgMnuNm(blgMnuNm) { BlogMenuForm.typeCheck(this.#blgMnuNm, blgMnuNm, "blgMnuNm"); this.blgMnuNm = this.#blgMnuNm.value; }
     setRprsMnuYn(rprsMnuYn) { BlogMenuForm.typeCheck(this.#rprsMnuYn, rprsMnuYn, "rprsMnuYn"); this.rprsMnuYn = this.#rprsMnuYn.value; }
@@ -91,6 +91,45 @@ class BlogMenuForm extends BlogForm {
     setNtfYn(ntfYn) { BlogMenuForm.typeCheck(this.#ntfYn, ntfYn, "ntfYn"); this.ntfYn = this.#ntfYn.value; }
     setSeq(seq) { BlogMenuForm.typeCheck(this.#seq, seq, "seq"); this.seq = this.#seq.value; }
     setNote(note) { BlogMenuForm.typeCheck(this.#note, note, "note"); this.note = this.#note.value; }
+
+    setDefaultMnu(type) {
+        switch(type) {
+            case 1: 
+                this.blgMnuNo = 'BM01';
+                this.blgMnuNm = '블로그';
+                this.rprsMnuYn = 'Y';
+                this.ncsYn = 'Y';
+                this.useYn = 'Y';
+                this.blgMnuTyCd = '101101';
+                this.pagPstCnt = 1;
+                this.prlgFrmCd = null;
+                this.ntfYn = null;
+                break;
+            case 2:
+                this.blgMnuNo = 'BM02';
+                this.blgMnuNm = '프롤로그';
+                this.rprsMnuYn = 'N';
+                this.ncsYn = 'Y';
+                this.useYn = 'N';
+                this.blgMnuTyCd = '101102';
+                this.pagPstCnt = null;
+                this.prlgFrmCd = '102101';      /* 글강조 */
+                this.ntfYn = null;
+                break;
+            case 3:
+                this.blgMnuNo = 'BM03';
+                this.blgMnuNm = '방명록';
+                this.rprsMnuYn = 'N';
+                this.ncsYn = 'Y';
+                this.useYn = 'Y';
+                this.blgMnuTyCd = '101103';
+                this.pagPstCnt = null;
+                this.prlgFrmCd = null;
+                this.ntfYn = 'Y';
+                break;
+            default: break;
+        }
+    }
 }
 
 /* 블로그 상단 메뉴 */
@@ -100,7 +139,7 @@ class TopMenuSetForm extends BlogForm {
     seq         = null;   //정렬순서
     #seq        = {value: null, dataType: "number", required: false};
 
-    constructor() {}
+    constructor() { super(); }
 
     setPstClNo(pstClNo) { TopMenuSetForm.typeCheck(this.#pstClNo, pstClNo, "pstClNo"); this.pstClNo = this.#pstClNo.value; }
     setSeq(seq) { TopMenuSetForm.typeCheck(this.#seq, seq, "seq"); this.seq = this.#seq.value; }
@@ -176,7 +215,7 @@ class PrlgSetForm extends PrlgDmnForm {
     prlgDmnSeq      = null;   //프롤로그영역정렬순서
     #prlgDmnSeq     = {value: null, dataType: "number", required: true};
 
-    constructor() {}
+    constructor() { super(); }
 
     setIntgMbrNo(intgMbrNo) { PrlgSetForm.typeCheck(this.#intgMbrNo, intgMbrNo, "intgMbrNo"); this.intgMbrNo = this.#intgMbrNo.value; }
     setBlgMnuNo(blgMnuNo) { PrlgSetForm.typeCheck(this.#blgMnuNo, blgMnuNo, "blgMnuNo"); this.blgMnuNo = this.#blgMnuNo.value; }
@@ -187,42 +226,6 @@ class PrlgSetForm extends PrlgDmnForm {
 }
 
 module.exports = { BlogForm, BlogMenuForm, TopMenuSetForm, PrlgDmnForm, PrlgSetForm };
-
-// exports.setBlogMenuJson = [
-//     {
-//         blgMnuNo: 'BM01'
-//       , blgMnuNm: '블로그'
-//       , rprsMnuYn: 'Y'
-//       , ncsYn: 'Y'
-//       , useYn: 'Y'
-//       , blgMnuTyCd: '101101'
-//       , pagPstCnt: 1
-//       , prlgFrmCd: null
-//       , ntfYn: null
-//     }
-//   , {
-//         blgMnuNo: 'BM02'
-//       , blgMnuNm: '프롤로그'
-//       , rprsMnuYn: 'N'
-//       , ncsYn: 'Y'
-//       , useYn: 'N'
-//       , blgMnuTyCd: '101102'
-//       , pagPstCnt: null
-//       , prlgFrmCd: '102101'   /* 글강조 */  
-//       , ntfYn: null
-//     }
-//     , {
-//         blgMnuNo: 'BM03'
-//       , blgMnuNm: '방명록'
-//       , rprsMnuYn: 'N'
-//       , ncsYn: 'Y'
-//       , useYn: 'Y'
-//       , blgMnuTyCd: '101103'
-//       , pagPstCnt: null
-//       , prlgFrmCd: null
-//       , ntfYn: 'Y'
-//     }
-// ];
 
 
 

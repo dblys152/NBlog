@@ -4,78 +4,65 @@ const mbrDao = require('../dao/mbrDao');
 const blogDao = require('../../blog/dao/blogDao');
 const postDao = require('../../blog/dao/postDao');
 
-const mbrModel = require('../model/mbrModel');
-const blogModel = require('../../blog/model/blogModel');
-const postModel = require('../../blog/model/postModel');
+const { MbrForm } = require('../model/mbrModel');
+const { BlogForm, BlogMenuForm } = require('../../blog/model/blogModel');
+const { PostClForm } = require('../../blog/model/postModel');
 
-exports.insertMbr = async (mbrEmail, mbrPw, mbrNknm, smbrUid) => {
+exports.insertMbr = async (mbrEmail, mbrPw, mbrNknm, smbrUid, regNo) => {
     const conn = await dbConfig.getMysqlConn();
     if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
         conn.beginTransaction();    //트랜잭션 시작
 
-        let mbrForm = {};
+        let mbrForm = new MbrForm();
         if(smbrUid == null) {
-            mbrForm = mbrModel.newMbrForm();
-            mbrForm.mbrEmail = mbrEmail;
-            mbrForm.mbrPw = mbrPw;
-            mbrForm.mbrNknm = mbrNknm;  
+            mbrForm.setMbrEmail(mbrEmail);
+            mbrForm.setMbrPw(mbrPw);
+            mbrForm.setMbrNknm(mbrNknm);  
         } else {
-            mbrForm = mbrModel.newSnsMbrForm();
-            mbrForm.smbrEmail = mbrEmail;
-            mbrForm.smbrNknm = mbrNknm;
-            mbrForm.smbrUid = smbrUid;
+            mbrForm.setSmbrEmail(mbrEmail);
+            mbrForm.setSmbrNknm(mbrNknm);
+            mbrForm.setSmbrUid(smbrUid);
         }
         let mbrNo = await mbrDao.selectNewMbrNo(conn, smbrUid);       //회원번호 생성
-        if(mbrNo) {
-            mbrForm.mbrNo = mbrNo;
-            await mbrDao.insertMbr(conn, mbrForm);     //회원등록   
-            
-            let blogMenuForm = blogModel.newBlogMenuForm();
-            blogMenuForm.intgMbrNo = mbrNo;
-            let setBlogMenuJson = blogModel.setBlogMenuJson;
-            for(let i = 0; i < setBlogMenuJson.length; i++) {
-                blogMenuForm.blgMnuNo = setBlogMenuJson[i].blgMnuNo;
-                blogMenuForm.blgMnuNm = setBlogMenuJson[i].blgMnuNm;
-                blogMenuForm.rprsMnuYn = setBlogMenuJson[i].rprsMnuYn;
-                blogMenuForm.ncsYn = setBlogMenuJson[i].ncsYn;
-                blogMenuForm.useYn = setBlogMenuJson[i].useYn;
-                blogMenuForm.blgMnuTyCd = setBlogMenuJson[i].blgMnuTyCd;
-                blogMenuForm.pagPstCnt = setBlogMenuJson[i].pagPstCnt;
-                blogMenuForm.prlgFrmCd = setBlogMenuJson[i].prlgFrmCd;
-                blogMenuForm.ntfYn = setBlogMenuJson[i].ntfYn;
-                blogMenuForm.regNo = 'M000000001';
+        mbrForm.setMbrNo(mbrNo);
+        await mbrDao.insertMbr(conn, mbrForm);     //회원등록   
+        
+        for(let i = 1; i <= 3; i++) {
+            let blogMenuForm = new BlogMenuForm();
+            blogMenuForm.setDefaultMnu(i);
+            blogMenuForm.setIntgMbrNo(mbrNo);
+            blogMenuForm.setRegNo(regNo);
+            await blogDao.insertBlogMenu(conn, blogMenuForm);  //기본 블로그 메뉴 생성(블로그, 프롤로그, 방명록)
 
-                await blogDao.insertBlogMenu(conn, blogMenuForm);  //기본 블로그 메뉴 생성(블로그, 프롤로그, 방명록)
+            if(i == 1) {
+                let blogForm = new BlogForm();
+                blogForm.setIntgMbrNo(mbrNo);
+                blogForm.setBlgMnuNo(blogMenuForm.blgMnuNo);   //블로그 메뉴 번호 : 블로그
+                blogForm.setBlgNm(mbrNknm + '님의 블로그');
+                blogForm.setTpcCtgNo('99');   //카테고리번호: 선택안함
+                await blogDao.insertBlogInfo(conn, blogForm);  //기본 블로그 정보 생성
+
+                let postClForm = new PostClForm();
+                postClForm.setIntgMbrNo(mbrNo);
+                postClForm.setBlgMnuNo(blogMenuForm.blgMnuNo);  //블로그 메뉴 번호 : 블로그
+                postClForm.setPstClTyCd('104101');   //게시글분류유형코드: 카테고리
+                postClForm.setPstClNm('기본 카테고리');
+                postClForm.setUpPstClNo(0);       //상위게시글분류번호: 최상위 0
+                postClForm.setTpcCtgNo('99');     //카테고리번호: 선택안함
+                postClForm.setPstCntDispYn('Y');
+                postClForm.setDispYn('Y');
+                postClForm.setDispTyCd('105101'); //전시유형코드: 블로그형
+                postClForm.setListDispYn('Y');
+                postClForm.setListDispCnt(5);
+                postClForm.setSeq(1);
+                postClForm.setRegNo(regNo);
+                await postDao.insertPostClass(conn, postClForm);    //기본 카테고리 생성
             }
-
-            let blogInfoForm = blogModel.newBlogInfoForm();
-            blogInfoForm.intgMbrNo = mbrNo;
-            blogInfoForm.blgMnuNo = setBlogMenuJson[0].blgMnuNo;
-            blogInfoForm.mbrNknm = mbrNknm;
-            await blogDao.insertBlogInfo(conn, blogInfoForm);  //기본 블로그 정보 생성
-
-            let postClForm = postModel.newPostClForm();
-            postClForm.intgMbrNo = mbrNo;
-            postClForm.blgMnuNo = setBlogMenuJson[0].blgMnuNo;
-            postClForm.pstClTyCd = '104101';   //게시글분류유형코드: 카테고리
-            postClForm.pstClNm = '기본 카테고리';
-            postClForm.upPstClNo = 0;       //상위게시글분류번호: 최상위 0
-            postClForm.tpcCtgNo = '99';     //카테고리번호: 선택안함
-            postClForm.pstCntDispYn = 'Y'
-            postClForm.dispYn = 'Y'
-            postClForm.dispTyCd = '105101' //전시유형코드: 블로그형
-            postClForm.listDispYn = 'Y'
-            postClForm.listDispCnt = 5
-            postClForm.seq = 1;
-            postClForm.regNo = 'M000000001';
-            await postDao.insertPostClass(conn, postClForm);
-            console.log('commit!!!');
-            conn.commit();              //트랜잭션 종료(COMMIT)
-            conn.release();             //DB연결 반환
-        } else {
-            throw {"status": 500, "message": "등록된 회원이 없습니다."};
         }
+        conn.commit();              //트랜잭션 종료(COMMIT)
+        conn.release();             //DB연결 반환
+        return mbrNo;
     } catch(err) {
         conn.rollback();            //트랜잭션 종료(ROLLBACK)
         conn.release();             //DB연결 반환

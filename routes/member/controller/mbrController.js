@@ -5,17 +5,25 @@ const upload = multer();
 
 const mbrService = require('../service/mbrService');
 
-router.post('/add', upload.array(), async (req, res, next) => {
+router.post('/add', async (req, res, next) => {
+    let { mbrEmail, mbrPw, mbrNknm } = req.body;
+    if(mbrEmail == null || mbrEmail.toString().trim() == "") {
+        return next({status: 400, message: "이메일이 존재하지 않습니다."});
+    }
+    if(mbrPw == null || mbrPw.toString().trim() == "") {
+        return next({status: 400, message: "패스워드가 존재하지 않습니다."});
+    }
+    if(mbrNknm == null || mbrNknm.toString().trim() == "") {
+        return next({status: 400, message: "닉네임이 존재하지 않습니다."});
+    }
     try {
-        let { mbrEmail, mbrPw, mbrNknm } = req.body;
-        let mbrEmailCnt = await mbrService.selectMbrEmailCnt(res, mbrEmail);
+        let mbrEmailCnt = await mbrService.selectMbrEmailCnt(mbrEmail);
         if(mbrEmailCnt > 0) {           //이메일 중복        
-            res.json({'ret': -2});
-        } else if(mbrEmailCnt < 0){     //SELECT 오류
-            res.json({'ret': -1});
+            res.status(404).json({message: "이메일이 중복됩니다."});
         } else {
-            await mbrService.insertMbr(res, mbrEmail, mbrPw, mbrNknm, null);
-            res.json({'ret': 1});
+            let regNo = 'M000000001';
+            let mbrNo = await mbrService.insertMbr(mbrEmail, mbrPw, mbrNknm, null, regNo);
+            res.status(201).json({message: "성공", data: {mbrNo: mbrNo}});
         }
     } catch(err) {
         console.log(err);
@@ -23,11 +31,18 @@ router.post('/add', upload.array(), async (req, res, next) => {
     }
 });
 
-router.post('/sns/add', upload.array(), async (req, res, next) => {
+router.post('/sns/add', async (req, res, next) => {
+    let { smbrNknm, smbrUid, smbrEmail } = req.body;
+    if(smbrNknm == null || smbrNknm.toString().trim() == "") {
+        return next({status: 400, message: "닉네임이 존재하지 않습니다."});
+    }
+    if(smbrUid == null || smbrUid.toString().trim() == "") {
+        return next({status: 400, message: "UID가 존재하지 않습니다."});
+    }
     try {
-        let { smbrNknm, smbrUid, smbrEmail } = req.body;
-        await mbrService.insertMbr(res, smbrEmail, null, smbrNknm, smbrUid);
-        res.res.status(204).json({'message': "성공"});
+        let regNo = 'M000000001';
+        let mbrNo = await mbrService.insertMbr(smbrEmail, null, smbrNknm, smbrUid, regNo);
+        res.status(201).json({message: "성공", data: {mbrNo: mbrNo}});
     } catch(err) {
         console.log(err);
         next(err);
@@ -37,7 +52,7 @@ router.post('/sns/add', upload.array(), async (req, res, next) => {
 router.post('/mbrInfo', async (req, res, next) => {
     try {
         let mbrForm = req.body;
-        let mbrInfo = await mbrService.selectMbrInfo(res, mbrForm);
+        let mbrInfo = await mbrService.selectMbrInfo(mbrForm);
         res.status(200).json({message: "성공", data: {mbrInfo}});
     } catch(err) {
         console.log(err);

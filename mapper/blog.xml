@@ -49,9 +49,9 @@
         VALUES                  (
                                     #{intgMbrNo}
                                   , #{blgMnuNo}
-                                  , CONCAT(#{mbrNknm}, '님의 블로그')
+                                  , #{blgNm}
                                   , NULL
-                                  , '99'  /* 주제카테고리: 선택안함 */
+                                  , #{tpcCtgNo}
                                 );
     </insert>
 
