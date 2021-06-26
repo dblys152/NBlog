@@ -5,13 +5,13 @@ const upload = multer();
 
 const mbrService = require('../service/mbrService');
 
-router.post('/add', async (req, res, next) => {
+router.post('', async (req, res, next) => {
     let { mbrEmail, mbrPw, mbrNknm } = req.body;
     if(mbrEmail == null || mbrEmail.toString().trim() == "") {
         return next({status: 400, message: "이메일이 존재하지 않습니다."});
     }
     if(mbrPw == null || mbrPw.toString().trim() == "") {
-        return next({status: 400, message: "패스워드가 존재하지 않습니다."});
+        return next({status: 400, message: "비밀번호가 존재하지 않습니다."});
     }
     if(mbrNknm == null || mbrNknm.toString().trim() == "") {
         return next({status: 400, message: "닉네임이 존재하지 않습니다."});

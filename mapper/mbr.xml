@@ -169,8 +169,8 @@
 
     <update id="updateMbrPwErr">
         UPDATE  MBR
-        SET     PW_ERR_CNT = (SELECT MAX(PW_ERR_CNT) + 1 FROM MBR WHERE MBR_NO = #{mbrEmail})
-        WHERE   MBR_NO = #{mbrEmail}
+        SET     PW_ERR_CNT = (SELECT MAX(PW_ERR_CNT) + 1 FROM MBR WHERE MBR_EMAIL = #{mbrEmail})
+        WHERE   MBR_EMAIL = #{mbrEmail}
     </update>
 
 </mapper>

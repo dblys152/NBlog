@@ -4,17 +4,19 @@ const router = express.Router();
 const { jwtMW } = require('../middleware/jwtMW');       //jwt 미들웨어
 router.use(jwtMW);
 
-const blogRouter = require('./blog/controller/blogController');
-const loginRouter = require('./login/controller/loginController');
-router.use('/', blogRouter, loginRouter);
+const blogController = require('./blog/controller/blogController');
+router.use('/', blogController);
 
-const commonRouter = require('./common/controller/commonController');
-router.use('/common', commonRouter);
+const loginController = require('./auth/controller/loginController');
+router.use('/auth', loginController);
 
-const mbrRouter = require('./member/controller/mbrController');
-router.use('/member', mbrRouter);
+const commonController = require('./common/controller/commonController');
+router.use('/common', commonController);
 
-const fileRouter = require('./common/controller/fileController');
-router.use('/file', fileRouter);
+const mbrController = require('./member/controller/mbrController');
+router.use('/mbr', mbrController);
+
+const fileController = require('./common/controller/fileController');
+router.use('/file', fileController);
 
 module.exports = router;
