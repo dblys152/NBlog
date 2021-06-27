@@ -26,25 +26,23 @@ router.post('', async (req, res, next) => {
             res.status(201).json({message: "성공", data: {mbrNo: mbrNo}});
         }
     } catch(err) {
-        console.log(err);
         next(err);
     }
 });
 
-router.post('/sns/add', async (req, res, next) => {
-    let { smbrNknm, smbrUid, smbrEmail } = req.body;
-    if(smbrNknm == null || smbrNknm.toString().trim() == "") {
-        return next({status: 400, message: "닉네임이 존재하지 않습니다."});
-    }
+router.post('/sns', async (req, res, next) => {
+    let { smbrUid, smbrNknm, smbrEmail } = req.body;
     if(smbrUid == null || smbrUid.toString().trim() == "") {
         return next({status: 400, message: "UID가 존재하지 않습니다."});
+    }
+    if(smbrNknm == null || smbrNknm.toString().trim() == "") {
+        return next({status: 400, message: "닉네임이 존재하지 않습니다."});
     }
     try {
         let regNo = 'M000000001';
         let mbrNo = await mbrService.insertMbr(smbrEmail, null, smbrNknm, smbrUid, regNo);
         res.status(201).json({message: "성공", data: {mbrNo: mbrNo}});
     } catch(err) {
-        console.log(err);
         next(err);
     }
 });

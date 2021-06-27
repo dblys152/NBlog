@@ -100,10 +100,13 @@ exports.selectLoginMbr = async (mbrEmail, mbrPw, smbrUid) => {
     const conn = await dbConfig.getMysqlConn();
     if(!conn) throw {"status": 500, "message": "DB connection error"};
     try {
-        let mbrForm = {};
-        mbrForm.mbrEmail = mbrEmail;
-        mbrForm.mbrPw = mbrPw;
-        mbrForm.smbrUid = smbrUid;
+        let mbrForm = new MbrForm();
+        if(smbrUid == null || smbrUid == '') {
+            mbrForm.setMbrEmail(mbrEmail);
+            if(mbrPw != null && mbrPw != '') mbrForm.setMbrPw(mbrPw);
+        } else {
+            mbrForm.setSmbrUid(smbrUid);
+        }
         let mbrInfo = await mbrDao.selectMbrInfo(conn, mbrForm);
         conn.release();             //DB연결 반환
         return mbrInfo;

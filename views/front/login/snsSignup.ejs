@@ -8,7 +8,7 @@
             <input type="hidden" name="smbrUid" value="<%= id %>">
             <input type="hidden" name="smbrEmail" value="<%= email %>">
             <button type="button" class="btn_base" id="signup">가입</button>
-            <div class="link_box">이미 계정이 있으신가요? <a href="/login" class="login_link">로그인하기</a></div>
+            <div class="link_box">이미 계정이 있으신가요? <a href="login" class="login_link">로그인하기</a></div>
         </form>
     </div>
 </div>
@@ -34,7 +34,7 @@ function fn_snsSignup() {
 
 function fn_save() {
     let dataForm = new FormData(document.querySelector('#mbrForm'));
-    fetch('/member/sns/add', {
+    fetch('/mbr/sns', {
         method: 'POST'
       , body: dataForm
     }).then(res => res.json()

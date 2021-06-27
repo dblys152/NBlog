@@ -3,13 +3,13 @@ mybatisMapper.createMapper(['mapper/mbr.xml']); //매퍼로드
 const sqlFormat = {language: 'sql', indent: '  '}; //질의문 형식
 
 exports.selectNewMbrNo = async (conn, smbrUid) => {
+    let sql = '';
+    if(smbrUid == null) {
+        sql = mybatisMapper.getStatement('mbr', 'selectNewMbrNo', null, sqlFormat);
+    } else {
+        sql = mybatisMapper.getStatement('mbr', 'selectNewSnsMbrNo', null, sqlFormat);
+    }
     try {
-        let sql = '';
-        if(smbrUid == null) {
-            sql = mybatisMapper.getStatement('mbr', 'selectNewMbrNo', null, sqlFormat);
-        } else {
-            sql = mybatisMapper.getStatement('mbr', 'selectNewSnsMbrNo', null, sqlFormat);
-        }
         let [row] = await conn.query(sql);
         console.log(sql);
         console.log(row[0].mbrNo);
@@ -21,13 +21,13 @@ exports.selectNewMbrNo = async (conn, smbrUid) => {
 };
 
 exports.insertMbr = async (conn, mbrForm) => {
+    let sql = '';
+    if(mbrForm.smbrUid == null) {
+        sql = mybatisMapper.getStatement('mbr', 'insertMbr', mbrForm, sqlFormat);
+    } else {
+        sql = mybatisMapper.getStatement('mbr', 'insertSnsMbr', mbrForm, sqlFormat);
+    }
     try {
-        let sql = '';
-        if(mbrForm.smbrUid == null) {
-            sql = mybatisMapper.getStatement('mbr', 'insertMbr', mbrForm, sqlFormat);
-        } else {
-            sql = mybatisMapper.getStatement('mbr', 'insertSnsMbr', mbrForm, sqlFormat);
-        }
         await conn.execute(sql);
         console.log(sql);
     } catch(err) {
@@ -37,8 +37,8 @@ exports.insertMbr = async (conn, mbrForm) => {
 };
 
 exports.selectMbrEmailCnt = async (conn, mbrEmail) => {
+    let sql = mybatisMapper.getStatement('mbr', 'selectMbrEmailCnt', {"mbrEmail": mbrEmail}, sqlFormat);
     try {
-        let sql = mybatisMapper.getStatement('mbr', 'selectMbrEmailCnt', {"mbrEmail": mbrEmail}, sqlFormat);
         let [row] = await conn.query(sql);
         console.log(sql);
         console.log(row[0].cnt);
@@ -50,8 +50,8 @@ exports.selectMbrEmailCnt = async (conn, mbrEmail) => {
 }
 
 exports.selectMbrInfo = async (conn, mbrForm) => {
+    let sql = mybatisMapper.getStatement('mbr', 'selectMbrInfo', mbrForm, sqlFormat);
     try {
-        let sql = mybatisMapper.getStatement('mbr', 'selectMbrInfo', mbrForm, sqlFormat);
         let [mbrInfo] = await conn.query(sql);
         console.log(sql);
         console.log(mbrInfo);
@@ -63,13 +63,13 @@ exports.selectMbrInfo = async (conn, mbrForm) => {
 };
 
 exports.updateMbrLoginDtt = async (conn, mbrNo, smbrNo) => {
+    let sql = '';
+    if(smbrNo == null) {
+        sql = mybatisMapper.getStatement('mbr', 'updateMbrLoginDtt', {mbrNo: mbrNo}, sqlFormat);
+    } else {
+        sql = mybatisMapper.getStatement('mbr', 'updateSnsMbrLoginDtt', {smbrNo: smbrNo}, sqlFormat);
+    }
     try {
-        let sql = '';
-        if(smbrNo == null) {
-            sql = mybatisMapper.getStatement('mbr', 'updateMbrLoginDtt', {mbrNo: mbrNo}, sqlFormat);
-        } else {
-            sql = mybatisMapper.getStatement('mbr', 'updateSnsMbrLoginDtt', {smbrNo: smbrNo}, sqlFormat);
-        }
         await conn.execute(sql);
         console.log(sql);
     } catch(err) {
@@ -79,8 +79,8 @@ exports.updateMbrLoginDtt = async (conn, mbrNo, smbrNo) => {
 };
 
 exports.updateMbrPwErr = async (conn, mbrEmail) => {
+    let sql = mybatisMapper.getStatement('mbr', 'updateMbrPwErr', {mbrEmail: mbrEmail}, sqlFormat);
     try {
-        let sql = mybatisMapper.getStatement('mbr', 'updateMbrPwErr', {mbrEmail: mbrEmail}, sqlFormat);
         await conn.execute(sql);
         console.log(sql);
     } catch(err) {

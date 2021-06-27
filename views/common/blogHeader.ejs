@@ -65,7 +65,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let loginBtn = document.getElementById('blogLogin');
     if(loginBtn) {
         loginBtn.addEventListener('click', () => {
-            location.href="/login?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
+            location.href="/auth/login?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
         });
     }
 
@@ -75,14 +75,14 @@ window.addEventListener('DOMContentLoaded', () => {
             let path = location.pathname;
             let sns = logoutBtn.getAttribute('data-sns');
             if(sns == 'naver') {
-                location.href = "/logout?url=" + path + "&sns=naver";
+                location.href = "/auth/logout?url=" + path + "&sns=naver";
             } else if(sns == 'kakao') {
                 let client_id = '390bd20f4240efdcb3be81e1c556beb8';
                 let redirectURI = encodeURI("http://localhost:3000/logout");
                 location.href = "https://kauth.kakao.com/oauth/logout?client_id=" + client_id + "&logout_redirect_uri=" + redirectURI + "&state=" + path;
             } else {
                 //location.href = "/logout?url=/blog/<%= blogInfo.INTG_MBR_NO %>";
-                location.href = "/logout?url=" + path;
+                location.href = "/auth/logout?url=" + path;
             }
             
         });
