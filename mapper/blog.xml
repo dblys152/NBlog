@@ -75,6 +75,7 @@
         SELECT  
                 BLG_MNU_NO
               , BLG_MNU_NM
+              , NCS_YN
         FROM    BLOG_MENU
         WHERE   1 = 1
         AND     INTG_MBR_NO = #{intgMbrNo}

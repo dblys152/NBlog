@@ -109,8 +109,8 @@ class BlogMenuForm extends BlogForm {
                 this.blgMnuNo = 'BM02';
                 this.blgMnuNm = '프롤로그';
                 this.rprsMnuYn = 'N';
-                this.ncsYn = 'Y';
-                this.useYn = 'N';
+                this.ncsYn = 'N';
+                this.useYn = 'Y';
                 this.blgMnuTyCd = '101102';
                 this.pagPstCnt = null;
                 this.prlgFrmCd = '102101';      /* 글강조 */
@@ -120,7 +120,7 @@ class BlogMenuForm extends BlogForm {
                 this.blgMnuNo = 'BM03';
                 this.blgMnuNm = '방명록';
                 this.rprsMnuYn = 'N';
-                this.ncsYn = 'Y';
+                this.ncsYn = 'N';
                 this.useYn = 'Y';
                 this.blgMnuTyCd = '101103';
                 this.pagPstCnt = null;
