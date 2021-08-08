@@ -9,5 +9,6 @@
 ---
 #### [ERD]
 ![Logical](./NBlog_Logical_ERD.png)
+![Physical](./NBlog_Physical_ERD.png)
 ---
 
