@@ -6,7 +6,6 @@
      
 * Server : Node.js + Express.js
 * View engin : ejs
-* NBlog ERD : https://blog.naver.com/l1523/222129870418
 ---
 #### [ERD]
 ![Logical](./NBlog_Logical_ERD.png)
