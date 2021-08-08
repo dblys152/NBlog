@@ -8,8 +8,7 @@
 * View engin : ejs
 * NBlog ERD : https://blog.naver.com/l1523/222129870418
 ---
-#### [프로젝트 기능]
-   1. HOME
-   2. BLOG
+#### [ERD]
+![Logical](./NBlog_Logical_ERD.png)
 ---
-##### ... 추후 업데이트 예정
+
